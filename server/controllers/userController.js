@@ -1,7 +1,7 @@
 const { comparePassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const { generateOTP, sendOTPByEmail } = require("../helpers/nodemailer");
-const { User } = require("../models");
+const { User, UserProfile, Booking, Property, Balance } = require("../models");
 
 class UserController {
     static async register(req, res, next) {
@@ -46,6 +46,69 @@ class UserController {
 
             const access_token = signToken({ id: user.id });
             res.status(200).json({ access_token });
+        } catch (error) {
+            next(error);
+        }
+    }
+    static async getProfile(req, res, next) {
+        try {
+            const data = await User.findOne({
+                where: { id: req.user.id },
+                attributes: { exclude: ["password", "otp"] },
+                include: [
+                    {
+                        model: UserProfile,
+                    },
+                    {
+                        model: Balance,
+                    },
+                    {
+                        model: Booking,
+                        include: Property,
+                    },
+                ],
+            });
+
+            data.dataValues.totalBookings = data.Bookings.length;
+            data.dataValues.totalAmount = data.Balances.reduce((sum, balance) => sum + balance.amount, 0);
+            data.dataValues.Balances = undefined;
+
+            res.json(data);
+        } catch (error) {
+            next(error);
+        }
+    }
+    static async createProfile(req, res, next) {
+        try {
+            if (!req.profilePicture) throw { name: "Profile Picture is required!" };
+            if (!req.idCard) throw { name: "ID card is required!" };
+            await UserProfile.create({
+                profilePicture: req.profilePicture,
+                idCard: req.idCard,
+                UserId: req.user.id,
+            });
+            res.status(201).json({ message: "Account profile successfully created!" });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async editProfile(req, res, next) {
+        try {
+            const { idCard, profilePicture } = req;
+            if (!profilePicture) throw { name: "Profile Picture is required!" };
+            if (!idCard) throw { name: "ID card is required!" };
+            await UserProfile.update({ idCard, profilePicture }, { where: { UserId: req.user.id } });
+            res.json({ message: "Successfully updated!" });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async deleteUser(req, res, next) {
+        try {
+            await User.destroy({ where: { id: req.user.id } });
+            res.json({ message: "Account successfully deleted!" });
         } catch (error) {
             next(error);
         }
