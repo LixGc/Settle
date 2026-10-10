@@ -1,0 +1,12 @@
+[
+  { "name": "bathroom", "value": "shared", "PropertyId": 1 },
+  { "name": "furnished", "value": "yes", "PropertyId": 1 },
+  { "name": "bills", "value": "included", "PropertyId": 1 },
+  { "name": "bathroom", "value": "private", "PropertyId": 2 },
+  { "name": "furnished", "value": "yes", "PropertyId": 2 },
+  { "name": "parking", "value": "no", "PropertyId": 2 },
+  { "name": "bedrooms", "value": "3", "PropertyId": 3 },
+  { "name": "bathrooms", "value": "2", "PropertyId": 3 },
+  { "name": "furnished", "value": "no", "PropertyId": 3 },
+  { "name": "parking", "value": "2", "PropertyId": 3 }
+]

@@ -1,0 +1,8 @@
+[
+  { "imageUrl": "https://picsum.photos/seed/settle-room-2/800/600", "PropertyId": 1 },
+  { "imageUrl": "https://picsum.photos/seed/settle-room-3/800/600", "PropertyId": 1 },
+  { "imageUrl": "https://picsum.photos/seed/settle-studio-2/800/600", "PropertyId": 2 },
+  { "imageUrl": "https://picsum.photos/seed/settle-house-2/800/600", "PropertyId": 3 },
+  { "imageUrl": "https://picsum.photos/seed/settle-house-3/800/600", "PropertyId": 3 },
+  { "imageUrl": "https://picsum.photos/seed/settle-house-4/800/600", "PropertyId": 3 }
+]

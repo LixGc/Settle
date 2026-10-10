@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Cosy room near campus",
+    "CategoryId": 1,
+    "price": 45,
+    "image": "https://picsum.photos/seed/settle-room/800/600",
+    "UserId": 1,
+    "location": "Sydney"
+  },
+  {
+    "name": "City studio with balcony",
+    "CategoryId": 2,
+    "price": 90,
+    "image": "https://picsum.photos/seed/settle-studio/800/600",
+    "UserId": 1,
+    "location": "Sydney"
+  },
+  {
+    "name": "Family house with garden",
+    "CategoryId": 4,
+    "price": 220,
+    "image": "https://picsum.photos/seed/settle-house/800/600",
+    "UserId": 1,
+    "location": "Parramatta"
+  }
+]

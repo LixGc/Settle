@@ -2,7 +2,15 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node bin/www",
+    "dev": "nodemon bin/www",
+    "test": "jest --runInBand --detectOpenHandles --verbose --coverage",
+    "db:create": "sequelize-cli db:create && sequelize-cli db:create --env test",
+    "db:migrate": "sequelize-cli db:migrate && sequelize-cli db:migrate --env test",
+    "db:seed": "sequelize-cli db:seed:all"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

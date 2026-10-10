@@ -1,0 +1,22 @@
+[
+  {
+    "name": "room",
+    "specifications": ["bathroom", "furnished", "bills"]
+  },
+  {
+    "name": "studio",
+    "specifications": ["bathroom", "furnished", "parking"]
+  },
+  {
+    "name": "apartment",
+    "specifications": ["bedrooms", "bathrooms", "furnished", "parking"]
+  },
+  {
+    "name": "house",
+    "specifications": ["bedrooms", "bathrooms", "furnished", "parking"]
+  },
+  {
+    "name": "townhouse",
+    "specifications": ["bedrooms", "bathrooms", "furnished", "parking"]
+  }
+]
