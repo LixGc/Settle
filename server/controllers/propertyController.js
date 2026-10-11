@@ -149,6 +149,38 @@ class PropertyController {
             next(error);
         }
     }
+    static async addProperty(req, res, next) {
+        try {
+            const { name, CategoryId, price, location } = req.body;
+            const specifications = req.body.specifications ? JSON.parse(req.body.specifications) : [];
+            const images = req.images || [];
+
+            await sequelize.transaction(async (t) => {
+                const property = await Property.create(
+                    {
+                        name,
+                        CategoryId,
+                        price,
+                        image: req.image,
+                        location,
+                        UserId: req.user.id,
+                    },
+                    { transaction: t }
+                );
+                await Specification.bulkCreate(
+                    specifications.map((el) => ({ name: el.name, value: el.value, PropertyId: property.id })),
+                    { transaction: t }
+                );
+                await PropertyImage.bulkCreate(
+                    images.map((imageUrl) => ({ imageUrl, PropertyId: property.id })),
+                    { transaction: t }
+                );
+            });
+            res.status(201).json({ message: "Success Add New Property" });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = PropertyController;
