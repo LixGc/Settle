@@ -23,6 +23,12 @@ const errorHandler = (error, req, res, next) => {
     } else if (error.name == "login_empty_field") {
         code = 400;
         message = "Email/Password is required!";
+    } else if (error.name == "forbidden") {
+        code = 403;
+        message = "You are not the owner of this property";
+    } else if (error.name == "SyntaxError") {
+        code = 400;
+        message = "Invalid JSON format";
     }
 
     res.status(code).json({ message });

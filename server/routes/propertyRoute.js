@@ -6,6 +6,7 @@ router.get("/my-properties", authentication, PropertyController.fetchMyProperty)
 router.get("/", PropertyController.fetchProperty);
 router.get("/locations", PropertyController.fetchLocation);
 router.get("/:id", PropertyController.detailProperty);
-
+router.put("/:id", authentication, uploadMulti(["image", "images"]), PropertyController.editProperty);
+router.delete("/:id", authentication, PropertyController.removeProperty);
 router.post("/", authentication, uploadMulti(["image", "images"]), PropertyController.addProperty);
 module.exports = router;

@@ -181,6 +181,55 @@ class PropertyController {
             next(error);
         }
     }
+    static async editProperty(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { name, CategoryId, price, location } = req.body;
+
+            const findProperty = await Property.findByPk(id);
+            if (!findProperty) {
+                throw { name: "not_found" };
+            }
+            if (findProperty.UserId !== req.user.id) {
+                throw { name: "forbidden" };
+            }
+
+            await findProperty.update({
+                name,
+                CategoryId,
+                price,
+                location,
+                image: req.image || findProperty.image,
+            });
+            if (req.images) {
+                await PropertyImage.bulkCreate(req.images.map((imageUrl) => ({ imageUrl, PropertyId: findProperty.id })));
+            }
+            res.status(200).json({ message: "Success Edit Property" });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async removeProperty(req, res, next) {
+        try {
+            const { id } = req.params;
+            const findProperty = await Property.findByPk(id);
+            if (!findProperty) {
+                throw { name: "not_found" };
+            }
+            if (findProperty.UserId !== req.user.id) {
+                throw { name: "forbidden" };
+            }
+            await Property.destroy({
+                where: {
+                    id,
+                },
+            });
+            res.status(200).json({ message: `Success Delete Property With Id ${id}` });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = PropertyController;
