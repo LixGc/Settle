@@ -30,6 +30,19 @@ const errorHandler = (error, req, res, next) => {
         code = 400;
         message = "Invalid JSON format";
     }
+    else if (error.name === "same-user") {
+        code = 403;
+        message = "Cannot book your own property";
+    } else if (error.name == "date_required") {
+        code = 400;
+        message = "Start date and end date are required";
+    } else if (error.name == "invalid_date") {
+        code = 400;
+        message = "End date must be after start date";
+    } else if (error.name == "already_booked") {
+        code = 400;
+        message = "Property is already booked on those dates";
+    }
 
     res.status(code).json({ message });
 };
