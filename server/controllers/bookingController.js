@@ -2,6 +2,24 @@ const { Booking, Property, User, UserProfile, Review, Balance } = require("../mo
 const { Sequelize, Op } = require("sequelize");
 const totalNightConverter = require("../helpers/totalNightConverter");
 
+const bookingInclude = [
+    {
+        model: Property,
+        include: [
+            {
+                model: User,
+                attributes: { exclude: ["password", "otp"] },
+                include: [{ model: UserProfile }],
+            },
+        ],
+    },
+    {
+        model: User,
+        attributes: { exclude: ["password", "otp"] },
+        include: [{ model: UserProfile }],
+    },
+];
+
 class BookingController {
     static async createBooking(req, res, next) {
         try {
@@ -46,6 +64,50 @@ class BookingController {
                 totalPrice,
             });
             res.status(201).json({ message: "Success create new booking", id: booking.id });
+        } catch (error) {
+            next(error);
+        }
+    }
+    static async findAllBooking(req, res, next) {
+        try {
+            const bookings = await Booking.findAll({
+                where: { UserId: req.user.id },
+                include: bookingInclude,
+                order: [["startDate", "DESC"]],
+            });
+            res.json(bookings);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async findBookingsByOwner(req, res, next) {
+        try {
+            const bookings = await Booking.findAll({
+                where: { ownerId: req.user.id },
+                include: bookingInclude,
+                order: [["startDate", "DESC"]],
+            });
+            res.json(bookings);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async findBookingById(req, res, next) {
+        try {
+            const { id } = req.params;
+            const booking = await Booking.findOne({
+                where: { id },
+                include: bookingInclude,
+            });
+            if (!booking) {
+                throw { name: "not_found" };
+            }
+            if (booking.UserId !== req.user.id && booking.ownerId !== req.user.id) {
+                throw { name: "forbidden", message: "You are not allowed to see this booking" };
+            }
+            res.json(booking);
         } catch (error) {
             next(error);
         }

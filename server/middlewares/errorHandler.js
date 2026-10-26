@@ -25,7 +25,7 @@ const errorHandler = (error, req, res, next) => {
         message = "Email/Password is required!";
     } else if (error.name == "forbidden") {
         code = 403;
-        message = "You are not the owner of this property";
+        message = error.message || "You are not the owner of this property";
     } else if (error.name == "SyntaxError") {
         code = 400;
         message = "Invalid JSON format";
