@@ -1,7 +1,6 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BOOKING_DETAIL_FETCH_REQUEST, BOOKING_DETAIL_FETCH_SUCCESS, PROPERTY_BOOKINGS_FETCH_SUCCESS } from "./actionType";
-import { getErrorMessage } from "../../src/helpers/alert";
+import { BOOKING_DETAIL_FETCH_REQUEST, BOOKING_DETAIL_FETCH_SUCCESS, PROPERTY_BOOKINGS_FETCH_SUCCESS, OWNER_BOOKINGS_FETCH_SUCCESS } from "./actionType";
 import { getUser } from "./userAction";
 import { baseUrl } from "./baseUrl";
 
@@ -81,6 +80,52 @@ export const createBooking = (value, id) => {
                     access_token,
                 },
             });
+            dispatch(getUser());
+            return data;
+        } catch (error) {
+            throw getErrorMessage(error);
+        }
+    };
+};
+
+// BOOKINGS OF MY PROPERTIES
+export const ownerBookingsFetchSuccess = (payload) => {
+    return { type: OWNER_BOOKINGS_FETCH_SUCCESS, payload };
+};
+
+export const fetchOwnerBookings = () => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/bookings/owner",
+                method: "GET",
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(ownerBookingsFetchSuccess(data));
+        } catch (error) {
+            console.log(getErrorMessage(error));
+        }
+    };
+};
+
+// UPDATE BOOKING STATUS (owner only)
+export const updateBookingStatus = (status, id) => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/bookings/" + id,
+                method: "PATCH",
+                data: { status },
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(fetchBookingById(id));
+            dispatch(fetchOwnerBookings());
             dispatch(getUser());
             return data;
         } catch (error) {

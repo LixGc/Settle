@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, ScrollView, Pressable, ActivityIndicator
 import { Ionicons } from "@expo/vector-icons";
 import { WebView } from "react-native-webview";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBookingById, createPayment, getUser } from "../../store/actions";
+import { fetchBookingById, createPayment, getUser, updateBookingStatus } from "../../store/actions";
 import { errorAlert, successAlert } from "../helpers/alert";
 import { fPrice } from "../helpers/fPrice";
 import { fDate } from "../helpers/fDate";
@@ -18,6 +18,7 @@ function BookingDetail({ route }) {
     const [loading, setLoading] = useState(true);
     const [paying, setPaying] = useState(false);
     const [paymentUrl, setPaymentUrl] = useState("");
+    const [updating, setUpdating] = useState(false);
     const paymentHandled = useRef(false);
 
     useEffect(() => {
@@ -34,6 +35,14 @@ function BookingDetail({ route }) {
             .then((data) => setPaymentUrl(data.url))
             .catch((error) => errorAlert(error))
             .finally(() => setPaying(false));
+    };
+
+    const handleComplete = () => {
+        setUpdating(true);
+        dispatch(updateBookingStatus("completed", id))
+            .then((data) => successAlert(data.message))
+            .catch((error) => errorAlert(error))
+            .finally(() => setUpdating(false));
     };
 
     // After paying, Stripe sends the WebView to the server's success or cancel page
@@ -74,6 +83,7 @@ function BookingDetail({ route }) {
 
     const property = booking.Property;
     const isTenant = booking.UserId === profile?.id;
+    const isOwner = booking.ownerId === profile?.id;
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -96,7 +106,7 @@ function BookingDetail({ route }) {
 
             {/* stay */}
             <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Your stay</Text>
+                <Text style={styles.sectionTitle}>{isOwner ? "Guest stay" : "Your stay"}</Text>
                 <View style={styles.card}>
                     <View style={styles.cardRow}>
                         <Text style={styles.grey}>Check-in</Text>
@@ -106,6 +116,12 @@ function BookingDetail({ route }) {
                         <Text style={styles.grey}>Check-out</Text>
                         <Text style={styles.value}>{fDate(booking.endDate)}</Text>
                     </View>
+                    {isOwner && (
+                        <View style={styles.cardRow}>
+                            <Text style={styles.grey}>Guest</Text>
+                            <Text style={styles.value}>{booking.User?.fullName}</Text>
+                        </View>
+                    )}
                     <View style={styles.cardRow}>
                         <Text style={styles.grey}>Status</Text>
                         <Text style={[styles.status, { backgroundColor: getStatusBackgroundColor(booking.status) }]}>{booking.status}</Text>
@@ -124,6 +140,16 @@ function BookingDetail({ route }) {
                         {paying ? <ActivityIndicator color={colors.white} /> : <Text style={styles.payText}>Pay with Stripe</Text>}
                     </Pressable>
                     <Text style={[styles.grey, { textAlign: "center" }]}>Your stay is confirmed once it's paid</Text>
+                </View>
+            )}
+
+            {/* owner finishes the stay */}
+            {isOwner && booking.status === "ongoing" && (
+                <View style={styles.section}>
+                    <Pressable style={styles.payButton} onPress={handleComplete} disabled={updating}>
+                        {updating ? <ActivityIndicator color={colors.white} /> : <Text style={styles.payText}>Mark as completed</Text>}
+                    </Pressable>
+                    <Text style={[styles.grey, { textAlign: "center" }]}>Do this after the guest checks out. The total goes to your balance.</Text>
                 </View>
             )}
         </ScrollView>

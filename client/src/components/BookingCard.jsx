@@ -6,7 +6,7 @@ import { fDate } from "../helpers/fDate";
 import { getStatusBackgroundColor } from "../helpers/getBg";
 import { colors } from "../theme";
 
-function BookingCard({ booking, navigation }) {
+function BookingCard({ booking, navigation, owner }) {
     const property = booking.Property;
 
     const goDetail = () => {
@@ -21,8 +21,9 @@ function BookingCard({ booking, navigation }) {
                     {property ? property.name : "Removed property"}
                 </Text>
                 <View style={styles.row}>
-                    <Ionicons name="location-outline" size={13} color={colors.grey} />
-                    <Text style={styles.small}>{property?.location}</Text>
+                    {/* the owner sees who booked, the guest sees where */}
+                    <Ionicons name={owner ? "person-outline" : "location-outline"} size={13} color={colors.grey} />
+                    <Text style={styles.small}>{owner ? booking.User?.fullName : property?.location}</Text>
                 </View>
                 <View style={styles.row}>
                     <Ionicons name="calendar-outline" size={13} color={colors.grey} />
@@ -32,7 +33,7 @@ function BookingCard({ booking, navigation }) {
                 </View>
                 <Text style={styles.price}>{fPrice(booking.totalPrice)}</Text>
             </View>
-            <Text style={[styles.status, { backgroundColor: getStatusBackgroundColor(booking.status) }]}>{booking.status === "pending" ? "Pay now" : booking.status}</Text>
+            <Text style={[styles.status, { backgroundColor: getStatusBackgroundColor(booking.status) }]}>{booking.status === "pending" && !owner ? "Pay now" : booking.status}</Text>
         </Pressable>
     );
 }

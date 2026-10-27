@@ -24,3 +24,5 @@ export const PROPERTY_BOOKINGS_FETCH_SUCCESS = "propertyBookings/fetchSuccess";
 
 export const LOCATIONS_FETCH_SUCCESS = "locations/fetchSuccess";
 export const SEARCH_FETCH_SUCCESS = "search/fetchSuccess";
+
+export const OWNER_BOOKINGS_FETCH_SUCCESS = "ownerBookings/fetchSuccess";

@@ -1,8 +1,9 @@
-import { BOOKING_DETAIL_FETCH_REQUEST, BOOKING_DETAIL_FETCH_SUCCESS, PROPERTY_BOOKINGS_FETCH_SUCCESS } from "../actions/actionType";
+import { BOOKING_DETAIL_FETCH_REQUEST, BOOKING_DETAIL_FETCH_SUCCESS, PROPERTY_BOOKINGS_FETCH_SUCCESS, OWNER_BOOKINGS_FETCH_SUCCESS } from "../actions/actionType";
 
 const initialState = {
     booking: null,
     propertyBookings: [],
+    ownerBookings: [],
 };
 
 const bookingReducer = (state = initialState, action) => {
@@ -21,6 +22,11 @@ const bookingReducer = (state = initialState, action) => {
             return {
                 ...state,
                 propertyBookings: action.payload,
+            };
+        case OWNER_BOOKINGS_FETCH_SUCCESS:
+            return {
+                ...state,
+                ownerBookings: action.payload,
             };
         default:
             return state;

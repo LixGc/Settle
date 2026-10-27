@@ -18,6 +18,7 @@ import Explore from "./src/screens/Explore";
 import Bookings from "./src/screens/Bookings";
 import BookingDetail from "./src/screens/BookingDetail";
 import Profile from "./src/screens/Profile";
+import OwnerBookings from "./src/screens/OwnerBookings";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -96,6 +97,16 @@ export default function App() {
               options={{
                 headerShown: true,
                 title: "My profile",
+                headerTintColor: colors.primary,
+                headerBackTitle: "Back",
+              }}
+            />
+            <Stack.Screen
+              name="ownerBookings"
+              component={OwnerBookings}
+              options={{
+                headerShown: true,
+                title: "Guest bookings",
                 headerTintColor: colors.primary,
                 headerBackTitle: "Back",
               }}
