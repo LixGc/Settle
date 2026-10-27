@@ -97,3 +97,44 @@ export const handleLogout = () => {
         successAlert("Success Logout");
     };
 };
+
+// PROFILE PHOTO AND ID CARD
+export const addProfile = (value) => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/profiles",
+                method: "POST",
+                data: value,
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(getUser());
+            return data;
+        } catch (error) {
+            throw getErrorMessage(error);
+        }
+    };
+};
+
+export const editProfile = (value) => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/profiles",
+                method: "PUT",
+                data: value,
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(getUser());
+            return data;
+        } catch (error) {
+            throw getErrorMessage(error);
+        }
+    };
+};

@@ -17,6 +17,7 @@ import Detail from "./src/screens/Detail";
 import Explore from "./src/screens/Explore";
 import Bookings from "./src/screens/Bookings";
 import BookingDetail from "./src/screens/BookingDetail";
+import Profile from "./src/screens/Profile";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -85,6 +86,16 @@ export default function App() {
               options={{
                 headerShown: true,
                 title: "Booking",
+                headerTintColor: colors.primary,
+                headerBackTitle: "Back",
+              }}
+            />
+            <Stack.Screen
+              name="profile"
+              component={Profile}
+              options={{
+                headerShown: true,
+                title: "My profile",
                 headerTintColor: colors.primary,
                 headerBackTitle: "Back",
               }}
