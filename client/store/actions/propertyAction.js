@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
     PROPERTY_FETCH_REQUEST,
     PROPERTY_FETCH_SUCCESS,
@@ -7,7 +6,10 @@ import {
     PROPERTY_DETAIL_FETCH_REQUEST,
     PROPERTY_DETAIL_FETCH_SUCCESS,
     CATEGORIES_FETCH_SUCCESS,
+    LOCATIONS_FETCH_SUCCESS,
+    SEARCH_FETCH_SUCCESS,
 } from "./actionType";
+import axios from "axios";
 import { getErrorMessage } from "../../src/helpers/alert";
 import { baseUrl } from "./baseUrl";
 
@@ -86,6 +88,39 @@ export const fetchCategories = () => {
             dispatch(categoriesFetchSuccess(data));
         } catch (error) {
             console.log(getErrorMessage(error));
+        }
+    };
+};
+
+// LOCATIONS
+export const locationsFetchSuccess = (payload) => {
+    return { type: LOCATIONS_FETCH_SUCCESS, payload };
+};
+
+export const fetchLocations = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(baseUrl + "/properties/locations");
+            dispatch(locationsFetchSuccess(data));
+        } catch (error) {
+            console.log(getErrorMessage(error));
+        }
+    };
+};
+
+// SEARCH BY LOCATION AND DATES
+export const searchFetchSuccess = (payload) => {
+    return { type: SEARCH_FETCH_SUCCESS, payload };
+};
+
+export const searchProperties = (query) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(baseUrl + "/properties", { params: query });
+            dispatch(searchFetchSuccess(data));
+        } catch (error) {
+            // "Not Found" means there are no places in that suburb
+            dispatch(searchFetchSuccess([]));
         }
     };
 };

@@ -1,10 +1,20 @@
-import { PROPERTY_FETCH_REQUEST, PROPERTY_FETCH_SUCCESS, PROPERTY_FETCH_FAIL, TRENDING_FETCH_SUCCESS, PROPERTY_DETAIL_FETCH_REQUEST, PROPERTY_DETAIL_FETCH_SUCCESS } from "../actions/actionType";
-
+import {
+    PROPERTY_FETCH_REQUEST,
+    PROPERTY_FETCH_SUCCESS,
+    PROPERTY_FETCH_FAIL,
+    TRENDING_FETCH_SUCCESS,
+    PROPERTY_DETAIL_FETCH_REQUEST,
+    PROPERTY_DETAIL_FETCH_SUCCESS,
+    LOCATIONS_FETCH_SUCCESS,
+    SEARCH_FETCH_SUCCESS
+} from "../actions/actionType";
 const initialState = {
     properties: [],
     trending: [],
     detail: null,
     loading: false,
+    locations: [],
+    searchResults: [],
 };
 
 const propertyReducer = (state = initialState, action) => {
@@ -40,6 +50,16 @@ const propertyReducer = (state = initialState, action) => {
             return {
                 ...state,
                 detail: action.payload,
+            };
+        case LOCATIONS_FETCH_SUCCESS:
+            return {
+                ...state,
+                locations: action.payload,
+            };
+        case SEARCH_FETCH_SUCCESS:
+            return {
+                ...state,
+                searchResults: action.payload,
             };
         default:
             return state;

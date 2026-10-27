@@ -14,6 +14,7 @@ import Home from "./src/screens/Home";
 import Account from "./src/screens/Account";
 import LoginRegister from "./src/screens/LoginRegister";
 import Detail from "./src/screens/Detail";
+import Explore from "./src/screens/Explore";
 import Bookings from "./src/screens/Bookings";
 import BookingDetail from "./src/screens/BookingDetail";
 const Stack = createNativeStackNavigator();
@@ -41,6 +42,8 @@ const HomeTab = () => {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "You") {
             iconName = focused ? "person-circle" : "person-circle-outline";
+          } else if (route.name === "Explore") {
+            iconName = focused ? "search" : "search-outline";
           } else if (route.name === "Bookings") {
             iconName = focused ? "calendar" : "calendar-outline";
           }
@@ -49,6 +52,7 @@ const HomeTab = () => {
       })}
     >
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Bookings" component={Bookings} />
       {profile ? <Tab.Screen name="You" component={Account} /> : <Tab.Screen name="You" component={LoginRegister} />}
     </Tab.Navigator>

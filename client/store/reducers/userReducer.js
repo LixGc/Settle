@@ -1,4 +1,3 @@
-import { DrawerLayoutAndroid } from "react-native";
 import { PROFILES_FETCH_REQUEST, PROFILES_FETCH_SUCCESS, PROFILES_FETCH_FAIL, LOGOUT_SUCCESS } from "../actions/actionType";
 
 const initialState = {
@@ -8,10 +7,9 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case PROFILES_FETCH_REQUEST: adwawdawda
+        case PROFILES_FETCH_REQUEST:
             return {
-                DrawerLayoutAndroid,
-                state,
+                ...state,
                 loading: true,
             };
         case PROFILES_FETCH_SUCCESS:

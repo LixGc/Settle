@@ -21,3 +21,6 @@ export const BOOKING_DETAIL_FETCH_REQUEST = "bookingDetail/fetchRequest";
 export const BOOKING_DETAIL_FETCH_SUCCESS = "bookingDetail/fetchSuccess";
 
 export const PROPERTY_BOOKINGS_FETCH_SUCCESS = "propertyBookings/fetchSuccess";
+
+export const LOCATIONS_FETCH_SUCCESS = "locations/fetchSuccess";
+export const SEARCH_FETCH_SUCCESS = "search/fetchSuccess";
