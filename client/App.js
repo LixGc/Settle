@@ -19,6 +19,7 @@ import Bookings from "./src/screens/Bookings";
 import BookingDetail from "./src/screens/BookingDetail";
 import Profile from "./src/screens/Profile";
 import OwnerBookings from "./src/screens/OwnerBookings";
+import MyProperties from "./src/screens/MyProperties";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -107,6 +108,16 @@ export default function App() {
               options={{
                 headerShown: true,
                 title: "Guest bookings",
+                headerTintColor: colors.primary,
+                headerBackTitle: "Back",
+              }}
+            />
+            <Stack.Screen
+              name="myProperties"
+              component={MyProperties}
+              options={{
+                headerShown: true,
+                title: "My places",
                 headerTintColor: colors.primary,
                 headerBackTitle: "Back",
               }}

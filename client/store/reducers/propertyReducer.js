@@ -6,8 +6,10 @@ import {
     PROPERTY_DETAIL_FETCH_REQUEST,
     PROPERTY_DETAIL_FETCH_SUCCESS,
     LOCATIONS_FETCH_SUCCESS,
-    SEARCH_FETCH_SUCCESS
+    SEARCH_FETCH_SUCCESS,
+    MY_PROPERTIES_FETCH_SUCCESS,
 } from "../actions/actionType";
+
 const initialState = {
     properties: [],
     trending: [],
@@ -15,6 +17,7 @@ const initialState = {
     loading: false,
     locations: [],
     searchResults: [],
+    myProperties: [],
 };
 
 const propertyReducer = (state = initialState, action) => {
@@ -60,6 +63,11 @@ const propertyReducer = (state = initialState, action) => {
             return {
                 ...state,
                 searchResults: action.payload,
+            };
+        case MY_PROPERTIES_FETCH_SUCCESS:
+            return {
+                ...state,
+                myProperties: action.payload,
             };
         default:
             return state;

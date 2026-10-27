@@ -8,10 +8,10 @@ import {
     CATEGORIES_FETCH_SUCCESS,
     LOCATIONS_FETCH_SUCCESS,
     SEARCH_FETCH_SUCCESS,
+    MY_PROPERTIES_FETCH_SUCCESS,
 } from "./actionType";
 import axios from "axios";
-import { getErrorMessage } from "../../src/helpers/alert";
-import { baseUrl } from "./baseUrl";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // FETCH PROPERTIES
 export const propertyFetchRequest = () => {
@@ -121,6 +121,48 @@ export const searchProperties = (query) => {
         } catch (error) {
             // "Not Found" means there are no places in that suburb
             dispatch(searchFetchSuccess([]));
+        }
+    };
+};
+// MY PROPERTIES
+export const myPropertiesFetchSuccess = (payload) => {
+    return { type: MY_PROPERTIES_FETCH_SUCCESS, payload };
+};
+
+export const fetchMyProperties = () => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/properties/my-properties",
+                method: "GET",
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(myPropertiesFetchSuccess(data));
+        } catch (error) {
+            console.log(getErrorMessage(error));
+        }
+    };
+};
+
+export const deleteProperty = (id) => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/properties/" + id,
+                method: "DELETE",
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(fetchMyProperties());
+            dispatch(fetchProperties());
+            return data;
+        } catch (error) {
+            throw getErrorMessage(error);
         }
     };
 };
