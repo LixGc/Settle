@@ -112,6 +112,36 @@ class BookingController {
             next(error);
         }
     }
+    static async updateBookingStatus(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { status } = req.body;
+            if (!["pending", "ongoing", "payment", "completed"].includes(status)) {
+                throw { name: "invalid_status" };
+            }
+            const findBooking = await Booking.findByPk(id);
+            if (!findBooking) {
+                throw { name: "not_found" };
+            }
+            if (findBooking.UserId !== req.user.id && findBooking.ownerId !== req.user.id) {
+                throw { name: "forbidden", message: "You are not allowed to update this booking" };
+            }
+            // Only the owner can complete a booking, because that pays them
+            if (status === "completed" && findBooking.ownerId !== req.user.id) {
+                throw { name: "forbidden", message: "Only the owner can complete this booking" };
+            }
+
+            const wasCompleted = findBooking.status === "completed";
+            await findBooking.update({ status });
+
+            if (status === "completed" && !wasCompleted) {
+                await Balance.create({ BookingId: findBooking.id, UserId: findBooking.ownerId, amount: findBooking.totalPrice });
+            }
+            res.json({ message: `Booking status updated to ${status}` });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = BookingController;

@@ -42,6 +42,9 @@ const errorHandler = (error, req, res, next) => {
     } else if (error.name == "already_booked") {
         code = 400;
         message = "Property is already booked on those dates";
+    } else if (error.name == "invalid_status") {
+        code = 400;
+        message = "Invalid booking status";
     } else if (error.name == "review_not_allowed") {
         code = 403;
         message = "You can only review a property after completing a booking";
