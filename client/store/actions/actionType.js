@@ -16,3 +16,8 @@ export const PROPERTY_DETAIL_FETCH_SUCCESS = "propertyDetail/fetchSuccess";
 export const CATEGORIES_FETCH_SUCCESS = "categories/fetchSuccess";
 
 export const FETCH_REVIEW_BY_PROPERTY_SUCCESS = "review/fetchByPropertySuccess";
+
+export const BOOKING_DETAIL_FETCH_REQUEST = "bookingDetail/fetchRequest";
+export const BOOKING_DETAIL_FETCH_SUCCESS = "bookingDetail/fetchSuccess";
+
+export const PROPERTY_BOOKINGS_FETCH_SUCCESS = "propertyBookings/fetchSuccess";

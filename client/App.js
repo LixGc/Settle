@@ -15,6 +15,7 @@ import Account from "./src/screens/Account";
 import LoginRegister from "./src/screens/LoginRegister";
 import Detail from "./src/screens/Detail";
 import Bookings from "./src/screens/Bookings";
+import BookingDetail from "./src/screens/BookingDetail";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -73,6 +74,16 @@ export default function App() {
                 headerTintColor: colors.primary,
                 headerBackTitle: "Back",
               })}
+            />
+            <Stack.Screen
+              name="bookingDetail"
+              component={BookingDetail}
+              options={{
+                headerShown: true,
+                title: "Booking",
+                headerTintColor: colors.primary,
+                headerBackTitle: "Back",
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>
