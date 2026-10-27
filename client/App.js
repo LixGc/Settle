@@ -14,6 +14,7 @@ import Home from "./src/screens/Home";
 import Account from "./src/screens/Account";
 import LoginRegister from "./src/screens/LoginRegister";
 import Detail from "./src/screens/Detail";
+import Bookings from "./src/screens/Bookings";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -39,12 +40,15 @@ const HomeTab = () => {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "You") {
             iconName = focused ? "person-circle" : "person-circle-outline";
+          } else if (route.name === "Bookings") {
+            iconName = focused ? "calendar" : "calendar-outline";
           }
           return <Ionicons name={iconName} size={22} color={color} />;
         },
       })}
     >
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Bookings" component={Bookings} />
       {profile ? <Tab.Screen name="You" component={Account} /> : <Tab.Screen name="You" component={LoginRegister} />}
     </Tab.Navigator>
   );
