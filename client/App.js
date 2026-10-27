@@ -20,6 +20,7 @@ import BookingDetail from "./src/screens/BookingDetail";
 import Profile from "./src/screens/Profile";
 import OwnerBookings from "./src/screens/OwnerBookings";
 import MyProperties from "./src/screens/MyProperties";
+import PropertyForm from "./src/screens/PropertyForm";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -121,6 +122,16 @@ export default function App() {
                 headerTintColor: colors.primary,
                 headerBackTitle: "Back",
               }}
+            />
+            <Stack.Screen
+              name="propertyForm"
+              component={PropertyForm}
+              options={({ route }) => ({
+                headerShown: true,
+                title: route.params?.id ? "Edit place" : "List a place",
+                headerTintColor: colors.primary,
+                headerBackTitle: "Back",
+              })}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -166,3 +166,46 @@ export const deleteProperty = (id) => {
         }
     };
 };
+
+// ADD AND EDIT PROPERTY (value is FormData with the photos)
+export const addProperty = (value) => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/properties",
+                method: "POST",
+                data: value,
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(fetchMyProperties());
+            dispatch(fetchProperties());
+            return data;
+        } catch (error) {
+            throw getErrorMessage(error);
+        }
+    };
+};
+
+export const editProperty = (value, id) => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/properties/" + id,
+                method: "PUT",
+                data: value,
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(fetchMyProperties());
+            dispatch(fetchProperties());
+            return data;
+        } catch (error) {
+            throw getErrorMessage(error);
+        }
+    };
+};
