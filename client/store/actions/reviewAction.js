@@ -41,3 +41,25 @@ export const fetchReviewByUser = () => {
         }
     };
 };
+
+// POST REVIEW
+export const addReview = (value, id) => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/reviews/" + id,
+                method: "POST",
+                data: value,
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(fetchReviewByProperty(id));
+            dispatch(fetchReviewByUser());
+            return data;
+        } catch (error) {
+            throw getErrorMessage(error);
+        }
+    };
+};

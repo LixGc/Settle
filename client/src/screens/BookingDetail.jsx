@@ -8,9 +8,10 @@ import { errorAlert, successAlert } from "../helpers/alert";
 import { fPrice } from "../helpers/fPrice";
 import { fDate } from "../helpers/fDate";
 import { getStatusBackgroundColor } from "../helpers/getBg";
+import ReviewModal from "../components/ReviewModal";
 import { colors } from "../theme";
 
-function BookingDetail({ route }) {
+function BookingDetail({ route, navigation }) {
     const { id } = route.params;
     const dispatch = useDispatch();
     const { booking } = useSelector((state) => state.bookingReducer);
@@ -19,6 +20,7 @@ function BookingDetail({ route }) {
     const [paying, setPaying] = useState(false);
     const [paymentUrl, setPaymentUrl] = useState("");
     const [updating, setUpdating] = useState(false);
+    const [reviewVisible, setReviewVisible] = useState(false);
     const paymentHandled = useRef(false);
 
     useEffect(() => {
@@ -140,6 +142,16 @@ function BookingDetail({ route }) {
                         {paying ? <ActivityIndicator color={colors.white} /> : <Text style={styles.payText}>Pay with Stripe</Text>}
                     </Pressable>
                     <Text style={[styles.grey, { textAlign: "center" }]}>Your stay is confirmed once it's paid</Text>
+                </View>
+            )}
+
+            {/* guest reviews the place after the stay */}
+            {isTenant && booking.status === "completed" && property && (
+                <View style={styles.section}>
+                    <Pressable style={styles.payButton} onPress={() => setReviewVisible(true)}>
+                        <Text style={styles.payText}>Write a review</Text>
+                    </Pressable>
+                    <ReviewModal visible={reviewVisible} property={property} onClose={() => setReviewVisible(false)} onSuccess={() => navigation.navigate("detail", { id: property.id, name: property.name })} />
                 </View>
             )}
 

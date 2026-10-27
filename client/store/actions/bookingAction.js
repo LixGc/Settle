@@ -1,6 +1,7 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BOOKING_DETAIL_FETCH_REQUEST, BOOKING_DETAIL_FETCH_SUCCESS, PROPERTY_BOOKINGS_FETCH_SUCCESS, OWNER_BOOKINGS_FETCH_SUCCESS } from "./actionType";
+import { getErrorMessage } from "../../src/helpers/alert";
 import { getUser } from "./userAction";
 import { baseUrl } from "./baseUrl";
 

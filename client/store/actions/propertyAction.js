@@ -12,6 +12,8 @@ import {
 } from "./actionType";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getErrorMessage } from "../../src/helpers/alert";
+import { baseUrl } from "./baseUrl";
 
 // FETCH PROPERTIES
 export const propertyFetchRequest = () => {
