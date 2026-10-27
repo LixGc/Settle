@@ -13,7 +13,7 @@ import Splash from "./src/screens/Splash";
 import Home from "./src/screens/Home";
 import Account from "./src/screens/Account";
 import LoginRegister from "./src/screens/LoginRegister";
-
+import Detail from "./src/screens/Detail";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -60,6 +60,16 @@ export default function App() {
             <Stack.Screen name="splash" component={Splash} />
             <Stack.Screen name="home" component={HomeTab} />
             <Stack.Screen name="loginRegister" component={LoginRegister} />
+            <Stack.Screen
+              name="detail"
+              component={Detail}
+              options={({ route }) => ({
+                headerShown: true,
+                title: route.params.name,
+                headerTintColor: colors.primary,
+                headerBackTitle: "Back",
+              })}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </AlertNotificationRoot>
