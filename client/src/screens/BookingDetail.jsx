@@ -47,16 +47,17 @@ function BookingDetail({ route, navigation }) {
             .finally(() => setUpdating(false));
     };
 
-    // After paying, Stripe sends the WebView to the server's success or cancel page
-    const handleNavigation = (navState) => {
-        if (paymentHandled.current || navState.loading) return;
-        if (navState.url.includes("/payments/success")) {
+    // After paying, Stripe sends the WebView to the server's success or cancel page.
+    // onLoad waits until that page has loaded, so the server has already marked the booking as paid
+    const handlePaymentLoad = ({ nativeEvent }) => {
+        if (paymentHandled.current) return;
+        if (nativeEvent.url.includes("/payments/success")) {
             paymentHandled.current = true;
             setPaymentUrl("");
             dispatch(fetchBookingById(id));
             dispatch(getUser());
             successAlert("Payment successful");
-        } else if (navState.url.includes("/payments/cancel")) {
+        } else if (nativeEvent.url.includes("/payments/cancel")) {
             paymentHandled.current = true;
             setPaymentUrl("");
             errorAlert("Payment cancelled");
@@ -64,7 +65,7 @@ function BookingDetail({ route, navigation }) {
     };
 
     if (paymentUrl) {
-        return <WebView source={{ uri: paymentUrl }} onNavigationStateChange={handleNavigation} startInLoadingState style={{ flex: 1 }} />;
+        return <WebView source={{ uri: paymentUrl }} onLoad={handlePaymentLoad} startInLoadingState style={{ flex: 1 }} />;
     }
 
     if (loading) {
