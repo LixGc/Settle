@@ -1,30 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, FlatList, ScrollView, ActivityIndicator, useWindowDimensions } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, ScrollView, Pressable, ActivityIndicator, useWindowDimensions } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDetail, fetchReviewByProperty } from "../../store/actions";
-import { errorAlert } from "../helpers/alert";
+import { fetchDetail, fetchReviewByProperty, fetchPropertyBookings, createBooking } from "../../store/actions";
+import { errorAlert, successAlert } from "../helpers/alert";
 import { fPrice } from "../helpers/fPrice";
-import { fDate } from "../helpers/fDate";
+import { fDate, toDateString, nextDay, countNights } from "../helpers/fDate";
 import { generateStars } from "../helpers/fRating";
+import DateInput from "../components/DateInput";
 import { colors } from "../theme";
 
-function Detail({ route }) {
-    const { id } = route.params;
+function Detail({ route, navigation }) {
+    // startDate and endDate come from Explore, when the guest searched by dates
+    const { id, startDate: searchStart, endDate: searchEnd } = route.params;
     const dispatch = useDispatch();
     const { detail } = useSelector((state) => state.propertyReducer);
     const { propertyReviews } = useSelector((state) => state.reviewReducer);
+    const { propertyBookings } = useSelector((state) => state.bookingReducer);
+    const { profile } = useSelector((state) => state.userReducer);
     const [loading, setLoading] = useState(true);
     const [imageIndex, setImageIndex] = useState(0);
+    const [startDate, setStartDate] = useState(searchStart ? new Date(searchStart) : new Date());
+    const [endDate, setEndDate] = useState(searchEnd ? new Date(searchEnd) : nextDay(new Date()));
+    const [submitting, setSubmitting] = useState(false);
     const { width } = useWindowDimensions();
 
     useEffect(() => {
         setLoading(true);
         dispatch(fetchReviewByProperty(id));
+        dispatch(fetchPropertyBookings(id));
         dispatch(fetchDetail(id))
             .catch((error) => errorAlert(error))
             .finally(() => setLoading(false));
     }, [id]);
+
+    const handleStartChange = (date) => {
+        setStartDate(date);
+        if (countNights(date, endDate) < 1) {
+            setEndDate(nextDay(date));
+        }
+    };
+
+    const handleBooking = () => {
+        if (!profile) {
+            errorAlert("Please log in first");
+            return navigation.navigate("loginRegister");
+        }
+        setSubmitting(true);
+        dispatch(createBooking({ startDate: toDateString(startDate), endDate: toDateString(endDate) }, id))
+            .then((data) => {
+                successAlert(data.message);
+                dispatch(fetchPropertyBookings(id));
+                navigation.navigate("bookingDetail", { id: data.id });
+            })
+            .catch((error) => errorAlert(error))
+            .finally(() => setSubmitting(false));
+    };
 
     if (loading) {
         return (
@@ -45,6 +76,11 @@ function Detail({ route }) {
     const { property, rating } = detail;
     const images = [property.image, ...property.PropertyImages.map((el) => el.imageUrl)];
     const owner = property.User;
+    const nights = countNights(startDate, endDate);
+
+    // Same check as the server: the stays overlap if one starts before the other ends
+    const isBooked = propertyBookings.some((booking) => new Date(toDateString(startDate)) < new Date(booking.endDate) && new Date(toDateString(endDate)) > new Date(booking.startDate));
+    const upcomingBookings = propertyBookings.filter((booking) => new Date(booking.endDate) >= new Date(toDateString(new Date())));
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -116,6 +152,31 @@ function Detail({ route }) {
                     </View>
                 </View>
             )}
+
+            {/* booking */}
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Book your stay</Text>
+                <View style={styles.dateRow}>
+                    <DateInput label="Check-in" value={startDate} minimumDate={new Date()} onChange={handleStartChange} />
+                    <DateInput label="Check-out" value={endDate} minimumDate={nextDay(startDate)} onChange={setEndDate} />
+                </View>
+                {upcomingBookings.length > 0 && <Text style={styles.small}>Already booked: {upcomingBookings.map((booking) => `${fDate(booking.startDate)} - ${fDate(booking.endDate)}`).join(", ")}</Text>}
+                <View style={styles.rowBetween}>
+                    <Text style={styles.grey}>
+                        {fPrice(property.price)} x {nights} {nights === 1 ? "night" : "nights"}
+                    </Text>
+                    <Text style={styles.total}>{fPrice(property.price * nights)}</Text>
+                </View>
+                {isBooked ? (
+                    <View style={[styles.bookButton, { backgroundColor: colors.danger }]}>
+                        <Text style={styles.bookText}>Not available on these dates</Text>
+                    </View>
+                ) : (
+                    <Pressable style={styles.bookButton} onPress={handleBooking} disabled={submitting}>
+                        {submitting ? <ActivityIndicator color={colors.white} /> : <Text style={styles.bookText}>Book now</Text>}
+                    </Pressable>
+                )}
+            </View>
 
             {/* reviews */}
             <View style={[styles.section, { paddingBottom: 40 }]}>
@@ -280,6 +341,37 @@ const styles = StyleSheet.create({
     reviewMessage: {
         marginTop: 4,
         color: colors.dark,
+    },
+    dateRow: {
+        flexDirection: "row",
+        gap: 12,
+    },
+    small: {
+        fontSize: 12,
+        color: colors.grey,
+    },
+    rowBetween: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: 4,
+    },
+    total: {
+        fontSize: 16,
+        fontWeight: "800",
+        color: colors.dark,
+    },
+    bookButton: {
+        marginTop: 6,
+        backgroundColor: colors.primary,
+        borderRadius: 12,
+        padding: 15,
+        alignItems: "center",
+    },
+    bookText: {
+        color: colors.white,
+        fontWeight: "700",
+        fontSize: 16,
     },
 });
 
