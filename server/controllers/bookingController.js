@@ -123,12 +123,9 @@ class BookingController {
             if (!findBooking) {
                 throw { name: "not_found" };
             }
-            if (findBooking.UserId !== req.user.id && findBooking.ownerId !== req.user.id) {
-                throw { name: "forbidden", message: "You are not allowed to update this booking" };
-            }
-            // Only the owner can complete a booking, because that pays them
-            if (status === "completed" && findBooking.ownerId !== req.user.id) {
-                throw { name: "forbidden", message: "Only the owner can complete this booking" };
+            // Payment sets "ongoing" by itself, so only the owner changes the status here
+            if (findBooking.ownerId !== req.user.id) {
+                throw { name: "forbidden", message: "Only the owner can update this booking" };
             }
 
             const wasCompleted = findBooking.status === "completed";

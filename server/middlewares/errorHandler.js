@@ -48,6 +48,15 @@ const errorHandler = (error, req, res, next) => {
     } else if (error.name == "review_not_allowed") {
         code = 403;
         message = "You can only review a property after completing a booking";
+    } else if (error.name == "already_paid") {
+        code = 400;
+        message = "This booking has already been paid";
+    } else if (error.name == "payment_not_completed") {
+        code = 400;
+        message = "Payment has not been completed";
+    } else if (error.type && error.type.startsWith("Stripe")) {
+        code = 400;
+        message = "Payment gateway error";
     }
 
     res.status(code).json({ message });
