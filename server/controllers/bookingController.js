@@ -142,6 +142,60 @@ class BookingController {
             next(error);
         }
     }
+    static async findAllBookingByProperty(req, res, next) {
+        try {
+            const { propertyId } = req.params;
+            const property = await Property.findByPk(propertyId);
+            if (!property) {
+                throw { name: "not_found" };
+            }
+            // Public route, so only return the booked dates, not who booked
+            const bookings = await Booking.findAll({
+                where: { PropertyId: propertyId },
+                attributes: ["id", "startDate", "endDate", "status"],
+            });
+            res.json(bookings);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async fetchTrending(req, res, next) {
+        try {
+            const results = await Booking.findAll({
+                attributes: ["PropertyId", [Sequelize.fn("COUNT", Sequelize.col("PropertyId")), "bookingCount"]],
+                where: { status: "completed" },
+                group: ["PropertyId"],
+                order: [[Sequelize.fn("COUNT", Sequelize.col("PropertyId")), "DESC"]],
+                limit: 7,
+            });
+
+            const mostBookedIds = results.map((result) => result.getDataValue("PropertyId"));
+            const mostBookedProperties = await Property.findAll({
+                where: { id: mostBookedIds },
+                include: [Review, Booking],
+            });
+
+            const trendingData = mostBookedProperties.map((property) => {
+                const { id, name, image, price, location, Reviews, Bookings } = property;
+                const totalReviews = Reviews.length;
+                const averageRating = totalReviews > 0 ? Reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews : 0;
+                return {
+                    id,
+                    name,
+                    image,
+                    location,
+                    price,
+                    totalReviews,
+                    averageRating: averageRating.toFixed(1),
+                    totalBookings: Bookings.length,
+                };
+            });
+            res.json(trendingData);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = BookingController;
