@@ -13,6 +13,13 @@ module.exports = {
     });
     await queryInterface.bulkInsert("Users", dataUsers, {});
 
+    const profiles = require("../data/userProfile.json");
+    const dataProfiles = profiles.map((el) => {
+      el.createdAt = el.updatedAt = new Date();
+      return el;
+    });
+    await queryInterface.bulkInsert("UserProfiles", dataProfiles, {});
+
     const categories = require("../data/category.json");
     const dataCategories = categories.map((el) => {
       el.createdAt = el.updatedAt = new Date();

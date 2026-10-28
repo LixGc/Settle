@@ -1,8 +1,114 @@
 [
-  { "imageUrl": "https://picsum.photos/seed/settle-room-2/800/600", "PropertyId": 1 },
-  { "imageUrl": "https://picsum.photos/seed/settle-room-3/800/600", "PropertyId": 1 },
-  { "imageUrl": "https://picsum.photos/seed/settle-studio-2/800/600", "PropertyId": 2 },
-  { "imageUrl": "https://picsum.photos/seed/settle-house-2/800/600", "PropertyId": 3 },
-  { "imageUrl": "https://picsum.photos/seed/settle-house-3/800/600", "PropertyId": 3 },
-  { "imageUrl": "https://picsum.photos/seed/settle-house-4/800/600", "PropertyId": 3 }
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1556912167-f556f1f39fdf?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 1
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 1
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1702014859878-5d4743176d28?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 2
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1702014859908-d48b9b844240?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 2
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1702014857653-dcea938d51f0?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 2
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 3
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 3
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1560185007-5f0bb1866cab?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 4
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 4
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 4
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 5
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 5
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1613575831056-0acd5da8f085?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 6
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 6
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1769869173719-997e7be14a56?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 7
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1612152605347-f93296cb657d?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 7
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1774578342100-f779e988c83d?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 8
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1617228069096-4638a7ffc906?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 8
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 9
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 9
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 10
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 10
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1759691555285-74005fcf3ddf?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 11
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1602028915047-37269d1a73f7?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 11
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1790214120388-944c0187239c?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 12
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 12
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1780427670049-43aa7921e3f0?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 13
+  },
+  {
+    "imageUrl": "https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=1200&q=80&fm=jpg&fit=crop",
+    "PropertyId": 13
+  }
 ]

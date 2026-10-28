@@ -1,14 +1,50 @@
 [
   {
-    "fullName": "Sam Owner",
+    "fullName": "Sam Whitfield",
     "email": "sam@mail.com",
     "password": "password123",
-    "phone": "0400000001"
+    "phone": "0491570156"
   },
   {
-    "fullName": "Alex Tenant",
+    "fullName": "Alex Moreno",
     "email": "alex@mail.com",
     "password": "password123",
-    "phone": "0400000002"
+    "phone": "0491570157"
+  },
+  {
+    "fullName": "Priya Raman",
+    "email": "priya@mail.com",
+    "password": "password123",
+    "phone": "0491570158"
+  },
+  {
+    "fullName": "Daniel O'Connor",
+    "email": "daniel@mail.com",
+    "password": "password123",
+    "phone": "0491570159"
+  },
+  {
+    "fullName": "Mei Lin Zhang",
+    "email": "meilin@mail.com",
+    "password": "password123",
+    "phone": "0491570110"
+  },
+  {
+    "fullName": "Jack Thompson",
+    "email": "jack@mail.com",
+    "password": "password123",
+    "phone": "0491570313"
+  },
+  {
+    "fullName": "Olivia Bennett",
+    "email": "olivia@mail.com",
+    "password": "password123",
+    "phone": "0491570737"
+  },
+  {
+    "fullName": "Lucas Ferreira",
+    "email": "lucas@mail.com",
+    "password": "password123",
+    "phone": "0491571266"
   }
 ]

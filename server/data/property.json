@@ -1,26 +1,106 @@
 [
   {
-    "name": "Cosy room near campus",
+    "name": "Sunny room in a Newtown terrace",
     "CategoryId": 1,
-    "price": 45,
-    "image": "https://picsum.photos/seed/settle-room/800/600",
+    "price": 55,
+    "image": "https://images.unsplash.com/photo-1758060215425-303300b1c7e2?w=1200&q=80&fm=jpg&fit=crop",
     "UserId": 1,
-    "location": "Sydney"
+    "location": "Newtown"
   },
   {
-    "name": "City studio with balcony",
+    "name": "Modern studio near Central Station",
     "CategoryId": 2,
-    "price": 90,
-    "image": "https://picsum.photos/seed/settle-studio/800/600",
+    "price": 125,
+    "image": "https://images.unsplash.com/photo-1702014862053-946a122b920d?w=1200&q=80&fm=jpg&fit=crop",
     "UserId": 1,
-    "location": "Sydney"
+    "location": "Surry Hills"
   },
   {
-    "name": "Family house with garden",
+    "name": "Two-bedroom apartment with city views",
+    "CategoryId": 3,
+    "price": 230,
+    "image": "https://images.unsplash.com/photo-1612419299101-6c294dc2901d?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 3,
+    "location": "Chatswood"
+  },
+  {
+    "name": "Four-bedroom family home with pool",
     "CategoryId": 4,
-    "price": 220,
-    "image": "https://picsum.photos/seed/settle-house/800/600",
+    "price": 390,
+    "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 4,
+    "location": "Castle Hill"
+  },
+  {
+    "name": "Three-bedroom townhouse near Westfield",
+    "CategoryId": 5,
+    "price": 260,
+    "image": "https://images.unsplash.com/photo-1777104623084-1b36260d1577?w=1200&q=80&fm=jpg&fit=crop",
     "UserId": 1,
     "location": "Parramatta"
+  },
+  {
+    "name": "Private room close to UNSW",
+    "CategoryId": 1,
+    "price": 65,
+    "image": "https://images.unsplash.com/photo-1776348065117-02285a905b0b?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 5,
+    "location": "Kensington"
+  },
+  {
+    "name": "Beachside apartment a short walk to Bondi",
+    "CategoryId": 3,
+    "price": 295,
+    "image": "https://images.unsplash.com/photo-1758448511320-05d7d28f4298?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 7,
+    "location": "Bondi"
+  },
+  {
+    "name": "Garden studio on a quiet street",
+    "CategoryId": 2,
+    "price": 95,
+    "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 3,
+    "location": "Marrickville"
+  },
+  {
+    "name": "Ivy-covered cottage with a leafy garden",
+    "CategoryId": 4,
+    "price": 310,
+    "image": "https://images.unsplash.com/photo-1562182384-08115de5ee97?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 1,
+    "location": "Newtown"
+  },
+  {
+    "name": "Furnished room with ensuite",
+    "CategoryId": 1,
+    "price": 75,
+    "image": "https://images.unsplash.com/photo-1633948393301-d43e3ec0e5cd?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 5,
+    "location": "Chatswood"
+  },
+  {
+    "name": "Modern townhouse by the river",
+    "CategoryId": 5,
+    "price": 235,
+    "image": "https://images.unsplash.com/photo-1598232973707-41b8faa2592c?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 4,
+    "location": "Ryde"
+  },
+  {
+    "name": "Light-filled apartment with balcony",
+    "CategoryId": 3,
+    "price": 275,
+    "image": "https://images.unsplash.com/photo-1665249934445-1de680641f50?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 7,
+    "location": "Chatswood"
+  },
+  {
+    "name": "Brick family home with double garage",
+    "CategoryId": 4,
+    "price": 340,
+    "image": "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 3,
+    "location": "Castle Hill"
   }
 ]

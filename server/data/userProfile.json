@@ -1,0 +1,42 @@
+[
+    {
+        "UserId": 1,
+        "profilePicture": "https://randomuser.me/api/portraits/men/32.jpg",
+        "idCard": "https://placehold.co/600x380/png?text=ID+card+on+file"
+    },
+    {
+        "UserId": 2,
+        "profilePicture": "https://randomuser.me/api/portraits/men/22.jpg",
+        "idCard": "https://placehold.co/600x380/png?text=ID+card+on+file"
+    },
+    {
+        "UserId": 3,
+        "profilePicture": "https://randomuser.me/api/portraits/women/79.jpg",
+        "idCard": "https://placehold.co/600x380/png?text=ID+card+on+file"
+    },
+    {
+        "UserId": 4,
+        "profilePicture": "https://randomuser.me/api/portraits/men/75.jpg",
+        "idCard": "https://placehold.co/600x380/png?text=ID+card+on+file"
+    },
+    {
+        "UserId": 5,
+        "profilePicture": "https://randomuser.me/api/portraits/women/90.jpg",
+        "idCard": "https://placehold.co/600x380/png?text=ID+card+on+file"
+    },
+    {
+        "UserId": 6,
+        "profilePicture": "https://randomuser.me/api/portraits/men/64.jpg",
+        "idCard": "https://placehold.co/600x380/png?text=ID+card+on+file"
+    },
+    {
+        "UserId": 7,
+        "profilePicture": "https://randomuser.me/api/portraits/women/65.jpg",
+        "idCard": "https://placehold.co/600x380/png?text=ID+card+on+file"
+    },
+    {
+        "UserId": 8,
+        "profilePicture": "https://randomuser.me/api/portraits/men/85.jpg",
+        "idCard": "https://placehold.co/600x380/png?text=ID+card+on+file"
+    }
+]
