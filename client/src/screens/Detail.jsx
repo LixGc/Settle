@@ -157,7 +157,6 @@ function Detail({ route, navigation }) {
                                 <Text style={styles.avatarText}>{owner.fullName.charAt(0)}</Text>
                             </View>
                         )}
-                        <View>
                         <View style={{ flex: 1 }}>
                             <Text style={styles.ownerName}>{owner.fullName}</Text>
                             <Text style={styles.grey}>Hosting on Settle</Text>
@@ -168,7 +167,6 @@ function Detail({ route, navigation }) {
                                 <Ionicons name="chatbubble-ellipses-outline" size={22} color={colors.primary} />
                             </Pressable>
                         )}
-                        </View>
                     </View>
                 </View>
             )}
