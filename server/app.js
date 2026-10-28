@@ -4,6 +4,12 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const cors = require("cors");
+
+
+// ngrok passes https requests on to this server as http
+// Without this, Stripe would send people back to http:// instead of https://.
+app.set("trust proxy", true);
+
 const router = require("./routes/index");
 const errorHandler = require("./middlewares/errorHandler");
 
