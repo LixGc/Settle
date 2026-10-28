@@ -77,6 +77,18 @@ function Detail({ route, navigation }) {
     const images = [property.image, ...property.PropertyImages.map((el) => el.imageUrl)];
     const owner = property.User;
     const nights = countNights(startDate, endDate);
+    
+    const goChat = () => {
+        if (!profile) {
+            errorAlert("Please log in first");
+            return navigation.navigate("loginRegister");
+        }
+        navigation.navigate("chatbox", {
+            id: owner.id,
+            name: owner.fullName,
+            property: { name: property.name, image: property.image, price: property.price },
+        });
+    };
 
     // Same check as the server: the stays overlap if one starts before the other ends
     const isBooked = propertyBookings.some((booking) => new Date(toDateString(startDate)) < new Date(booking.endDate) && new Date(toDateString(endDate)) > new Date(booking.startDate));
@@ -146,8 +158,16 @@ function Detail({ route, navigation }) {
                             </View>
                         )}
                         <View>
+                        <View style={{ flex: 1 }}>
                             <Text style={styles.ownerName}>{owner.fullName}</Text>
                             <Text style={styles.grey}>Hosting on Settle</Text>
+                        </View>
+                        {/* no chat button on your own place */}
+                        {owner.id !== profile?.id && (
+                            <Pressable style={styles.chatButton} onPress={goChat}>
+                                <Ionicons name="chatbubble-ellipses-outline" size={22} color={colors.primary} />
+                            </Pressable>
+                        )}
                         </View>
                     </View>
                 </View>
@@ -325,6 +345,11 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "700",
         color: colors.dark,
+    },
+    chatButton: {
+        backgroundColor: colors.primaryLight,
+        borderRadius: 12,
+        padding: 10,
     },
     review: {
         flexDirection: "row",

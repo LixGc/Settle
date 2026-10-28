@@ -9,6 +9,7 @@ import PropertyCard from "../components/PropertyCard";
 import PropertyListItem from "../components/PropertyListItem";
 import { fDate } from "../helpers/fDate";
 import { getStatusBackgroundColor } from "../helpers/getBg";
+import { errorAlert } from "../helpers/alert";
 import { colors } from "../theme";
 
 const categoryIcons = {
@@ -57,6 +58,14 @@ function Home({ navigation }) {
         navigation.navigate("detail", { id: item.id, name: item.name });
     };
 
+    const goChats = () => {
+        if (!profile) {
+            errorAlert("Please log in first");
+            return navigation.navigate("You");
+        }
+        navigation.navigate("conversationList");
+    };
+
     if (loading && properties.length === 0) {
         return (
             <View style={styles.center}>
@@ -70,7 +79,12 @@ function Home({ navigation }) {
             <ScrollView showsVerticalScrollIndicator={false}>
                 {/* header and search */}
                 <View style={styles.header}>
-                    <Text style={styles.greeting}>Hi{profile ? `, ${profile.fullName}` : ""}</Text>
+                       <View style={styles.headerRow}>
+                        <Text style={styles.greeting}>Hi{profile ? `, ${profile.fullName}` : ""}</Text>
+                        <Pressable onPress={goChats}>
+                            <Ionicons name="chatbubbles-outline" size={26} color={colors.white} />
+                        </Pressable>
+                    </View>
                     <Text style={styles.title}>Find your next place to settle</Text>
                     <View style={styles.searchContainer}>
                         <Ionicons name="search" size={20} color={colors.grey} />
@@ -206,6 +220,11 @@ const styles = StyleSheet.create({
         paddingBottom: 24,
         borderBottomLeftRadius: 24,
         borderBottomRightRadius: 24,
+    },
+    headerRow: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
     },
     greeting: {
         fontSize: 15,

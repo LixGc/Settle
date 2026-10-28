@@ -88,6 +88,9 @@ function BookingDetail({ route, navigation }) {
     const isTenant = booking.UserId === profile?.id;
     const isOwner = booking.ownerId === profile?.id;
 
+    // The guest chats with the host, the host chats with the guest
+    const chatWith = isOwner ? booking.User : property?.User;
+
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             {property && <Image source={{ uri: property.image }} style={styles.image} />}
@@ -135,6 +138,16 @@ function BookingDetail({ route, navigation }) {
                     </View>
                 </View>
             </View>
+
+            {/* chat */}
+            {chatWith && (
+                <View style={styles.section}>
+                    <Pressable style={styles.chatButton} onPress={() => navigation.navigate("chatbox", { id: chatWith.id, name: chatWith.fullName })}>
+                        <Ionicons name="chatbubble-ellipses-outline" size={18} color={colors.primary} />
+                        <Text style={styles.chatText}>{isOwner ? "Message guest" : "Message host"}</Text>
+                    </Pressable>
+                </View>
+            )}
 
             {/* payment */}
             {isTenant && booking.status === "pending" && (
@@ -255,6 +268,21 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontWeight: "700",
         fontSize: 16,
+    },
+    chatButton: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 8,
+        borderWidth: 1,
+        borderColor: colors.primary,
+        borderRadius: 12,
+        padding: 13,
+    },
+    chatText: {
+        color: colors.primary,
+        fontWeight: "700",
+        fontSize: 15,
     },
 });
 

@@ -7,6 +7,7 @@
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-community/datetimepicker": "9.2.1",
     "@react-navigation/bottom-tabs": "^7.21.0",
+    "@react-navigation/elements": "^2.9.45",
     "@react-navigation/native": "^7.5.1",
     "@react-navigation/native-stack": "^7.21.0",
     "axios": "^1.20.0",
@@ -23,6 +24,7 @@
     "react-redux": "^9.3.0",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
+    "stream-chat": "^9.54.1"
   },
   "scripts": {
     "start": "expo start",
