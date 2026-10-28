@@ -26,6 +26,7 @@
     "pg": "^8.23.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.33.0",
+    "stream-chat": "^9.54.1",
     "stripe": "^23.0.1"
   },
   "devDependencies": {
