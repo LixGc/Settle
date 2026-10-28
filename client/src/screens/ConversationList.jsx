@@ -20,7 +20,8 @@ function ConversationList({ navigation }) {
         const loadChannels = async () => {
             try {
                 const result = await chatClient.queryChannels({ type: "messaging", members: { $in: [chatClient.userID] } }, { last_message_at: -1 });
-                if (!cancelled) setChannels(result);
+                // A chat that was opened but never used has no messages, so leave it out
+                if (!cancelled) setChannels(result.filter((channel) => channel.state.messages.length > 0));
             } catch (error) {
                 if (!cancelled) setErrMsg(getErrorMessage(error));
             }
