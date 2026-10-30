@@ -169,8 +169,15 @@ function BookingDetail({ route, navigation }) {
                                 rotateEnabled={false}
                                 pitchEnabled={false}
                             >
-                                <Marker coordinate={{ latitude: exactLocation.latitude, longitude: exactLocation.longitude }} pinColor={colors.primary} />
-                            </MapView>
+                                {/* anchor puts the tip of the pin, not its middle, on the address */}
+                                <Marker coordinate={{ latitude: exactLocation.latitude, longitude: exactLocation.longitude }} anchor={{ x: 0.5, y: 1 }}>
+                                    <View style={styles.pin}>
+                                        <View style={styles.pinCircle}>
+                                            <Ionicons name="home" size={18} color={colors.white} />
+                                        </View>
+                                        <View style={styles.pinTip} />
+                                    </View>
+                                </Marker>                            </MapView>
                         </View>
                     ) : null}
                     <Pressable style={styles.chatButton} onPress={openDirections}>
