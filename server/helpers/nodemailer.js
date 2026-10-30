@@ -73,4 +73,4 @@ function generateOTP() {
     return otp;
 }
 
-module.exports = { generateOTP, sendOTPByEmail };
+module.exports = { generateOTP, sendOTPByEmail, sendInvoiceEmail };
