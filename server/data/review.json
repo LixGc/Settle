@@ -1,0 +1,86 @@
+[
+    {
+        "rating": 5,
+        "message": "Spotless studio and only a short walk to Central. Check-in was easy and Sam replied to every message within minutes.",
+        "PropertyId": 2,
+        "UserId": 2,
+        "createdAt": "2026-08-08"
+    },
+    {
+        "rating": 5,
+        "message": "Waking up to the ocean view was amazing. Five minutes to the beach and plenty of cafes nearby.",
+        "PropertyId": 7,
+        "UserId": 6,
+        "createdAt": "2026-08-19"
+    },
+    {
+        "rating": 4,
+        "message": "Bright room in a lovely old terrace and the shared kitchen was always clean. A bit of street noise on Friday night.",
+        "PropertyId": 1,
+        "UserId": 8,
+        "createdAt": "2026-08-28"
+    },
+    {
+        "rating": 4,
+        "message": "Great location and a comfortable bed. Street parking was hard to find on the weekend.",
+        "PropertyId": 7,
+        "UserId": 3,
+        "createdAt": "2026-09-07"
+    },
+    {
+        "rating": 5,
+        "message": "Perfect for our family weekend. The kids loved the pool and the kitchen had everything we needed.",
+        "PropertyId": 4,
+        "UserId": 2,
+        "createdAt": "2026-09-15"
+    },
+    {
+        "rating": 4,
+        "message": "Compact but really well designed. Fast Wi-Fi made it easy to work from the studio.",
+        "PropertyId": 2,
+        "UserId": 6,
+        "createdAt": "2026-09-22"
+    },
+    {
+        "rating": 5,
+        "message": "Such a charming cottage. The garden is beautiful and it felt like home from the moment we arrived.",
+        "PropertyId": 9,
+        "UserId": 5,
+        "createdAt": "2026-09-29"
+    },
+    {
+        "rating": 4,
+        "message": "Modern apartment with a great view of the city lights. Close to the station and the shopping centre.",
+        "PropertyId": 3,
+        "UserId": 8,
+        "createdAt": "2026-10-06"
+    },
+    {
+        "rating": 5,
+        "message": "Spacious, on a quiet street and with a big backyard. Priya left a lovely welcome basket.",
+        "PropertyId": 13,
+        "UserId": 7,
+        "createdAt": "2026-10-12"
+    },
+    {
+        "rating": 4,
+        "message": "Lots of natural light and a nice balcony for morning coffee. Would stay again.",
+        "PropertyId": 12,
+        "UserId": 4,
+        "createdAt": "2026-10-20"
+    },
+    {
+        "rating": 5,
+        "message": "Plenty of space for the three of us and a short walk to Westfield and the train.",
+        "PropertyId": 5,
+        "UserId": 6,
+        "createdAt": "2026-10-24"
+    },
+    {
+        "rating": 5,
+        "message": "Second time staying here and it was just as good. Olivia's local tips were spot on.",
+        "PropertyId": 7,
+        "UserId": 8,
+        "createdAt": "2026-10-27"
+    }
+]
