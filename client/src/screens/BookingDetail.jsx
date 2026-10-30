@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, StyleSheet, Image, ScrollView, Pressable, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, Pressable, ActivityIndicator, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 import { WebView } from "react-native-webview";
@@ -177,7 +177,8 @@ function BookingDetail({ route, navigation }) {
                                         </View>
                                         <View style={styles.pinTip} />
                                     </View>
-                                </Marker>                            </MapView>
+                                </Marker>
+                            </MapView>
                         </View>
                     ) : null}
                     <Pressable style={styles.chatButton} onPress={openDirections}>
