@@ -1,5 +1,6 @@
 const { Booking, Property, User } = require("../models");
 const getStripe = require("../helpers/stripe");
+const { sendInvoiceEmail } = require("../helpers/nodemailer");
 
 class PaymentController {
     static async createPayment(req, res, next) {
@@ -53,12 +54,16 @@ class PaymentController {
             if (session.payment_status !== "paid") {
                 throw { name: "payment_not_completed" };
             }
-            const findBooking = await Booking.findByPk(session.metadata.bookingId);
+            const findBooking = await Booking.findByPk(session.metadata.bookingId, { include: [Property, User] });
             if (!findBooking) {
                 throw { name: "not_found" };
             }
-            if (findBooking.status === "pending") {
-                await findBooking.update({ status: "ongoing" });
+            // The WebView and the app can both report the payment, so only change a booking
+            // that is still pending. That way the guest gets one invoice, not two
+            const [updated] = await Booking.update({ status: "ongoing" }, { where: { id: findBooking.id, status: "pending" } });
+            if (updated) {
+                // Don't make the guest wait for the email, and a failed email shouldn't undo the payment
+                sendInvoiceEmail(findBooking, session.payment_intent).catch((error) => console.log("Invoice email failed:", error.message));
             }
             res.send("<h2>Payment successful</h2><p>You can go back to the Settle app.</p>");
         } catch (error) {

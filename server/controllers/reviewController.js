@@ -1,4 +1,4 @@
-const { Review, Property, User, Booking } = require("../models");
+const { Review, Property, User, Booking, UserProfile } = require("../models");
 
 class ReviewController {
     static async getReviewUser(req, res, next) {
@@ -6,6 +6,28 @@ class ReviewController {
             const reviews = await Review.findAll({
                 where: { UserId: req.user.id },
                 include: [Property],
+            });
+            res.json(reviews);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async getReviewMyProperties(req, res, next) {
+        try {
+            const reviews = await Review.findAll({
+                include: [
+                    {
+                        model: Property,
+                        where: { UserId: req.user.id },
+                    },
+                    {
+                        model: User,
+                        attributes: ["id", "fullName"],
+                        include: [{ model: UserProfile, attributes: ["profilePicture"] }],
+                    },
+                ],
+                order: [["createdAt", "DESC"]],
             });
             res.json(reviews);
         } catch (error) {

@@ -48,6 +48,28 @@ module.exports = {
       return el;
     });
     await queryInterface.bulkInsert("PropertyImages", dataImages, {});
+
+
+    const bookings = require("../data/booking.json");
+    const dataBookings = bookings.map((el) => {
+      el.startDate = new Date(el.startDate);
+      el.endDate = new Date(el.endDate);
+      el.createdAt = el.updatedAt = new Date();
+      return el;
+    });
+    await queryInterface.bulkInsert("Bookings", dataBookings, {});
+
+    const dataBalances = dataBookings.map((el, index) => {
+      return { BookingId: index + 1, UserId: el.ownerId, amount: el.totalPrice, createdAt: new Date(), updatedAt: new Date() };
+    });
+    await queryInterface.bulkInsert("Balances", dataBalances, {});
+
+    const reviews = require("../data/review.json");
+    const dataReviews = reviews.map((el) => {
+      el.createdAt = el.updatedAt = new Date(el.createdAt);
+      return el;
+    });
+    await queryInterface.bulkInsert("Reviews", dataReviews, {});
   },
 
   async down(queryInterface, Sequelize) {
