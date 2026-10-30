@@ -333,6 +333,31 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primaryLight,
         marginVertical: 4,
     },
+    pin: {
+        alignItems: "center",
+    },
+    pinCircle: {
+        width: 38,
+        height: 38,
+        borderRadius: 19,
+        backgroundColor: colors.primary,
+        borderWidth: 3,
+        borderColor: colors.white,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    // A small triangle under the circle, so it looks like a pin
+    pinTip: {
+        width: 0,
+        height: 0,
+        marginTop: -2,
+        borderLeftWidth: 7,
+        borderRightWidth: 7,
+        borderTopWidth: 9,
+        borderLeftColor: "transparent",
+        borderRightColor: "transparent",
+        borderTopColor: colors.primary,
+    },
     chatText: {
         color: colors.primary,
         fontWeight: "700",
