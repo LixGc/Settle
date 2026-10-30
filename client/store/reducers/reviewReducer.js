@@ -1,8 +1,9 @@
-import { FETCH_REVIEW_BY_PROPERTY_SUCCESS, FETCH_REVIEW_BY_USER_SUCCESS } from "../actions/actionType";
+import { FETCH_REVIEW_BY_PROPERTY_SUCCESS, FETCH_REVIEW_BY_USER_SUCCESS, FETCH_REVIEW_BY_OWNER_SUCCESS } from "../actions/actionType";
 
 const initialState = {
     propertyReviews: [],
     userReviews: [],
+    ownerReviews: [],
 };
 
 const reviewReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const reviewReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userReviews: action.payload,
+            };
+        case FETCH_REVIEW_BY_OWNER_SUCCESS:
+            return {
+                ...state,
+                ownerReviews: action.payload,
             };
         default:
             return state;

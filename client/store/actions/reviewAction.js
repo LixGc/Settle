@@ -1,6 +1,6 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FETCH_REVIEW_BY_PROPERTY_SUCCESS, FETCH_REVIEW_BY_USER_SUCCESS } from "./actionType";
+import { FETCH_REVIEW_BY_PROPERTY_SUCCESS, FETCH_REVIEW_BY_USER_SUCCESS, FETCH_REVIEW_BY_OWNER_SUCCESS } from "./actionType";
 import { getErrorMessage } from "../../src/helpers/alert";
 import { baseUrl } from "./baseUrl";
 
@@ -60,6 +60,29 @@ export const addReview = (value, id) => {
             return data;
         } catch (error) {
             throw getErrorMessage(error);
+        }
+    };
+};
+
+// REVIEWS OF MY PLACES
+export const reviewByOwnerFetchSuccess = (payload) => {
+    return { type: FETCH_REVIEW_BY_OWNER_SUCCESS, payload };
+};
+
+export const fetchReviewsOfMyProperties = () => {
+    return async (dispatch) => {
+        try {
+            const access_token = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: baseUrl + "/reviews/my-properties",
+                method: "GET",
+                headers: {
+                    access_token,
+                },
+            });
+            dispatch(reviewByOwnerFetchSuccess(data));
+        } catch (error) {
+            console.log(getErrorMessage(error));
         }
     };
 };

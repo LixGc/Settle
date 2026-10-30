@@ -23,6 +23,7 @@ import MyProperties from "./src/screens/MyProperties";
 import PropertyForm from "./src/screens/PropertyForm";
 import ConversationList from "./src/screens/ConversationList";
 import Chatbox from "./src/screens/Chatbox";
+import PlaceReviews from "./src/screens/PlaceReviews";
 
 
 const Stack = createNativeStackNavigator();
@@ -137,7 +138,7 @@ export default function App() {
                 headerBackTitle: "Back",
               })}
             />
-                        <Stack.Screen
+            <Stack.Screen
               name="conversationList"
               component={ConversationList}
               options={{
@@ -156,6 +157,16 @@ export default function App() {
                 headerTintColor: colors.primary,
                 headerBackTitle: "Back",
               })}
+            />
+            <Stack.Screen
+              name="placeReviews"
+              component={PlaceReviews}
+              options={{
+                headerShown: true,
+                title: "Reviews",
+                headerTintColor: colors.primary,
+                headerBackTitle: "Back",
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>

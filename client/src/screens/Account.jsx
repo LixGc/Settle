@@ -72,6 +72,7 @@ function Account({ navigation }) {
                         <MenuItem icon="add-circle-outline" title="List a place" info="Rent out your room or home" onPress={() => navigation.navigate("propertyForm")} />
                         <MenuItem icon="home-outline" title="My places" info="Edit or remove your listings" onPress={() => navigation.navigate("myProperties")} />
                         <MenuItem icon="people-outline" title="Guest bookings" info="Who is staying at your places" onPress={() => navigation.navigate("ownerBookings")} />
+                        <MenuItem icon="star-outline" title="Reviews" info="What guests say about your places" onPress={() => navigation.navigate("placeReviews")} />
                     </View>
                 </View>
 
