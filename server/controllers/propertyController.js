@@ -1,6 +1,9 @@
 const { Property, User, Category, Review, Booking, UserProfile, Specification, PropertyImage } = require("../models/index");
 const { sequelize } = require("../models/index");
 const getCoordinates = require("../helpers/geocode");
+// "parramatta " and "Parramatta" are the same suburb, so save them the same way.
+// Otherwise Explore would show the suburb twice
+const tidySuburb = (location) => location?.trim().toLowerCase().replace(/\b\w/g, (letter) => letter.toUpperCase());
 
 class PropertyController {
     static async getCategories(req, res, next) {
@@ -157,7 +160,8 @@ class PropertyController {
     }
     static async addProperty(req, res, next) {
         try {
-            const { name, CategoryId, price, location, address } = req.body;
+            const { name, CategoryId, price, address } = req.body;
+            const location = tidySuburb(req.body.location);
             const specifications = req.body.specifications ? JSON.parse(req.body.specifications) : [];
             const images = req.images || [];
             const { latitude, longitude } = await getCoordinates(address, location);
@@ -193,8 +197,8 @@ class PropertyController {
     static async editProperty(req, res, next) {
         try {
             const { id } = req.params;
-            const { name, CategoryId, price, location, address } = req.body;
-
+            const { name, CategoryId, price, address } = req.body;
+            const location = tidySuburb(req.body.location);
             const findProperty = await Property.scope("withAddress").findByPk(id);
             if (!findProperty) {
                 throw { name: "not_found" };
