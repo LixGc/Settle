@@ -65,6 +65,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      address: DataTypes.STRING,
       latitude: DataTypes.FLOAT,
       longitude: DataTypes.FLOAT,
       UserId: DataTypes.INTEGER,
@@ -77,6 +78,14 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Property",
+      // The street address and the exact map spot are private, so every query leaves them out.
+      // Use Property.scope("withAddress") only where they are allowed to be seen
+      defaultScope: {
+        attributes: { exclude: ["address", "latitude", "longitude"] },
+      },
+      scopes: {
+        withAddress: {},
+      },
     }
   );
   return Property;

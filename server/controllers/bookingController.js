@@ -107,6 +107,13 @@ class BookingController {
             if (booking.UserId !== req.user.id && booking.ownerId !== req.user.id) {
                 throw { name: "forbidden", message: "You are not allowed to see this booking" };
             }
+            // The exact address is for the host, and for the guest once they have paid
+            const paid = ["ongoing", "completed"].includes(booking.status);
+            if (booking.ownerId === req.user.id || paid) {
+                booking.dataValues.exactLocation = await Property.scope("withAddress").findByPk(booking.PropertyId, {
+                    attributes: ["address", "latitude", "longitude"],
+                });
+            }
             res.json(booking);
         } catch (error) {
             next(error);

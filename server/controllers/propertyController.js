@@ -103,7 +103,7 @@ class PropertyController {
                 const average = ratingData.reduce((a, b) => a + b, 0) / ratingData.length;
                 averageRating = average.toFixed(1);
             }
-            const property = await Property.findOne({
+            const property = await Property.scope("withAddress").findOne({
                 where: {
                     id,
                 },
@@ -133,7 +133,11 @@ class PropertyController {
             if (!property) {
                 throw { name: "not_found" };
             }
-            res.status(200).json({ property, rating: averageRating });
+            // Before booking, guests only see roughly where the place is, like Airbnb.
+            // The street address is left out and the map spot is rounded to about a kilometre
+            const { address, latitude, longitude, ...publicProperty } = property.toJSON();
+            const roughly = (value) => (value === null ? null : Math.round(value * 100) / 100);
+            res.status(200).json({ property: { ...publicProperty, latitude: roughly(latitude), longitude: roughly(longitude) }, rating: averageRating });
         } catch (error) {
             next(error);
         }
@@ -141,7 +145,8 @@ class PropertyController {
 
     static async fetchMyProperty(req, res, next) {
         try {
-            const properties = await Property.findAll({
+            // Owners can see their own addresses
+            const properties = await Property.scope("withAddress").findAll({
                 where: { UserId: req.user.id },
                 include: [Category],
             });
@@ -152,10 +157,10 @@ class PropertyController {
     }
     static async addProperty(req, res, next) {
         try {
-            const { name, CategoryId, price, location } = req.body;
+            const { name, CategoryId, price, location, address } = req.body;
             const specifications = req.body.specifications ? JSON.parse(req.body.specifications) : [];
             const images = req.images || [];
-            const { latitude, longitude } = await getCoordinates(location);
+            const { latitude, longitude } = await getCoordinates(address, location);
 
             await sequelize.transaction(async (t) => {
                 const property = await Property.create(
@@ -188,9 +193,9 @@ class PropertyController {
     static async editProperty(req, res, next) {
         try {
             const { id } = req.params;
-            const { name, CategoryId, price, location } = req.body;
+            const { name, CategoryId, price, location, address } = req.body;
 
-            const findProperty = await Property.findByPk(id);
+            const findProperty = await Property.scope("withAddress").findByPk(id);
             if (!findProperty) {
                 throw { name: "not_found" };
             }
@@ -198,15 +203,16 @@ class PropertyController {
                 throw { name: "forbidden" };
             }
 
-            // Only look the suburb up again when it changed, or the place has no map yet
-            const needsMap = location && (location !== findProperty.location || findProperty.latitude === null);
-            const coordinates = needsMap ? await getCoordinates(location) : {};
+            // Only look the place up again when the address or suburb changed, or it has no map yet
+            const moved = address !== findProperty.address || location !== findProperty.location;
+            const coordinates = moved || findProperty.latitude === null ? await getCoordinates(address, location) : {};
 
             await findProperty.update({
                 name,
                 CategoryId,
                 price,
                 location,
+                address,
                 image: req.image || findProperty.image,
                 ...coordinates,
             });
