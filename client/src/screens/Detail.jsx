@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, FlatList, ScrollView, Pressable, ActivityIndicator, useWindowDimensions } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
+import MapView, { Circle } from "react-native-maps";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetail, fetchReviewByProperty, fetchPropertyBookings, createBooking } from "../../store/actions";
 import { errorAlert, successAlert } from "../helpers/alert";
@@ -77,7 +78,7 @@ function Detail({ route, navigation }) {
     const images = [property.image, ...property.PropertyImages.map((el) => el.imageUrl)];
     const owner = property.User;
     const nights = countNights(startDate, endDate);
-    
+
     const goChat = () => {
         if (!profile) {
             errorAlert("Please log in first");
@@ -88,6 +89,11 @@ function Detail({ route, navigation }) {
             name: owner.fullName,
             property: { name: property.name, image: property.image, price: property.price },
         });
+    };
+
+    // Opens the Google Maps app, or the Google Maps website if the app isn't installed
+    const openMap = () => {
+        Linking.openURL("https://www.google.com/maps/search/?api=1&query=" + property.latitude + "," + property.longitude);
     };
 
     // Same check as the server: the stays overlap if one starts before the other ends
@@ -145,6 +151,31 @@ function Detail({ route, navigation }) {
                 </View>
             )}
 
+            {/* map, only the suburb is shown, not the exact address */}
+            {property.latitude ? (
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Where you'll be</Text>
+                    {/* the box rounds the corners, a map can't do that by itself on Android */}
+                    <View style={styles.mapBox}>
+                        <MapView
+                            style={{ flex: 1 }}
+                            initialRegion={{ latitude: property.latitude, longitude: property.longitude, latitudeDelta: 0.04, longitudeDelta: 0.04 }}
+                            scrollEnabled={false}
+                            zoomEnabled={false}
+                            rotateEnabled={false}
+                            pitchEnabled={false}
+                        >
+                            <Circle center={{ latitude: property.latitude, longitude: property.longitude }} radius={800} strokeColor={colors.primary} fillColor="rgba(31, 111, 92, 0.2)" />
+                        </MapView>
+                    </View>
+                    <Text style={styles.small}>The map shows the area, not the exact address. The host shares the address after you book.</Text>
+                    <Pressable style={styles.mapButton} onPress={openMap}>
+                        <Ionicons name="navigate-outline" size={18} color={colors.primary} />
+                        <Text style={styles.mapButtonText}>Open in Google Maps</Text>
+                    </Pressable>
+                </View>
+            ) : null}
+
             {/* owner */}
             {owner && (
                 <View style={styles.section}>
@@ -157,7 +188,6 @@ function Detail({ route, navigation }) {
                                 <Text style={styles.avatarText}>{owner.fullName.charAt(0)}</Text>
                             </View>
                         )}
-                        <View>
                         <View style={{ flex: 1 }}>
                             <Text style={styles.ownerName}>{owner.fullName}</Text>
                             <Text style={styles.grey}>Hosting on Settle</Text>
@@ -168,7 +198,6 @@ function Detail({ route, navigation }) {
                                 <Ionicons name="chatbubble-ellipses-outline" size={22} color={colors.primary} />
                             </Pressable>
                         )}
-                        </View>
                     </View>
                 </View>
             )}
@@ -350,6 +379,27 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primaryLight,
         borderRadius: 12,
         padding: 10,
+    },
+    mapBox: {
+        height: 180,
+        borderRadius: 16,
+        overflow: "hidden",
+        backgroundColor: colors.primaryLight,
+    },
+    mapButton: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 8,
+        borderWidth: 1,
+        borderColor: colors.primary,
+        borderRadius: 12,
+        padding: 12,
+        marginTop: 4,
+    },
+    mapButtonText: {
+        color: colors.primary,
+        fontWeight: "700",
     },
     review: {
         flexDirection: "row",

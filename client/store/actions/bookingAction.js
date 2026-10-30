@@ -52,6 +52,26 @@ export const createPayment = (id) => {
     };
 };
 
+
+// The app opens Stripe's success link itself too, because on ngrok's free plan
+// the WebView can stop at ngrok's warning page before reaching the server
+export const confirmPayment = (url) => {
+    return async () => {
+        try {
+            const { data } = await axios({
+                url,
+                method: "GET",
+                headers: {
+                    "ngrok-skip-browser-warning": "true",
+                },
+            });
+            return data;
+        } catch (error) {
+            throw getErrorMessage(error);
+        }
+    };
+};
+
 // BOOKED DATES OF A PROPERTY
 export const propertyBookingsFetchSuccess = (payload) => {
     return { type: PROPERTY_BOOKINGS_FETCH_SUCCESS, payload };

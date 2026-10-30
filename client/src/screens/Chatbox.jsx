@@ -15,7 +15,8 @@ function Chatbox({ route }) {
     const insets = useSafeAreaInsets();
     const [channel, setChannel] = useState(null);
     const [messages, setMessages] = useState([]);
-    const [text, setText] = useState("");
+    const [text, setText] = useState(property ? `Hi, I'm interested in ${property.name}` : "");
+    const [attachedProperty, setAttachedProperty] = useState(property);
     const [errMsg, setErrMsg] = useState("");
 
     useEffect(() => {
@@ -30,13 +31,6 @@ function Chatbox({ route }) {
             try {
                 const client = await connectChat();
                 chatChannel = await openChannel(client, id);
-                // A new chat about a place starts with a card of that place
-                if (property && chatChannel.state.messages.length === 0) {
-                    await chatChannel.sendMessage({
-                        text: `Hi, I'm interested in ${property.name}`,
-                        attachments: [{ type: "property", title: property.name, image_url: property.image, price: property.price }],
-                    });
-                }
                 if (cancelled) return;
                 setMessages([...chatChannel.state.messages]);
                 chatChannel.on("message.new", handleNewMessage);
@@ -56,8 +50,10 @@ function Chatbox({ route }) {
     const sendMessage = () => {
         const value = text.trim();
         if (!value) return;
+        const attachments = attachedProperty ? [{ type: "property", title: attachedProperty.name, image_url: attachedProperty.image, price: attachedProperty.price }] : [];
         setText("");
-        channel.sendMessage({ text: value }).catch((error) => errorAlert(getErrorMessage(error)));
+        setAttachedProperty(null);
+        channel.sendMessage({ text: value, attachments }).catch((error) => errorAlert(getErrorMessage(error)));
     };
 
     if (errMsg) {
@@ -121,6 +117,20 @@ function Chatbox({ route }) {
                     );
                 }}
             />
+
+            {/* the place this message is about */}
+            {attachedProperty && (
+                <View style={styles.attached}>
+                    <Image source={{ uri: attachedProperty.image }} style={styles.attachedImage} />
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.cardName} numberOfLines={1}>
+                            {attachedProperty.name}
+                        </Text>
+                        <Text style={styles.cardPrice}>{fPrice(attachedProperty.price)} / night</Text>
+                    </View>
+                </View>
+            )}
+
             <View style={[styles.inputRow, { paddingBottom: Math.max(insets.bottom, 10) }]}>
                 <TextInput style={styles.input} placeholder="Type a message" value={text} onChangeText={setText} onSubmitEditing={sendMessage} returnKeyType="send" />
                 <Pressable style={styles.sendButton} onPress={sendMessage}>
@@ -216,6 +226,22 @@ const styles = StyleSheet.create({
     cardPrice: {
         fontWeight: "700",
         color: colors.primary,
+    },
+    attached: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+        backgroundColor: colors.white,
+        borderTopWidth: 1,
+        borderTopColor: "#E6ECEA",
+        paddingHorizontal: 12,
+        paddingTop: 10,
+    },
+    attachedImage: {
+        width: 48,
+        height: 48,
+        borderRadius: 8,
+        backgroundColor: colors.primaryLight,
     },
     inputRow: {
         flexDirection: "row",

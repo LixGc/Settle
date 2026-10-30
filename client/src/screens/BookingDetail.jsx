@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, ScrollView, Pressable, ActivityIndicator
 import { Ionicons } from "@expo/vector-icons";
 import { WebView } from "react-native-webview";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBookingById, createPayment, getUser, updateBookingStatus } from "../../store/actions";
+import { fetchBookingById, createPayment, confirmPayment, getUser, updateBookingStatus } from "../../store/actions";
 import { errorAlert, successAlert } from "../helpers/alert";
 import { fPrice } from "../helpers/fPrice";
 import { fDate } from "../helpers/fDate";
@@ -48,22 +48,26 @@ function BookingDetail({ route, navigation }) {
     };
 
     // After paying, Stripe sends the WebView to the server's success or cancel page.
-    // onLoad waits until that page has loaded, so the server has already marked the booking as paid
+    // The app then asks the server to check the payment, so the booking is marked as paid
     const handlePaymentLoad = ({ nativeEvent }) => {
         if (paymentHandled.current) return;
         if (nativeEvent.url.includes("/payments/success")) {
             paymentHandled.current = true;
             setPaymentUrl("");
-            dispatch(fetchBookingById(id));
-            dispatch(getUser());
-            successAlert("Payment successful");
+            dispatch(confirmPayment(nativeEvent.url))
+                .then(() => {
+                    dispatch(fetchBookingById(id));
+                    dispatch(getUser());
+                    successAlert("Payment successful");
+                })
+                .catch((error) => errorAlert(error));
         } else if (nativeEvent.url.includes("/payments/cancel")) {
             paymentHandled.current = true;
             setPaymentUrl("");
             errorAlert("Payment cancelled");
         }
     };
-
+    
     if (paymentUrl) {
         return <WebView source={{ uri: paymentUrl }} onLoad={handlePaymentLoad} startInLoadingState style={{ flex: 1 }} />;
     }
