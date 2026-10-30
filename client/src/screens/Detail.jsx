@@ -90,9 +90,9 @@ function Detail({ route, navigation }) {
         });
     };
 
-    // Opens the Google Maps app, or the Google Maps website if the app isn't installed
+    // Opens the suburb in the Google Maps app, or the Google Maps website if the app isn't installed
     const openMap = () => {
-        Linking.openURL("https://www.google.com/maps/search/?api=1&query=" + property.latitude + "," + property.longitude);
+        Linking.openURL("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(property.location + " NSW"));
     };
 
     // Same check as the server: the stays overlap if one starts before the other ends
@@ -167,7 +167,7 @@ function Detail({ route, navigation }) {
                             <Circle center={{ latitude: property.latitude, longitude: property.longitude }} radius={800} strokeColor={colors.primary} fillColor="rgba(31, 111, 92, 0.2)" />
                         </MapView>
                     </View>
-                    <Text style={styles.small}>The map shows the area, not the exact address. The host shares the address after you book.</Text>
+                    <Text style={styles.small}>The map shows the area, not the exact spot. You'll get the full address after you book and pay.</Text>
                     <Pressable style={styles.mapButton} onPress={openMap}>
                         <Ionicons name="navigate-outline" size={18} color={colors.primary} />
                         <Text style={styles.mapButtonText}>Open in Google Maps</Text>
