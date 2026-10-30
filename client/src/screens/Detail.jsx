@@ -173,7 +173,8 @@ function Detail({ route, navigation }) {
                             </Marker>
                         </MapView>
                     </View>
-                    <Text style={styles.small}>The map shows the area, not the exact spot. You'll get the full address after you book and pay.</Text>                    <Pressable style={styles.mapButton} onPress={openMap}>
+                    <Text style={styles.small}>The map shows the area, not the exact spot. You'll get the full address after you book and pay.</Text>
+                    <Pressable style={styles.mapButton} onPress={openMap}>
                         <Ionicons name="navigate-outline" size={18} color={colors.primary} />
                         <Text style={styles.mapButtonText}>Open in Google Maps</Text>
                     </Pressable>
