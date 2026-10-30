@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, FlatList, ScrollView, Pressable, ActivityIndicator, useWindowDimensions } from "react-native";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { View, Text, StyleSheet, Image, FlatList, ScrollView, Pressable, ActivityIndicator, useWindowDimensions, Linking } from "react-native"; import { AntDesign, Ionicons } from "@expo/vector-icons";
 import MapView, { Circle } from "react-native-maps";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetail, fetchReviewByProperty, fetchPropertyBookings, createBooking } from "../../store/actions";
