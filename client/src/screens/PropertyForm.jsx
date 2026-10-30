@@ -7,6 +7,17 @@ import { errorAlert, successAlert } from "../helpers/alert";
 import { pickImage, pickImages, toFile } from "../helpers/pickImage";
 import { colors } from "../theme";
 
+// The choices for each detail, so every listing uses the same words.
+// A detail that isn't listed here (from a new category) is typed in instead
+const specOptions = {
+    bedrooms: ["1", "2", "3", "4", "5+"],
+    bathrooms: ["1", "2", "3", "4+"],
+    bathroom: ["private", "shared", "ensuite"],
+    furnished: ["yes", "no"],
+    bills: ["included", "not included"],
+    parking: ["no", "street", "1 car space", "single garage", "double garage"],
+};
+
 function PropertyForm({ route, navigation }) {
     // id is only passed when editing a place
     const id = route.params?.id;
@@ -134,7 +145,7 @@ function PropertyForm({ route, navigation }) {
             </View>
             <View style={styles.field}>
                 <Text style={styles.label}>Suburb</Text>
-                <TextInput style={styles.textInput} placeholder="Parramatta" value={input.location} onChangeText={(text) => handleChangeInput("location", text)} />
+                <TextInput style={styles.textInput} placeholder="Parramatta" autoCapitalize="words" value={input.location} onChangeText={(text) => handleChangeInput("location", text)} />
             </View>
             <View style={styles.field}>
                 <Text style={styles.label}>Street address</Text>
@@ -158,7 +169,17 @@ function PropertyForm({ route, navigation }) {
             {specNames.map((name) => (
                 <View style={styles.field} key={name}>
                     <Text style={[styles.label, { textTransform: "capitalize" }]}>{name}</Text>
-                    <TextInput style={styles.textInput} value={specifications[name] || ""} onChangeText={(text) => handleChangeSpec(name, text)} />
+                    {specOptions[name] ? (
+                        <View style={styles.chips}>
+                            {specOptions[name].map((option) => (
+                                <Pressable key={option} style={[styles.chip, specifications[name] === option && styles.chipActive]} onPress={() => handleChangeSpec(name, option)}>
+                                    <Text style={[styles.chipText, specifications[name] === option && styles.chipTextActive]}>{option}</Text>
+                                </Pressable>
+                            ))}
+                        </View>
+                    ) : (
+                        <TextInput style={styles.textInput} value={specifications[name] || ""} onChangeText={(text) => handleChangeSpec(name, text)} />
+                    )}
                 </View>
             ))}
 
