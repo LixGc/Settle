@@ -1,5 +1,6 @@
 const { Property, User, Category, Review, Booking, UserProfile, Specification, PropertyImage } = require("../models/index");
 const { sequelize } = require("../models/index");
+const getCoordinates = require("../helpers/geocode");
 
 class PropertyController {
     static async getCategories(req, res, next) {
@@ -154,6 +155,7 @@ class PropertyController {
             const { name, CategoryId, price, location } = req.body;
             const specifications = req.body.specifications ? JSON.parse(req.body.specifications) : [];
             const images = req.images || [];
+            const { latitude, longitude } = await getCoordinates(location);
 
             await sequelize.transaction(async (t) => {
                 const property = await Property.create(
@@ -163,6 +165,8 @@ class PropertyController {
                         price,
                         image: req.image,
                         location,
+                        latitude,
+                        longitude,
                         UserId: req.user.id,
                     },
                     { transaction: t }
@@ -194,12 +198,17 @@ class PropertyController {
                 throw { name: "forbidden" };
             }
 
+            // Only look the suburb up again when it changed, or the place has no map yet
+            const needsMap = location && (location !== findProperty.location || findProperty.latitude === null);
+            const coordinates = needsMap ? await getCoordinates(location) : {};
+
             await findProperty.update({
                 name,
                 CategoryId,
                 price,
                 location,
                 image: req.image || findProperty.image,
+                ...coordinates,
             });
             if (req.images) {
                 await PropertyImage.bulkCreate(req.images.map((imageUrl) => ({ imageUrl, PropertyId: findProperty.id })));

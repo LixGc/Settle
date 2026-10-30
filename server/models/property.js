@@ -65,6 +65,8 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      latitude: DataTypes.FLOAT,
+      longitude: DataTypes.FLOAT,
       UserId: DataTypes.INTEGER,
       status: {
         type: DataTypes.ENUM,
