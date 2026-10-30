@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Image, ScrollView, Pressable, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import MapView, { Marker } from "react-native-maps";
 import { WebView } from "react-native-webview";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookingById, createPayment, confirmPayment, getUser, updateBookingStatus } from "../../store/actions";
@@ -67,7 +68,7 @@ function BookingDetail({ route, navigation }) {
             errorAlert("Payment cancelled");
         }
     };
-    
+
     if (paymentUrl) {
         return <WebView source={{ uri: paymentUrl }} onLoad={handlePaymentLoad} startInLoadingState style={{ flex: 1 }} />;
     }
@@ -94,6 +95,14 @@ function BookingDetail({ route, navigation }) {
 
     // The guest chats with the host, the host chats with the guest
     const chatWith = isOwner ? booking.User : property?.User;
+
+    // The server only sends this to the host, and to the guest once they have paid
+    const exactLocation = booking.exactLocation;
+
+    // Directions to the place in the Google Maps app, or the website if the app isn't installed
+    const openDirections = () => {
+        Linking.openURL("https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(exactLocation.address + ", " + property.location + " NSW"));
+    };
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -142,6 +151,40 @@ function BookingDetail({ route, navigation }) {
                     </View>
                 </View>
             </View>
+
+            {/* address */}
+            {exactLocation?.address ? (
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Address</Text>
+                    <Text style={styles.value}>
+                        {exactLocation.address}, {property.location}
+                    </Text>
+                    {exactLocation.latitude ? (
+                        <View style={styles.mapBox}>
+                            <MapView
+                                style={{ flex: 1 }}
+                                initialRegion={{ latitude: exactLocation.latitude, longitude: exactLocation.longitude, latitudeDelta: 0.01, longitudeDelta: 0.01 }}
+                                scrollEnabled={false}
+                                zoomEnabled={false}
+                                rotateEnabled={false}
+                                pitchEnabled={false}
+                            >
+                                <Marker coordinate={{ latitude: exactLocation.latitude, longitude: exactLocation.longitude }} pinColor={colors.primary} />
+                            </MapView>
+                        </View>
+                    ) : null}
+                    <Pressable style={styles.chatButton} onPress={openDirections}>
+                        <Ionicons name="navigate-outline" size={18} color={colors.primary} />
+                        <Text style={styles.chatText}>Get directions</Text>
+                    </Pressable>
+                </View>
+            ) : null}
+            {isTenant && booking.status === "pending" && property ? (
+                <View style={styles.section}>
+                    <Text style={styles.grey}>You'll see the full address here once you've paid.</Text>
+                </View>
+            ) : null}
+
 
             {/* chat */}
             {chatWith && (
@@ -282,6 +325,13 @@ const styles = StyleSheet.create({
         borderColor: colors.primary,
         borderRadius: 12,
         padding: 13,
+    },
+    mapBox: {
+        height: 180,
+        borderRadius: 16,
+        overflow: "hidden",
+        backgroundColor: colors.primaryLight,
+        marginVertical: 4,
     },
     chatText: {
         color: colors.primary,

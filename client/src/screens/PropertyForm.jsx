@@ -18,6 +18,7 @@ function PropertyForm({ route, navigation }) {
         name: property ? property.name : "",
         price: property ? String(property.price) : "",
         location: property ? property.location : "",
+        address: property?.address || "",
     });
     const [CategoryId, setCategoryId] = useState(null);
     const [specifications, setSpecifications] = useState({});
@@ -66,6 +67,9 @@ function PropertyForm({ route, navigation }) {
         }
         if (specNames.some((name) => !specifications[name])) {
             return errorAlert("Please fill in all the details");
+        }
+        if (!input.address) {
+            return errorAlert("Please add the street address");
         }
 
         const formData = new FormData();
@@ -131,6 +135,11 @@ function PropertyForm({ route, navigation }) {
             <View style={styles.field}>
                 <Text style={styles.label}>Suburb</Text>
                 <TextInput style={styles.textInput} placeholder="Parramatta" value={input.location} onChangeText={(text) => handleChangeInput("location", text)} />
+            </View>
+            <View style={styles.field}>
+                <Text style={styles.label}>Street address</Text>
+                <TextInput style={styles.textInput} placeholder="12 Church Street" value={input.address} onChangeText={(text) => handleChangeInput("address", text)} />
+                <Text style={styles.grey}>Only guests who have booked and paid can see this. Everyone else sees the suburb.</Text>
             </View>
 
             {/* type and details, only when listing a new place */}
