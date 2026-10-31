@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       PropertyImage.belongsTo(models.Property);
     }
   }
+  // Extra photos of a place. The main photo is saved on the Property itself
   PropertyImage.init(
     {
       imageUrl: {

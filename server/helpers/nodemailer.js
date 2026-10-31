@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const totalNightConverter = require("./totalNightConverter");
 
+// Sends emails from the Gmail account in .env
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -9,6 +10,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+// Emails the 4-digit login code
 async function sendOTPByEmail(email, otp) {
     await transporter.sendMail({
         from: process.env.EMAIL_USER,
@@ -18,6 +20,7 @@ async function sendOTPByEmail(email, otp) {
     });
 }
 
+// Shows prices like $1,234.00
 const formatPrice = (amount) => {
     return new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD" }).format(amount);
 };
@@ -32,10 +35,12 @@ const escapeHtml = (text) => {
     return String(text).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
 };
 
+// Emails the invoice after a booking is paid
 // booking needs its Property and User included
 async function sendInvoiceEmail(booking, paymentId) {
     const nights = totalNightConverter(booking.startDate, booking.endDate);
     const invoiceNumber = "SET-" + String(booking.id).padStart(5, "0");
+    // Each line of the invoice: label, value
     const rows = [
         ["Invoice number", invoiceNumber],
         ["Paid on", formatDate(new Date())],
@@ -65,6 +70,7 @@ async function sendInvoiceEmail(booking, paymentId) {
     });
 }
 
+// Random 4-digit code, like 0427
 function generateOTP() {
     let otp = "";
     for (let i = 0; i < 4; i++) {

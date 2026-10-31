@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       UserProfile.belongsTo(models.User);
     }
   }
+  // Links to the profile photo and ID card (the files are on Cloudinary)
   UserProfile.init(
     {
       UserId: DataTypes.INTEGER,

@@ -8,9 +8,11 @@ const booking = require("./bookingRoute");
 const review = require("./reviewRoute");
 const payment = require("./paymentRoute");
 const chat = require("./chatRoute");
+// Sign up, then log in in two steps: /otp emails a code, /login checks it
 router.post("/register", UserController.register);
 router.post("/otp", UserController.getOTP);
 router.post("/login", UserController.login);
+// The rest have their own route files
 router.use("/profiles", user);
 router.use("/properties", property);
 router.get("/categories", PropertyController.getCategories);

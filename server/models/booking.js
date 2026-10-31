@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Booking.init(
     {
+      // pending = not paid yet, ongoing = paid, completed = the stay is over
       status: {
         type: DataTypes.ENUM,
         values: ["pending", "ongoing", "payment", "completed"],
@@ -33,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "End date required" },
         },
       },
+      // The host's id, saved here so finding a host's bookings is easy
       ownerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -41,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "Owner Id required" },
         },
       },
+      // Nights x price per night, worked out when booking
       totalPrice: {
         type: DataTypes.INTEGER,
       },

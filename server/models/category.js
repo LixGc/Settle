@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Category.init(
     {
+      // Room, Studio, Apartment, House or Townhouse
       name: DataTypes.STRING,
       specifications: DataTypes.STRING,
     },

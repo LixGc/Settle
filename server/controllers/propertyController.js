@@ -5,6 +5,7 @@ const findAddress = require("../helpers/geocode");
 const kmToCity = require("../helpers/distance");
 
 class PropertyController {
+    // GET /categories: Room, Studio, Apartment and so on
     static async getCategories(req, res, next) {
         try {
             const categories = await Category.findAll();
@@ -33,6 +34,7 @@ class PropertyController {
             next(error);
         }
     }
+    // GET /properties: all places, or only the ones in a suburb (?location=) that are free on the dates
     static async fetchProperty(req, res, next) {
         try {
             let { location, startdate, enddate } = req.query;
@@ -62,6 +64,7 @@ class PropertyController {
             }
 
             let filteredProperties;
+            // Drop places that already have a booking overlapping those dates
             if (startdate && enddate) {
                 startdate = new Date(startdate);
                 enddate = new Date(enddate);
@@ -78,6 +81,7 @@ class PropertyController {
                 filteredProperties = properties;
             }
 
+            // Only send what the cards need, plus the rating and how many bookings
             const propertyData = filteredProperties.map((property) => {
                 const { id, name, image, price, location, status, Reviews, Bookings, Category } = property;
                 const totalReviews = Reviews.length;
@@ -132,6 +136,7 @@ class PropertyController {
             next(error);
         }
     }
+    // GET /properties/:id: everything for the place page
     static async detailProperty(req, res, next) {
         try {
             const { id } = req.params;
@@ -186,6 +191,7 @@ class PropertyController {
         }
     }
 
+    // GET /properties/my-properties: the places I host
     static async fetchMyProperty(req, res, next) {
         try {
             // Owners can see their own addresses
@@ -198,6 +204,7 @@ class PropertyController {
             next(error);
         }
     }
+    // POST /properties: list a new place. The photos are already on Cloudinary (req.image, req.images)
     static async addProperty(req, res, next) {
         try {
             const { name, CategoryId, price, address, description } = req.body;
@@ -214,6 +221,7 @@ class PropertyController {
             // The exact spot for paid guests, or the suburb's spot if the address can't be found
             const { latitude, longitude } = (await findAddress(address, suburb.name)) || suburb;
 
+            // Save the place, its specs and its extra photos together. If one fails, none of it is saved
             await sequelize.transaction(async (t) => {
                 const property = await Property.create(
                     {
@@ -245,6 +253,7 @@ class PropertyController {
             next(error);
         }
     }
+    // PUT /properties/:id: only the owner can edit
     static async editProperty(req, res, next) {
         try {
             const { id } = req.params;
@@ -281,6 +290,7 @@ class PropertyController {
                 image: req.image || findProperty.image,
                 ...spot,
             });
+            // New photos get added to the old ones
             if (req.images) {
                 await PropertyImage.bulkCreate(req.images.map((imageUrl) => ({ imageUrl, PropertyId: findProperty.id })));
             }
@@ -290,6 +300,7 @@ class PropertyController {
         }
     }
 
+    // DELETE /properties/:id: only the owner can remove it
     static async removeProperty(req, res, next) {
         try {
             const { id } = req.params;

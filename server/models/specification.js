@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       Specification.belongsTo(models.Property);
     }
   }
+  // Details shown on the place page, like name "Bedrooms" with value "2"
   Specification.init(
     {
       name: DataTypes.STRING,
