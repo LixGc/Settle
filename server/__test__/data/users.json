@@ -1,0 +1,14 @@
+[
+  {
+    "fullName": "Sam Owner",
+    "email": "sam@mail.com",
+    "password": "Password123!",
+    "phone": "0400000001"
+  },
+  {
+    "fullName": "Alex Tenant",
+    "email": "alex@mail.com",
+    "password": "Password123!",
+    "phone": "0400000002"
+  }
+]
