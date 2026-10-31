@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Pressable, Image, ScrollView, TextInput, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories, addProperty, editProperty, searchSuburbs } from "../../store/actions"; import { errorAlert, successAlert } from "../helpers/alert";
+import { fetchCategories, addProperty, editProperty } from "../../store/actions";
+import { errorAlert, successAlert } from "../helpers/alert";
 import { pickImage, pickImages, toFile } from "../helpers/pickImage";
+import SuburbInput from "../components/SuburbInput";
 import { colors } from "../theme";
 
 // The choices for each detail, so every listing uses the same words.
@@ -37,36 +39,20 @@ function PropertyForm({ route, navigation }) {
     const [loading, setLoading] = useState(false);
     // Which photo button is opening the gallery ("main" or "more"), to show a spinner on it
     const [picking, setPicking] = useState(null);
-    // Suburbs matching what the host typed, and whether they picked one from that list
-    const [suburbs, setSuburbs] = useState([]);
+    // Whether the host picked the suburb from the list
     const [suburbChosen, setSuburbChosen] = useState(Boolean(property));
 
     useEffect(() => {
         dispatch(fetchCategories());
     }, []);
 
-    useEffect(() => {
-        const search = input.location.trim();
-        if (suburbChosen || search.length < 2) {
-            setSuburbs([]);
-            return;
-        }
-        // Wait until the host stops typing for a moment, so it doesn't search on every letter
-        const timer = setTimeout(() => {
-            dispatch(searchSuburbs(search))
-                .then((data) => setSuburbs(data))
-                .catch(() => setSuburbs([]));
-        }, 300);
-        return () => clearTimeout(timer);
-    }, [input.location, suburbChosen]);
-
     const handleSuburbChange = (text) => {
         handleChangeInput("location", text);
         setSuburbChosen(false);
     };
 
-    const chooseSuburb = (suburb) => {
-        handleChangeInput("location", suburb.name);
+    const chooseSuburb = (name) => {
+        handleChangeInput("location", name);
         setSuburbChosen(true);
     };
 
@@ -201,18 +187,8 @@ function PropertyForm({ route, navigation }) {
             </View>
             <View style={styles.field}>
                 <Text style={styles.label}>Suburb</Text>
-                <TextInput style={styles.textInput} placeholder="Start typing, like Bondi" autoCapitalize="words" value={input.location} onChangeText={handleSuburbChange} />
-                {/* the host has to pick from this list, they can't add their own suburb */}
-                {suburbs.length > 0 && (
-                    <View style={styles.dropdown}>
-                        {suburbs.map((suburb) => (
-                            <Pressable key={suburb.id} style={styles.dropdownItem} onPress={() => chooseSuburb(suburb)}>
-                                {picking === "more" ? <ActivityIndicator color={colors.primary} /> : <Ionicons name="images-outline" size={22} color={colors.primary} />}
-                                <Text style={styles.dropdownText}>{suburb.name}</Text>
-                            </Pressable>
-                        ))}
-                    </View>
-                )}
+                {/* the host has to pick from the list, they can't add their own suburb */}
+                <SuburbInput value={input.location} chosen={suburbChosen} onChangeText={handleSuburbChange} onChoose={chooseSuburb} />
             </View>
             <View style={styles.field}>
                 <Text style={styles.label}>Street address</Text>
@@ -308,23 +284,6 @@ const styles = StyleSheet.create({
         padding: 14,
         borderWidth: 1,
         borderColor: "#DDE5E2",
-    },
-    dropdown: {
-        backgroundColor: colors.white,
-        borderRadius: 12,
-        borderWidth: 1,
-        borderColor: "#DDE5E2",
-    },
-    dropdownItem: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 8,
-        padding: 12,
-        borderBottomWidth: 1,
-        borderBottomColor: "#F0F3F2",
-    },
-    dropdownText: {
-        color: colors.dark,
     },
     chips: {
         flexDirection: "row",
