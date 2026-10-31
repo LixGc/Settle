@@ -46,5 +46,77 @@
     "email": "lucas@mail.com",
     "password": "password123",
     "phone": "0491571266"
+  },
+  {
+    "fullName": "Hannah Kim",
+    "email": "hannah@mail.com",
+    "password": "password123",
+    "phone": "0491571491"
+  },
+  {
+    "fullName": "Tom Nguyen",
+    "email": "tom@mail.com",
+    "password": "password123",
+    "phone": "0491571804"
+  },
+  {
+    "fullName": "Chloe Williams",
+    "email": "chloe@mail.com",
+    "password": "password123",
+    "phone": "0491572549"
+  },
+  {
+    "fullName": "Raj Patel",
+    "email": "raj@mail.com",
+    "password": "password123",
+    "phone": "0491572665"
+  },
+  {
+    "fullName": "Emily Clarke",
+    "email": "emily@mail.com",
+    "password": "password123",
+    "phone": "0491572983"
+  },
+  {
+    "fullName": "Marco Rossi",
+    "email": "marco@mail.com",
+    "password": "password123",
+    "phone": "0491573770"
+  },
+  {
+    "fullName": "Aisha Rahman",
+    "email": "aisha@mail.com",
+    "password": "password123",
+    "phone": "0491573087"
+  },
+  {
+    "fullName": "Ben Carter",
+    "email": "ben@mail.com",
+    "password": "password123",
+    "phone": "0491574118"
+  },
+  {
+    "fullName": "Sophie Martin",
+    "email": "sophie@mail.com",
+    "password": "password123",
+    "phone": "0491574632"
+  },
+  {
+    "fullName": "Josh Miller",
+    "email": "josh@mail.com",
+    "password": "password123",
+    "phone": "0491575254"
+  },
+  {
+    "fullName": "Grace O'Brien",
+    "email": "grace@mail.com",
+    "password": "password123",
+    "phone": "0491575789"
+  },
+  {
+    "fullName": "Liam Walsh",
+    "email": "liam@mail.com",
+    "password": "password123",
+    "phone": "0491576398"
   }
 ]

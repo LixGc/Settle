@@ -1,86 +1,590 @@
 [
-    {
-        "rating": 5,
-        "message": "Spotless studio and only a short walk to Central. Check-in was easy and Sam replied to every message within minutes.",
-        "PropertyId": 2,
-        "UserId": 2,
-        "createdAt": "2026-08-08"
-    },
-    {
-        "rating": 5,
-        "message": "Waking up to the ocean view was amazing. Five minutes to the beach and plenty of cafes nearby.",
-        "PropertyId": 7,
-        "UserId": 6,
-        "createdAt": "2026-08-19"
-    },
-    {
-        "rating": 4,
-        "message": "Bright room in a lovely old terrace and the shared kitchen was always clean. A bit of street noise on Friday night.",
-        "PropertyId": 1,
-        "UserId": 8,
-        "createdAt": "2026-08-28"
-    },
-    {
-        "rating": 4,
-        "message": "Great location and a comfortable bed. Street parking was hard to find on the weekend.",
-        "PropertyId": 7,
-        "UserId": 3,
-        "createdAt": "2026-09-07"
-    },
-    {
-        "rating": 5,
-        "message": "Perfect for our family weekend. The kids loved the pool and the kitchen had everything we needed.",
-        "PropertyId": 4,
-        "UserId": 2,
-        "createdAt": "2026-09-15"
-    },
-    {
-        "rating": 4,
-        "message": "Compact but really well designed. Fast Wi-Fi made it easy to work from the studio.",
-        "PropertyId": 2,
-        "UserId": 6,
-        "createdAt": "2026-09-22"
-    },
-    {
-        "rating": 5,
-        "message": "Such a charming cottage. The garden is beautiful and it felt like home from the moment we arrived.",
-        "PropertyId": 9,
-        "UserId": 5,
-        "createdAt": "2026-09-29"
-    },
-    {
-        "rating": 4,
-        "message": "Modern apartment with a great view of the city lights. Close to the station and the shopping centre.",
-        "PropertyId": 3,
-        "UserId": 8,
-        "createdAt": "2026-10-06"
-    },
-    {
-        "rating": 5,
-        "message": "Spacious, on a quiet street and with a big backyard. Priya left a lovely welcome basket.",
-        "PropertyId": 13,
-        "UserId": 7,
-        "createdAt": "2026-10-12"
-    },
-    {
-        "rating": 4,
-        "message": "Lots of natural light and a nice balcony for morning coffee. Would stay again.",
-        "PropertyId": 12,
-        "UserId": 4,
-        "createdAt": "2026-10-20"
-    },
-    {
-        "rating": 5,
-        "message": "Plenty of space for the three of us and a short walk to Westfield and the train.",
-        "PropertyId": 5,
-        "UserId": 6,
-        "createdAt": "2026-10-24"
-    },
-    {
-        "rating": 5,
-        "message": "Second time staying here and it was just as good. Olivia's local tips were spot on.",
-        "PropertyId": 7,
-        "UserId": 8,
-        "createdAt": "2026-10-27"
-    }
+  {
+    "rating": 5,
+    "message": "A little oasis. The garden is beautiful and the bakeries nearby are amazing.",
+    "PropertyId": 8,
+    "UserId": 16,
+    "createdAt": "2026-02-05"
+  },
+  {
+    "rating": 5,
+    "message": "Unreal location. The beach is two minutes away and the ferry into the city was the best commute I've ever had.",
+    "PropertyId": 16,
+    "UserId": 20,
+    "createdAt": "2026-02-05"
+  },
+  {
+    "rating": 4,
+    "message": "Nice modern apartment with a lovely view over the bay. Walking along the water in the evening was a highlight.",
+    "PropertyId": 24,
+    "UserId": 8,
+    "createdAt": "2026-02-05"
+  },
+  {
+    "rating": 5,
+    "message": "Lovely terrace and fun housemates. The Saturday market at Carriageworks was a great bonus.",
+    "PropertyId": 32,
+    "UserId": 15,
+    "createdAt": "2026-02-05"
+  },
+  {
+    "rating": 5,
+    "message": "Amazing ocean views from the terrace and a huge kitchen. Perfect for our family holiday.",
+    "PropertyId": 40,
+    "UserId": 7,
+    "createdAt": "2026-02-05"
+  },
+  {
+    "rating": 5,
+    "message": "Great room in a great house. Being two minutes from King Street meant I never ran out of places to eat.",
+    "PropertyId": 1,
+    "UserId": 13,
+    "createdAt": "2026-02-11"
+  },
+  {
+    "rating": 5,
+    "message": "Gorgeous cottage. The fireplace and the garden were our favourite parts.",
+    "PropertyId": 9,
+    "UserId": 11,
+    "createdAt": "2026-02-11"
+  },
+  {
+    "rating": 5,
+    "message": "We stayed here for a family reunion and it was perfect. The kids lived in the pool and we walked to Coogee for breakfast every morning.",
+    "PropertyId": 17,
+    "UserId": 3,
+    "createdAt": "2026-02-11"
+  },
+  {
+    "rating": 5,
+    "message": "Ideal for our family while we looked for a place to rent. Quiet complex and the station is close.",
+    "PropertyId": 25,
+    "UserId": 15,
+    "createdAt": "2026-02-11"
+  },
+  {
+    "rating": 5,
+    "message": "Beautifully styled apartment, and the timber kitchen is stunning. We walked to Balmoral Beach every morning.",
+    "PropertyId": 33,
+    "UserId": 3,
+    "createdAt": "2026-02-14"
+  },
+  {
+    "rating": 4,
+    "message": "Big room with a great ensuite, and the pool was a bonus. Very close to the station.",
+    "PropertyId": 10,
+    "UserId": 14,
+    "createdAt": "2026-02-17"
+  },
+  {
+    "rating": 4,
+    "message": "Comfortable and modern, with plenty of room for the three of us. The garage was a bonus in Leichhardt.",
+    "PropertyId": 18,
+    "UserId": 6,
+    "createdAt": "2026-02-17"
+  },
+  {
+    "rating": 4,
+    "message": "Cosy studio in a lovely old building. Taking the ferry from Neutral Bay to the city was a highlight.",
+    "PropertyId": 34,
+    "UserId": 13,
+    "createdAt": "2026-02-17"
+  },
+  {
+    "rating": 5,
+    "message": "Perfect for my conference at the uni, I could walk to everything. Compact but very well set up.",
+    "PropertyId": 26,
+    "UserId": 14,
+    "createdAt": "2026-02-21"
+  },
+  {
+    "rating": 4,
+    "message": "The city views at night were fantastic. Very handy for the Metro and the shops.",
+    "PropertyId": 3,
+    "UserId": 15,
+    "createdAt": "2026-02-23"
+  },
+  {
+    "rating": 4,
+    "message": "Spacious townhouse near the river. Unfurnished bedrooms, exactly as the listing said.",
+    "PropertyId": 11,
+    "UserId": 16,
+    "createdAt": "2026-02-23"
+  },
+  {
+    "rating": 5,
+    "message": "The ultimate beach house. Sitting on the deck after a swim was exactly what we needed. We'll be back next summer.",
+    "PropertyId": 27,
+    "UserId": 7,
+    "createdAt": "2026-02-23"
+  },
+  {
+    "rating": 5,
+    "message": "Waking up to kookaburras in the gum trees was magical. Such a peaceful place, and still close to the train.",
+    "PropertyId": 35,
+    "UserId": 11,
+    "createdAt": "2026-02-23"
+  },
+  {
+    "rating": 5,
+    "message": "Our kids didn't want to leave the pool. A big, comfortable home on a quiet street.",
+    "PropertyId": 4,
+    "UserId": 18,
+    "createdAt": "2026-02-25"
+  },
+  {
+    "rating": 5,
+    "message": "Sunny balcony and a really comfortable bed. Great restaurants a short walk away.",
+    "PropertyId": 12,
+    "UserId": 20,
+    "createdAt": "2026-02-25"
+  },
+  {
+    "rating": 5,
+    "message": "Such a warm welcome. The house is beautiful, the street is really peaceful and the train connections are great.",
+    "PropertyId": 28,
+    "UserId": 13,
+    "createdAt": "2026-02-25"
+  },
+  {
+    "rating": 5,
+    "message": "The view of the Harbour Bridge from the couch is incredible, especially at night. Easy train ride to the city for work.",
+    "PropertyId": 20,
+    "UserId": 18,
+    "createdAt": "2026-02-27"
+  },
+  {
+    "rating": 4,
+    "message": "Perfect for my exchange semester, UTS was a five-minute walk. The room is small but cosy.",
+    "PropertyId": 36,
+    "UserId": 20,
+    "createdAt": "2026-02-27"
+  },
+  {
+    "rating": 4,
+    "message": "Spacious and clean, with a great kitchen. The courtyard was perfect for morning coffee.",
+    "PropertyId": 25,
+    "UserId": 10,
+    "createdAt": "2026-02-28"
+  },
+  {
+    "rating": 5,
+    "message": "Beautiful house, even nicer than the photos. Marco was really helpful with tips for the coastal walk.",
+    "PropertyId": 17,
+    "UserId": 15,
+    "createdAt": "2026-03-01"
+  },
+  {
+    "rating": 4,
+    "message": "Handy for work in Parramatta and the townhouse was spotless. The courtyard was a nice spot for dinner.",
+    "PropertyId": 5,
+    "UserId": 20,
+    "createdAt": "2026-03-03"
+  },
+  {
+    "rating": 4,
+    "message": "Lots of space for our family while we settled into Sydney. Close to schools and the Metro.",
+    "PropertyId": 13,
+    "UserId": 18,
+    "createdAt": "2026-03-03"
+  },
+  {
+    "rating": 5,
+    "message": "Beautiful old terrace with heaps of character, and surprisingly quiet at night. The coffee on Victoria Street is the best.",
+    "PropertyId": 21,
+    "UserId": 10,
+    "createdAt": "2026-03-03"
+  },
+  {
+    "rating": 5,
+    "message": "Comfortable apartment right near the station and the shops. The car space was very handy.",
+    "PropertyId": 29,
+    "UserId": 4,
+    "createdAt": "2026-03-03"
+  },
+  {
+    "rating": 5,
+    "message": "Perfect for an early flight, the airport is two stops away. Clean and comfortable.",
+    "PropertyId": 37,
+    "UserId": 14,
+    "createdAt": "2026-03-03"
+  },
+  {
+    "rating": 5,
+    "message": "I was here for a nursing placement and it was ideal. The blockout curtains were a lifesaver after night shifts.",
+    "PropertyId": 19,
+    "UserId": 15,
+    "createdAt": "2026-03-05"
+  },
+  {
+    "rating": 5,
+    "message": "Olivia was a great host and the studio had everything I needed for a work trip.",
+    "PropertyId": 34,
+    "UserId": 16,
+    "createdAt": "2026-03-09"
+  },
+  {
+    "rating": 5,
+    "message": "Ideal for uni, the light rail stop is right there. Friendly housemates and a nice back deck.",
+    "PropertyId": 6,
+    "UserId": 10,
+    "createdAt": "2026-03-09"
+  },
+  {
+    "rating": 5,
+    "message": "Lovely bright room and the housemates made me feel at home straight away. The walk to uni through Glebe was a highlight.",
+    "PropertyId": 14,
+    "UserId": 13,
+    "createdAt": "2026-03-09"
+  },
+  {
+    "rating": 5,
+    "message": "A gorgeous little cottage. The picket fence and the courtyard made us feel like locals, and the ferry to the city was a treat.",
+    "PropertyId": 22,
+    "UserId": 5,
+    "createdAt": "2026-03-09"
+  },
+  {
+    "rating": 5,
+    "message": "Great family home with plenty of space for us and the dog. Daniel was easy to deal with.",
+    "PropertyId": 30,
+    "UserId": 12,
+    "createdAt": "2026-03-09"
+  },
+  {
+    "rating": 5,
+    "message": "Comfortable and quiet, and Mei Lin made sure I had everything I needed.",
+    "PropertyId": 10,
+    "UserId": 18,
+    "createdAt": "2026-03-12"
+  },
+  {
+    "rating": 4,
+    "message": "New, clean and quiet. Unfurnished as described, which suited us while our furniture was being shipped.",
+    "PropertyId": 38,
+    "UserId": 12,
+    "createdAt": "2026-03-13"
+  },
+  {
+    "rating": 5,
+    "message": "Loved the high ceilings and the view towards the harbour. Walked to Darling Harbour every evening and Raj had everything ready when I arrived.",
+    "PropertyId": 15,
+    "UserId": 2,
+    "createdAt": "2026-03-15"
+  },
+  {
+    "rating": 5,
+    "message": "Having my own ensuite made all the difference. Super close to the station, and the food in Burwood is amazing.",
+    "PropertyId": 23,
+    "UserId": 6,
+    "createdAt": "2026-03-15"
+  },
+  {
+    "rating": 5,
+    "message": "Everything was easy, from check-in to the pool. Priya left helpful notes about the area.",
+    "PropertyId": 24,
+    "UserId": 20,
+    "createdAt": "2026-03-15"
+  },
+  {
+    "rating": 5,
+    "message": "Spotless apartment with everything we needed for a week. Chloe even left boogie boards for us.",
+    "PropertyId": 16,
+    "UserId": 8,
+    "createdAt": "2026-03-16"
+  },
+  {
+    "rating": 5,
+    "message": "Plenty of room for two families, and the outdoor shower was a nice touch after the beach.",
+    "PropertyId": 27,
+    "UserId": 16,
+    "createdAt": "2026-03-16"
+  },
+  {
+    "rating": 4,
+    "message": "Cosy and private with its own entrance. A bit of a walk to the station, but a pleasant one.",
+    "PropertyId": 8,
+    "UserId": 13,
+    "createdAt": "2026-03-17"
+  },
+  {
+    "rating": 5,
+    "message": "Beautiful home and a short walk to the beach. Hannah thought of everything.",
+    "PropertyId": 40,
+    "UserId": 20,
+    "createdAt": "2026-03-18"
+  },
+  {
+    "rating": 5,
+    "message": "We loved the bushwalks nearby. The house is comfortable and full of light.",
+    "PropertyId": 35,
+    "UserId": 6,
+    "createdAt": "2026-03-18"
+  },
+  {
+    "rating": 4,
+    "message": "Cosy room in a great area. Old terraces are a bit chilly in winter, but there's a heater.",
+    "PropertyId": 32,
+    "UserId": 10,
+    "createdAt": "2026-03-19"
+  },
+  {
+    "rating": 5,
+    "message": "Very clean and modern, and close to the hospital where my wife was working. Mei Lin was a great host.",
+    "PropertyId": 31,
+    "UserId": 8,
+    "createdAt": "2026-03-20"
+  },
+  {
+    "rating": 4,
+    "message": "Clean and convenient, and the desk was handy for studying. It gets a bit noisy when the shopping centre closes at night.",
+    "PropertyId": 26,
+    "UserId": 2,
+    "createdAt": "2026-03-21"
+  },
+  {
+    "rating": 5,
+    "message": "Loved being close to Norton Street, so many good restaurants. The townhouse was clean and Sophie was lovely.",
+    "PropertyId": 18,
+    "UserId": 13,
+    "createdAt": "2026-03-22"
+  },
+  {
+    "rating": 4,
+    "message": "Clean, quiet room in a lovely bungalow. Good value with bills included.",
+    "PropertyId": 28,
+    "UserId": 6,
+    "createdAt": "2026-03-22"
+  },
+  {
+    "rating": 5,
+    "message": "Stylish apartment, and two bathrooms were a big plus for the two of us. The gym was great too.",
+    "PropertyId": 20,
+    "UserId": 2,
+    "createdAt": "2026-03-25"
+  },
+  {
+    "rating": 5,
+    "message": "Quiet, comfortable, and the pool was a lovely surprise. Easy bus to the city.",
+    "PropertyId": 33,
+    "UserId": 18,
+    "createdAt": "2026-03-27"
+  },
+  {
+    "rating": 4,
+    "message": "Quiet room in a nice old house, a short walk to the hospital. The kitchen is small but had everything I needed.",
+    "PropertyId": 19,
+    "UserId": 16,
+    "createdAt": "2026-03-27"
+  },
+  {
+    "rating": 5,
+    "message": "A lovely light studio with a view of the garden. Paddington is such a nice area to walk around.",
+    "PropertyId": 39,
+    "UserId": 2,
+    "createdAt": "2026-03-29"
+  },
+  {
+    "rating": 4,
+    "message": "Good value and super central. The housemates were quiet during exam time.",
+    "PropertyId": 36,
+    "UserId": 8,
+    "createdAt": "2026-03-29"
+  },
+  {
+    "rating": 4,
+    "message": "Convenient and modern. A bit of plane noise, but the windows block most of it.",
+    "PropertyId": 37,
+    "UserId": 3,
+    "createdAt": "2026-03-31"
+  },
+  {
+    "rating": 4,
+    "message": "Bright and modern, a good base for exploring the eastern suburbs.",
+    "PropertyId": 29,
+    "UserId": 15,
+    "createdAt": "2026-04-01"
+  },
+  {
+    "rating": 4,
+    "message": "Great little studio in a great area. The kitchenette is basic, but with so many restaurants nearby we hardly cooked.",
+    "PropertyId": 21,
+    "UserId": 20,
+    "createdAt": "2026-04-02"
+  },
+  {
+    "rating": 4,
+    "message": "Lovely house with plenty of space. The hill back up from the beach is steep, but the view is worth it.",
+    "PropertyId": 40,
+    "UserId": 15,
+    "createdAt": "2026-04-06"
+  },
+  {
+    "rating": 4,
+    "message": "Great spot for a family weekend. The second bedroom is on the small side, but the location makes up for it.",
+    "PropertyId": 16,
+    "UserId": 4,
+    "createdAt": "2026-04-07"
+  },
+  {
+    "rating": 4,
+    "message": "Comfy house with a big backyard. We used it as a base for day trips to the Blue Mountains.",
+    "PropertyId": 30,
+    "UserId": 20,
+    "createdAt": "2026-04-11"
+  },
+  {
+    "rating": 5,
+    "message": "Sam was a brilliant host and the cottage was spotless. We loved the pubs around Balmain.",
+    "PropertyId": 22,
+    "UserId": 16,
+    "createdAt": "2026-04-12"
+  },
+  {
+    "rating": 4,
+    "message": "Great location near the markets and plenty of cafes. Three people share the bathroom, so mornings can get busy, but everyone was considerate.",
+    "PropertyId": 14,
+    "UserId": 18,
+    "createdAt": "2026-04-13"
+  },
+  {
+    "rating": 4,
+    "message": "Lovely relaxed house close to the water. A long train ride from the city, but worth it.",
+    "PropertyId": 27,
+    "UserId": 18,
+    "createdAt": "2026-04-17"
+  },
+  {
+    "rating": 4,
+    "message": "Big room, good air con and a quiet house. The laundry is shared, but there was never a wait.",
+    "PropertyId": 23,
+    "UserId": 18,
+    "createdAt": "2026-04-18"
+  },
+  {
+    "rating": 4,
+    "message": "Comfortable bed and a great shower. The window faces a busy street, so bring earplugs if you're a light sleeper.",
+    "PropertyId": 15,
+    "UserId": 16,
+    "createdAt": "2026-04-19"
+  },
+  {
+    "rating": 4,
+    "message": "Good-sized townhouse with a nice little courtyard. Quick train to the city.",
+    "PropertyId": 31,
+    "UserId": 2,
+    "createdAt": "2026-04-22"
+  },
+  {
+    "rating": 4,
+    "message": "Fantastic views and a comfortable bed. The lifts were slow at peak times, but that's a small thing.",
+    "PropertyId": 20,
+    "UserId": 14,
+    "createdAt": "2026-04-28"
+  },
+  {
+    "rating": 4,
+    "message": "Charming and well located. The stairs are steep, so travel light.",
+    "PropertyId": 39,
+    "UserId": 4,
+    "createdAt": "2026-04-30"
+  },
+  {
+    "rating": 4,
+    "message": "Charming and cosy. The second bedroom is small, which was fine for our kids.",
+    "PropertyId": 22,
+    "UserId": 13,
+    "createdAt": "2026-05-20"
+  },
+  {
+    "rating": 5,
+    "message": "Hannah was quick to reply and left a guide to the best spots in Glebe. Clean, quiet and good value.",
+    "PropertyId": 14,
+    "UserId": 10,
+    "createdAt": "2026-05-22"
+  },
+  {
+    "rating": 5,
+    "message": "Spotless studio and only a short walk to Central. Check-in was easy and Sam replied to every message within minutes.",
+    "PropertyId": 2,
+    "UserId": 2,
+    "createdAt": "2026-08-08"
+  },
+  {
+    "rating": 5,
+    "message": "Waking up to the ocean view was amazing. Five minutes to the beach and plenty of cafes nearby.",
+    "PropertyId": 7,
+    "UserId": 6,
+    "createdAt": "2026-08-19"
+  },
+  {
+    "rating": 4,
+    "message": "Bright room in a lovely old terrace and the shared kitchen was always clean. A bit of street noise on Friday night.",
+    "PropertyId": 1,
+    "UserId": 8,
+    "createdAt": "2026-08-28"
+  },
+  {
+    "rating": 4,
+    "message": "Great location and a comfortable bed. Street parking was hard to find on the weekend.",
+    "PropertyId": 7,
+    "UserId": 3,
+    "createdAt": "2026-09-07"
+  },
+  {
+    "rating": 5,
+    "message": "Perfect for our family weekend. The kids loved the pool and the kitchen had everything we needed.",
+    "PropertyId": 4,
+    "UserId": 2,
+    "createdAt": "2026-09-15"
+  },
+  {
+    "rating": 4,
+    "message": "Compact but really well designed. Fast Wi-Fi made it easy to work from the studio.",
+    "PropertyId": 2,
+    "UserId": 6,
+    "createdAt": "2026-09-22"
+  },
+  {
+    "rating": 5,
+    "message": "Such a charming cottage. The garden is beautiful and it felt like home from the moment we arrived.",
+    "PropertyId": 9,
+    "UserId": 5,
+    "createdAt": "2026-09-29"
+  },
+  {
+    "rating": 4,
+    "message": "Modern apartment with a great view of the city lights. Close to the station and the shopping centre.",
+    "PropertyId": 3,
+    "UserId": 8,
+    "createdAt": "2026-10-06"
+  },
+  {
+    "rating": 5,
+    "message": "Spacious, on a quiet street and with a big backyard. Priya left a lovely welcome basket.",
+    "PropertyId": 13,
+    "UserId": 7,
+    "createdAt": "2026-10-12"
+  },
+  {
+    "rating": 4,
+    "message": "Lots of natural light and a nice balcony for morning coffee. Would stay again.",
+    "PropertyId": 12,
+    "UserId": 4,
+    "createdAt": "2026-10-20"
+  },
+  {
+    "rating": 5,
+    "message": "Plenty of space for the three of us and a short walk to Westfield and the train.",
+    "PropertyId": 5,
+    "UserId": 6,
+    "createdAt": "2026-10-24"
+  },
+  {
+    "rating": 5,
+    "message": "Second time staying here and it was just as good. Olivia's local tips were spot on.",
+    "PropertyId": 7,
+    "UserId": 8,
+    "createdAt": "2026-10-27"
+  }
 ]

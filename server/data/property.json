@@ -8,7 +8,16 @@
     "location": "Newtown",
     "address": "18 Wilson Street",
     "latitude": -33.89647,
-    "longitude": 151.18086
+    "longitude": 151.18086,
+    "description": "A bright front bedroom in a two-storey Victorian terrace, two minutes from King Street's cafes, bars and bookshops. The room has a queen bed, a big wardrobe and a desk under the window. You'll share the kitchen, bathroom and little back courtyard with two friendly professionals. Newtown station is a five-minute walk, and buses to the city stop at the corner. Bills are included.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "heating",
+      "workspace",
+      "garden"
+    ]
   },
   {
     "name": "Modern studio near Central Station",
@@ -19,7 +28,15 @@
     "location": "Surry Hills",
     "address": "75 Foveaux Street",
     "latitude": -33.88421,
-    "longitude": 151.2102
+    "longitude": 151.2102,
+    "description": "A compact, freshly renovated studio on a leafy Surry Hills street, ten minutes' walk from Central Station. It has a comfortable double bed, a kitchenette with a two-burner cooktop and a small dining table that doubles as a desk. Crown Street's restaurants are around the corner, and Prince Alfred Park is close by for a morning run.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "aircon",
+      "tv",
+      "workspace"
+    ]
   },
   {
     "name": "Two-bedroom apartment with city views",
@@ -30,7 +47,18 @@
     "location": "Chatswood",
     "address": "38 Albert Avenue",
     "latitude": -33.7977,
-    "longitude": 151.18542
+    "longitude": 151.18542,
+    "description": "A light-filled two-bedroom, two-bathroom apartment on the 12th floor, looking south to the city skyline. The open-plan living area opens onto a balcony that's perfect for watching the sunset. Chatswood Chase, the interchange and the Metro are all within five minutes' walk, so you can be in the CBD in 15 minutes. Secure parking for one car and a lift.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "balcony",
+      "gym"
+    ]
   },
   {
     "name": "Four-bedroom family home with pool",
@@ -41,7 +69,21 @@
     "location": "Castle Hill",
     "address": "21 Cecil Avenue",
     "latitude": -33.73518,
-    "longitude": 151.00377
+    "longitude": 151.00377,
+    "description": "A spacious single-level family home on a quiet cul-de-sac, with a solar-heated pool and a covered outdoor area made for summer barbecues. There are four bedrooms, two bathrooms, a big family kitchen, a separate lounge for movie nights and a double garage. Castle Towers and the Metro are a short drive away, with parks and walking tracks nearby.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "heating",
+      "tv",
+      "dishwasher",
+      "garden",
+      "bbq",
+      "pool",
+      "pets"
+    ]
   },
   {
     "name": "Three-bedroom townhouse near Westfield",
@@ -52,7 +94,18 @@
     "location": "Parramatta",
     "address": "27 Hassall Street",
     "latitude": -33.8176,
-    "longitude": 151.01045
+    "longitude": 151.01045,
+    "description": "A modern three-bedroom townhouse a short walk from Westfield Parramatta, the station and the river ferry. Upstairs are three bedrooms including a main with ensuite; downstairs there's an open-plan kitchen and living area leading out to a private courtyard. Great for families or colleagues visiting the Parramatta CBD. Single garage.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "garden",
+      "bbq"
+    ]
   },
   {
     "name": "Private room close to UNSW",
@@ -63,7 +116,15 @@
     "location": "Kensington",
     "address": "40 Doncaster Avenue",
     "latitude": -33.91747,
-    "longitude": 151.22389
+    "longitude": 151.22389,
+    "description": "A quiet, furnished room in a friendly share house, a 10-minute walk to UNSW and right on the light rail line. The room has a double bed, a desk and plenty of storage. You'll share the kitchen, bathroom and a sunny back deck with two students. Bills and fast Wi-Fi are included, and there's a supermarket at the end of the street.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "heating",
+      "workspace"
+    ]
   },
   {
     "name": "Beachside apartment a short walk to Bondi",
@@ -74,7 +135,17 @@
     "location": "Bondi",
     "address": "54 Bondi Road",
     "latitude": -33.89429,
-    "longitude": 151.26613
+    "longitude": 151.26613,
+    "description": "Catch glimpses of the ocean from this airy two-bedroom apartment, a five-minute stroll from Bondi Beach and the start of the Bondi to Coogee coastal walk. The living room has big windows and a balcony, and the kitchen is fully equipped for cooking at home. Hall Street's cafes and the Icebergs pool are close by, and buses to Bondi Junction stop out the front.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "balcony"
+    ]
   },
   {
     "name": "Garden studio on a quiet street",
@@ -85,7 +156,16 @@
     "location": "Marrickville",
     "address": "33 Victoria Road",
     "latitude": -33.90585,
-    "longitude": 151.16559
+    "longitude": 151.16559,
+    "description": "A self-contained studio at the back of a family home, opening onto a leafy garden. It has its own entrance, a queen bed, a kitchenette and a private bathroom. Marrickville's Vietnamese bakeries, breweries and the Saturday organic markets are all nearby, and Marrickville station is a 10-minute walk.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "heating",
+      "tv",
+      "garden",
+      "pets"
+    ]
   },
   {
     "name": "Ivy-covered cottage with a leafy garden",
@@ -96,7 +176,18 @@
     "location": "Newtown",
     "address": "7 Australia Street",
     "latitude": -33.8945,
-    "longitude": 151.17745
+    "longitude": 151.17745,
+    "description": "A charming freestanding cottage, its front covered in ivy and its back garden full of established trees. Inside there are polished floorboards, two bedrooms, a cosy lounge with a fireplace and a sunny kitchen that opens to the garden. Enmore Road and King Street are both a short walk away. A peaceful base in the middle of the inner west.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "heating",
+      "tv",
+      "garden",
+      "bbq",
+      "pets"
+    ]
   },
   {
     "name": "Furnished room with ensuite",
@@ -107,7 +198,18 @@
     "location": "Chatswood",
     "address": "12 Help Street",
     "latitude": -33.79641,
-    "longitude": 151.17893
+    "longitude": 151.17893,
+    "description": "A large furnished bedroom with its own ensuite in a modern apartment, five minutes from Chatswood station. The room has a queen bed, a built-in wardrobe and a desk. You'll share the kitchen, living room and balcony with one quiet professional. Bills, Wi-Fi and use of the building's pool and gym are included.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "workspace",
+      "balcony",
+      "pool",
+      "gym"
+    ]
   },
   {
     "name": "Modern townhouse by the river",
@@ -118,7 +220,16 @@
     "location": "Ryde",
     "address": "5 Belmore Street",
     "latitude": -33.81289,
-    "longitude": 151.10333
+    "longitude": 151.10333,
+    "description": "A modern townhouse in a small complex near the Parramatta River foreshore. Three bedrooms upstairs, two bathrooms, and an open-plan living and dining area downstairs that opens onto a private courtyard. It's unfurnished apart from the kitchen appliances, so it suits longer stays. Top Ryde shopping centre and buses to Macquarie Park are a short walk away.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "dishwasher",
+      "garden"
+    ]
   },
   {
     "name": "Light-filled apartment with balcony",
@@ -129,7 +240,18 @@
     "location": "Chatswood",
     "address": "6 Victoria Avenue",
     "latitude": -33.79602,
-    "longitude": 151.18402
+    "longitude": 151.18402,
+    "description": "A bright one-bedroom apartment on a tree-lined street, with a north-facing balcony that gets sun all day. The kitchen has stone benchtops and a dishwasher, and the bedroom has a built-in robe. It's an easy walk to Chatswood's restaurants, the station and the Victoria Avenue shops. One secure car space included.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "heating",
+      "tv",
+      "dishwasher",
+      "balcony"
+    ]
   },
   {
     "name": "Brick family home with double garage",
@@ -140,6 +262,580 @@
     "location": "Castle Hill",
     "address": "45 Showground Road",
     "latitude": -33.72348,
-    "longitude": 150.98131
+    "longitude": 150.98131,
+    "description": "A solid brick family home with four bedrooms, three bathrooms, two living areas and a double garage, on a big flat block near Showground station. The kitchen overlooks a level backyard with room for the kids to play. It's unfurnished, which suits families relocating to the Hills district. Castle Hill's shops and schools are close by.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "heating",
+      "dishwasher",
+      "garden",
+      "bbq",
+      "pets"
+    ]
+  },
+  {
+    "name": "Bright room in a Glebe share house",
+    "CategoryId": 1,
+    "price": 70,
+    "image": "https://images.unsplash.com/photo-1771611186938-39a6b934f2f6?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 9,
+    "location": "Glebe",
+    "address": "52 Glebe Point Road",
+    "latitude": -33.8827,
+    "longitude": 151.19052,
+    "description": "A sunny double room in a relaxed three-bedroom share house on Glebe Point Road. The room has a queen bed, a clothes rack and a wide window over the street's jacaranda trees. You'll share the kitchen, laundry and bathroom with two easy-going housemates, a nurse and a postgrad student. Sydney Uni is a 15-minute walk, and Glebe's bookshops, cafes and Saturday markets are on your doorstep.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "heating",
+      "workspace"
+    ]
+  },
+  {
+    "name": "Harbourside studio in Pyrmont",
+    "CategoryId": 2,
+    "price": 150,
+    "image": "https://images.unsplash.com/photo-1620332372374-f108c53d2e03?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 12,
+    "location": "Pyrmont",
+    "address": "120 Harris Street",
+    "latitude": -33.87257,
+    "longitude": 151.19559,
+    "description": "A smart studio on the fourth floor of a converted wool store, with high ceilings and a window looking towards Darling Harbour. There's a comfortable queen bed, a compact kitchen, a fast connection for working from home and a modern bathroom with a rain shower. The light rail, the Fish Market and the CBD are all within a 10-minute walk.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "aircon",
+      "tv",
+      "workspace"
+    ]
+  },
+  {
+    "name": "Two-bedroom apartment steps from Manly Beach",
+    "CategoryId": 3,
+    "price": 340,
+    "image": "https://images.unsplash.com/photo-1560448076-957f79776e95?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 11,
+    "location": "Manly",
+    "address": "18 Pittwater Road",
+    "latitude": -33.79473,
+    "longitude": 151.28523,
+    "description": "Hear the waves from this airy two-bedroom apartment, a two-minute walk from Manly Beach and the Corso. The living room opens onto a sunny balcony, and the kitchen has everything you need for breakfast before a swim. Take the ferry from Manly Wharf to Circular Quay in 20 minutes. One secure car space, plus a beach cart for towels and boards.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "tv",
+      "dishwasher",
+      "balcony"
+    ]
+  },
+  {
+    "name": "Coastal family house near Coogee Beach",
+    "CategoryId": 4,
+    "price": 480,
+    "image": "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 14,
+    "location": "Coogee",
+    "address": "9 Arden Street",
+    "latitude": -33.91977,
+    "longitude": 151.25705,
+    "description": "A bright, architect-designed family home with a pool, a few minutes' walk from Coogee Beach. The open kitchen and living area have high ceilings and a fireplace for cooler nights, and glass doors slide open to the pool deck. There are four bedrooms, two bathrooms and a single garage. Walk the coastal path to Bondi, or grab fish and chips on the beach.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "heating",
+      "tv",
+      "dishwasher",
+      "garden",
+      "bbq",
+      "pool"
+    ]
+  },
+  {
+    "name": "Two-storey townhouse in Leichhardt",
+    "CategoryId": 5,
+    "price": 240,
+    "image": "https://images.unsplash.com/photo-1625283518755-6047df2fb180?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 17,
+    "location": "Leichhardt",
+    "address": "61 Marion Street",
+    "latitude": -33.88418,
+    "longitude": 151.14677,
+    "description": "A modern three-bedroom townhouse in a small complex just off Norton Street, with a garage and two balconies. Downstairs is an open living room and a bright white kitchen; upstairs are three bedrooms and two bathrooms. Norton Street's Italian restaurants and Pioneer Memorial Park are a short walk, and buses to the city take about 20 minutes.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "balcony"
+    ]
+  },
+  {
+    "name": "Quiet room near Randwick hospitals",
+    "CategoryId": 1,
+    "price": 68,
+    "image": "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 5,
+    "location": "Randwick",
+    "address": "47 Avoca Street",
+    "latitude": -33.91141,
+    "longitude": 151.24328,
+    "description": "A calm, furnished room in a Federation home, ideal for nurses, doctors or students on placement at Prince of Wales and the children's hospital, a five-minute walk away. The room has a double bed, a desk and blockout curtains for night-shift sleep. Share a clean kitchen and bathroom with one other person. The light rail to the city is close by, and bills are included.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "heating",
+      "workspace"
+    ]
+  },
+  {
+    "name": "Apartment with Harbour Bridge views",
+    "CategoryId": 3,
+    "price": 310,
+    "image": "https://images.unsplash.com/photo-1649429710616-dad56ce9a076?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 7,
+    "location": "North Sydney",
+    "address": "88 Walker Street",
+    "latitude": -33.83399,
+    "longitude": 151.20984,
+    "description": "Watch the ferries cross the harbour from this two-bedroom apartment on the 18th floor in North Sydney. The living room has floor-to-ceiling windows that frame the Harbour Bridge, both bedrooms have their own bathrooms, and the building has a gym. North Sydney station is a three-minute walk and one stop from Wynyard.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "heating",
+      "tv",
+      "dishwasher",
+      "balcony",
+      "gym"
+    ]
+  },
+  {
+    "name": "Studio in a Darlinghurst terrace",
+    "CategoryId": 2,
+    "price": 120,
+    "image": "https://images.unsplash.com/photo-1722942631172-210ec4f03181?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 19,
+    "location": "Darlinghurst",
+    "address": "140 Victoria Street",
+    "latitude": -33.87738,
+    "longitude": 151.22162,
+    "description": "A stylish studio on the first floor of a restored 1880s terrace on Victoria Street. It's light and quiet at the back of the building, with a queen bed, a sofa, a kitchenette and a fully tiled bathroom. Some of Sydney's best cafes and wine bars are on the street, Kings Cross station is five minutes away, and the Domain and the Art Gallery are a pleasant walk.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "heating",
+      "tv",
+      "workspace"
+    ]
+  },
+  {
+    "name": "Weatherboard cottage in Balmain",
+    "CategoryId": 4,
+    "price": 290,
+    "image": "https://images.unsplash.com/photo-1720175338668-2e96d090d780?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 1,
+    "location": "Balmain",
+    "address": "23 Darling Street",
+    "latitude": -33.85632,
+    "longitude": 151.17746,
+    "description": "A pretty two-bedroom weatherboard cottage with a white picket fence, on a quiet stretch of Darling Street near the Balmain East wharf. Inside are timber floors, a cosy lounge, a country-style kitchen and a small sunny courtyard. Catch the ferry to Barangaroo or Circular Quay, and finish the day at one of Balmain's old pubs.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "heating",
+      "tv",
+      "garden",
+      "pets"
+    ]
+  },
+  {
+    "name": "Ensuite room near Burwood station",
+    "CategoryId": 1,
+    "price": 82,
+    "image": "https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 12,
+    "location": "Burwood",
+    "address": "15 Shaftesbury Road",
+    "latitude": -33.87082,
+    "longitude": 151.10832,
+    "description": "A large furnished room with its own modern ensuite in a quiet home, a five-minute walk from Burwood station and Westfield. The room has a queen bed, a built-in wardrobe, a desk and a split-system air conditioner. Use the shared kitchen and laundry any time. Express trains reach Central in about 12 minutes, and Burwood's food courts are famous for a reason.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "workspace"
+    ]
+  },
+  {
+    "name": "Waterfront apartment in Rhodes",
+    "CategoryId": 3,
+    "price": 220,
+    "image": "https://images.unsplash.com/photo-1629042306558-7d1e15cc02fa?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 3,
+    "location": "Rhodes",
+    "address": "6 Shoreline Drive",
+    "latitude": -33.82642,
+    "longitude": 151.08628,
+    "description": "A modern two-bedroom apartment overlooking Homebush Bay, with two bathrooms and a big balcony. The open living and dining space is light and simple, and the building has a pool and a gym. Rhodes station, the shopping centre and the bay walk are all minutes away, and Sydney Olympic Park is a short bike ride across the bridge.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "balcony",
+      "pool",
+      "gym"
+    ]
+  },
+  {
+    "name": "Family townhouse near Epping station",
+    "CategoryId": 5,
+    "price": 230,
+    "image": "https://images.unsplash.com/photo-1781264896328-c7ce738762fc?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 4,
+    "location": "Epping",
+    "address": "112 Carlingford Road",
+    "latitude": -33.77399,
+    "longitude": 151.06737,
+    "description": "A three-bedroom townhouse in a leafy complex, a 10-minute walk from Epping station, where the Metro and trains meet. The kitchen has stone benches and a gas cooktop, the living room opens onto a private courtyard, and there's a double garage. It's close to good schools, Macquarie University and the Lane Cove National Park walking tracks.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "heating",
+      "tv",
+      "dishwasher",
+      "garden",
+      "bbq"
+    ]
+  },
+  {
+    "name": "Studio next to Macquarie University",
+    "CategoryId": 2,
+    "price": 105,
+    "image": "https://images.unsplash.com/photo-1722942719131-2a208e55d72e?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 9,
+    "location": "Macquarie Park",
+    "address": "29 Herring Road",
+    "latitude": -33.77957,
+    "longitude": 151.11569,
+    "description": "A neat, self-contained studio a two-minute walk from Macquarie University and the Metro. It has a double bed, a kitchenette with a fridge and cooktop, a study desk and a private bathroom. Macquarie Centre's shops, cinema and ice rink are across the road. Great for visiting academics, interns and students.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "aircon",
+      "tv",
+      "workspace"
+    ]
+  },
+  {
+    "name": "Beach house in Cronulla",
+    "CategoryId": 4,
+    "price": 450,
+    "image": "https://images.unsplash.com/photo-1691709997089-d7830bd2074e?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 11,
+    "location": "Cronulla",
+    "address": "31 Ewos Parade",
+    "latitude": -34.07065,
+    "longitude": 151.15426,
+    "description": "A relaxed timber beach house with a wide deck, a short stroll to North Cronulla beach and the esplanade walk. There are three bedrooms, two bathrooms, a big kitchen and a dining area with sliding doors to the backyard and an outdoor shower. Trains run straight to the city from Cronulla station, and the Bundeena ferry leaves from the wharf.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "garden",
+      "bbq",
+      "pets"
+    ]
+  },
+  {
+    "name": "Furnished room in a quiet Strathfield home",
+    "CategoryId": 1,
+    "price": 60,
+    "image": "https://images.unsplash.com/photo-1660407761025-539c2dbc1dc6?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 17,
+    "location": "Strathfield",
+    "address": "40 The Boulevarde",
+    "latitude": -33.87271,
+    "longitude": 151.09432,
+    "description": "A tidy furnished room in a Federation bungalow on a wide, tree-lined street, a 10-minute walk from Strathfield station. The room has a double bed, a wardrobe and a desk. You'll share the kitchen and bathroom with the owner, a retired teacher and a great cook. Trains to the city, Parramatta and the Blue Mountains all stop at Strathfield. Bills are included.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "heating",
+      "garden"
+    ]
+  },
+  {
+    "name": "Apartment above Bondi Junction",
+    "CategoryId": 3,
+    "price": 210,
+    "image": "https://images.unsplash.com/photo-1759743918954-f373b0d8a891?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 19,
+    "location": "Bondi Junction",
+    "address": "12 Spring Street",
+    "latitude": -33.89217,
+    "longitude": 151.24614,
+    "description": "A modern one-bedroom apartment with tall windows, a short walk from Bondi Junction station and Westfield. The living area is bright and comfortable, the bedroom fits a queen bed, and there's a secure car space and a gym in the building. Catch the train to Martin Place in 10 minutes, or the bus down to Bondi Beach in 15.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "gym"
+    ]
+  },
+  {
+    "name": "Spacious home near the Nepean River",
+    "CategoryId": 4,
+    "price": 280,
+    "image": "https://images.unsplash.com/photo-1720175328600-06f71cee36c4?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 4,
+    "location": "Penrith",
+    "address": "74 Lemongrove Road",
+    "latitude": -33.75024,
+    "longitude": 150.70365,
+    "description": "A comfortable four-bedroom brick home on a quiet street, a few minutes' drive from the Nepean River and Penrith's centre. There's a lounge with a fireplace, a big family kitchen, two bathrooms, a double garage and a large backyard. Perfect for families visiting western Sydney, or for day trips up to the Blue Mountains.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "heating",
+      "tv",
+      "dishwasher",
+      "garden",
+      "bbq",
+      "pets"
+    ]
+  },
+  {
+    "name": "Modern townhouse in Kogarah",
+    "CategoryId": 5,
+    "price": 210,
+    "image": "https://images.unsplash.com/photo-1579678929710-862f8e01c0b2?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 5,
+    "location": "Kogarah",
+    "address": "19 Gray Street",
+    "latitude": -33.96828,
+    "longitude": 151.1334,
+    "description": "A three-bedroom brick townhouse close to Kogarah station and St George Hospital. The open-plan kitchen and living area lead to a small courtyard, and upstairs are three bedrooms including a main with ensuite. Express trains reach the city in 15 minutes, and Brighton-Le-Sands beach is a short drive.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "garden"
+    ]
+  },
+  {
+    "name": "Room in a Redfern terrace",
+    "CategoryId": 1,
+    "price": 78,
+    "image": "https://images.unsplash.com/photo-1541004995602-b3e898709909?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 1,
+    "location": "Redfern",
+    "address": "86 George Street",
+    "latitude": -33.8912,
+    "longitude": 151.20243,
+    "description": "A cosy room in a classic Victorian terrace, with a double bed, a reading nook and a window over a tiny garden. Share the kitchen, bathroom and back courtyard with two creative housemates. Redfern station is five minutes away and the Saturday farmers market at Carriageworks is around the corner. Bills are split between the housemates.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "heating",
+      "garden"
+    ]
+  },
+  {
+    "name": "Mosman apartment with a pool",
+    "CategoryId": 3,
+    "price": 330,
+    "image": "https://images.unsplash.com/photo-1788910432628-772fa22ed52a?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 14,
+    "location": "Mosman",
+    "address": "210 Military Road",
+    "latitude": -33.82719,
+    "longitude": 151.24402,
+    "description": "A warm, design-led two-bedroom apartment in a boutique building with a residents' pool, just off Military Road. The timber kitchen flows into the living and dining area, both bedrooms have built-ins, and there are two bathrooms and a secure car space. Balmoral Beach is a 15-minute walk, and the bus to the city takes about 20 minutes.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "heating",
+      "tv",
+      "dishwasher",
+      "balcony",
+      "pool"
+    ]
+  },
+  {
+    "name": "Cosy studio in Neutral Bay",
+    "CategoryId": 2,
+    "price": 115,
+    "image": "https://images.unsplash.com/photo-1742824250069-440c8ba18714?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 7,
+    "location": "Neutral Bay",
+    "address": "35 Ben Boyd Road",
+    "latitude": -33.82917,
+    "longitude": 151.21984,
+    "description": "A cosy studio in a quiet art deco block, with a comfortable bed, a sitting area and a kitchen with full-size appliances. Neutral Bay's cafes and grocery stores are a short walk away, and the ferry from Neutral Bay wharf reaches Circular Quay in about 15 minutes. Street parking is easy most of the day.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "heating",
+      "tv"
+    ]
+  },
+  {
+    "name": "Bush retreat in Hornsby",
+    "CategoryId": 4,
+    "price": 300,
+    "image": "https://images.unsplash.com/photo-1679984743278-1e325c4c899a?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 12,
+    "location": "Hornsby",
+    "address": "58 Edgeworth David Avenue",
+    "latitude": -33.70594,
+    "longitude": 151.10327,
+    "description": "A Federation-style home surrounded by gum trees, close to the bushland of the Berowra Valley. Big windows fill the living areas with light, and the veranda is the best spot for watching kookaburras at breakfast. There are three bedrooms, two bathrooms and a garage. Hornsby station is a short drive, with trains to the city every 15 minutes.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "heating",
+      "tv",
+      "dishwasher",
+      "garden",
+      "bbq",
+      "pets"
+    ]
+  },
+  {
+    "name": "Student room near UTS",
+    "CategoryId": 1,
+    "price": 65,
+    "image": "https://images.unsplash.com/photo-1622429420441-60dd67f737a6?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 19,
+    "location": "Ultimo",
+    "address": "27 Jones Street",
+    "latitude": -33.87935,
+    "longitude": 151.19721,
+    "description": "A snug furnished room in a student share apartment, a five-minute walk from UTS, Central Station and Broadway. The room comes with a bed, a desk, fairy lights and plenty of shelf space. The shared kitchen is well stocked, and bills and fast internet are included. Quiet hours after 10pm on weeknights.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "workspace"
+    ]
+  },
+  {
+    "name": "Apartment near the airport",
+    "CategoryId": 3,
+    "price": 170,
+    "image": "https://images.unsplash.com/photo-1783667440357-bf89d00c2077?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 17,
+    "location": "Wolli Creek",
+    "address": "10 Arncliffe Street",
+    "latitude": -33.93492,
+    "longitude": 151.14855,
+    "description": "A modern one-bedroom apartment in Wolli Creek, two stops from the domestic and international terminals. Great for early flights or long layovers, with a comfortable queen bed, a full kitchen and a secure car space. Wolli Creek station is a short walk, and the Cooks River cycleway runs right past.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "balcony"
+    ]
+  },
+  {
+    "name": "Kellyville townhouse with a courtyard",
+    "CategoryId": 5,
+    "price": 220,
+    "image": "https://images.unsplash.com/photo-1698362695891-8628b6ff6802?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 3,
+    "location": "Kellyville",
+    "address": "190 Windsor Road",
+    "latitude": -33.70909,
+    "longitude": 150.94288,
+    "description": "A brand-new three-bedroom townhouse in a modern estate, close to the Kellyville Metro station. The kitchen has a big island bench, the living room opens onto a private courtyard, and there's a single garage. It's unfurnished apart from the kitchen appliances, so it suits longer stays and people relocating to the Hills.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "dishwasher",
+      "garden"
+    ]
+  },
+  {
+    "name": "Garden studio in Paddington",
+    "CategoryId": 2,
+    "price": 135,
+    "image": "https://images.unsplash.com/photo-1721201335795-85d8976ae3e4?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 11,
+    "location": "Paddington",
+    "address": "102 Glenmore Road",
+    "latitude": -33.88258,
+    "longitude": 151.2227,
+    "description": "A light-filled studio with doors onto a small balcony over a leafy back garden, just off Glenmore Road. It has a queen bed, a sofa, a kitchenette and a private bathroom. Paddington's galleries, Five Ways and the Saturday markets are a short walk, and Centennial Park is perfect for a morning run.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "heating",
+      "tv",
+      "balcony",
+      "garden"
+    ]
+  },
+  {
+    "name": "Beachside family home in Dee Why",
+    "CategoryId": 4,
+    "price": 520,
+    "image": "https://images.unsplash.com/photo-1631528858266-5ebeb8bfc6f5?w=1200&q=80&fm=jpg&fit=crop",
+    "UserId": 9,
+    "location": "Dee Why",
+    "address": "44 Howard Avenue",
+    "latitude": -33.75323,
+    "longitude": 151.29192,
+    "description": "A sunny Mediterranean-style home on the hill above Dee Why Beach, with ocean views from the front terrace. Inside are four bedrooms, three bathrooms, a modern kitchen that opens to the outdoor dining area, and a double garage. Walk down to the beach, the rock pool and the cafes on The Strand, or follow the coastal walk to Long Reef.",
+    "amenities": [
+      "wifi",
+      "kitchen",
+      "washer",
+      "aircon",
+      "tv",
+      "dishwasher",
+      "balcony",
+      "garden",
+      "bbq"
+    ]
   }
 ]

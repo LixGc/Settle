@@ -1,128 +1,875 @@
 [
-    {
-        "PropertyId": 2,
-        "UserId": 2,
-        "ownerId": 1,
-        "startDate": "2026-08-03",
-        "endDate": "2026-08-07",
-        "totalPrice": 500,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 7,
-        "UserId": 6,
-        "ownerId": 7,
-        "startDate": "2026-08-14",
-        "endDate": "2026-08-18",
-        "totalPrice": 1180,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 1,
-        "UserId": 8,
-        "ownerId": 1,
-        "startDate": "2026-08-20",
-        "endDate": "2026-08-27",
-        "totalPrice": 385,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 7,
-        "UserId": 3,
-        "ownerId": 7,
-        "startDate": "2026-09-04",
-        "endDate": "2026-09-06",
-        "totalPrice": 590,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 4,
-        "UserId": 2,
-        "ownerId": 4,
-        "startDate": "2026-09-11",
-        "endDate": "2026-09-14",
-        "totalPrice": 1170,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 2,
-        "UserId": 6,
-        "ownerId": 1,
-        "startDate": "2026-09-18",
-        "endDate": "2026-09-21",
-        "totalPrice": 375,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 9,
-        "UserId": 5,
-        "ownerId": 1,
-        "startDate": "2026-09-25",
-        "endDate": "2026-09-28",
-        "totalPrice": 930,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 3,
-        "UserId": 8,
-        "ownerId": 3,
-        "startDate": "2026-10-02",
-        "endDate": "2026-10-05",
-        "totalPrice": 690,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 13,
-        "UserId": 7,
-        "ownerId": 3,
-        "startDate": "2026-10-09",
-        "endDate": "2026-10-11",
-        "totalPrice": 680,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 6,
-        "UserId": 2,
-        "ownerId": 5,
-        "startDate": "2026-10-12",
-        "endDate": "2026-10-16",
-        "totalPrice": 260,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 12,
-        "UserId": 4,
-        "ownerId": 7,
-        "startDate": "2026-10-17",
-        "endDate": "2026-10-19",
-        "totalPrice": 550,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 5,
-        "UserId": 6,
-        "ownerId": 1,
-        "startDate": "2026-10-20",
-        "endDate": "2026-10-23",
-        "totalPrice": 780,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 7,
-        "UserId": 8,
-        "ownerId": 7,
-        "startDate": "2026-10-23",
-        "endDate": "2026-10-26",
-        "totalPrice": 885,
-        "status": "completed"
-    },
-    {
-        "PropertyId": 11,
-        "UserId": 3,
-        "ownerId": 4,
-        "startDate": "2026-10-24",
-        "endDate": "2026-10-26",
-        "totalPrice": 470,
-        "status": "completed"
-    }
+  {
+    "PropertyId": 2,
+    "UserId": 2,
+    "ownerId": 1,
+    "startDate": "2026-08-03",
+    "endDate": "2026-08-07",
+    "totalPrice": 500,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 7,
+    "UserId": 6,
+    "ownerId": 7,
+    "startDate": "2026-08-14",
+    "endDate": "2026-08-18",
+    "totalPrice": 1180,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 1,
+    "UserId": 8,
+    "ownerId": 1,
+    "startDate": "2026-08-20",
+    "endDate": "2026-08-27",
+    "totalPrice": 385,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 7,
+    "UserId": 3,
+    "ownerId": 7,
+    "startDate": "2026-09-04",
+    "endDate": "2026-09-06",
+    "totalPrice": 590,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 4,
+    "UserId": 2,
+    "ownerId": 4,
+    "startDate": "2026-09-11",
+    "endDate": "2026-09-14",
+    "totalPrice": 1170,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 2,
+    "UserId": 6,
+    "ownerId": 1,
+    "startDate": "2026-09-18",
+    "endDate": "2026-09-21",
+    "totalPrice": 375,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 9,
+    "UserId": 5,
+    "ownerId": 1,
+    "startDate": "2026-09-25",
+    "endDate": "2026-09-28",
+    "totalPrice": 930,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 3,
+    "UserId": 8,
+    "ownerId": 3,
+    "startDate": "2026-10-02",
+    "endDate": "2026-10-05",
+    "totalPrice": 690,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 13,
+    "UserId": 7,
+    "ownerId": 3,
+    "startDate": "2026-10-09",
+    "endDate": "2026-10-11",
+    "totalPrice": 680,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 6,
+    "UserId": 2,
+    "ownerId": 5,
+    "startDate": "2026-10-12",
+    "endDate": "2026-10-16",
+    "totalPrice": 260,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 12,
+    "UserId": 4,
+    "ownerId": 7,
+    "startDate": "2026-10-17",
+    "endDate": "2026-10-19",
+    "totalPrice": 550,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 5,
+    "UserId": 6,
+    "ownerId": 1,
+    "startDate": "2026-10-20",
+    "endDate": "2026-10-23",
+    "totalPrice": 780,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 7,
+    "UserId": 8,
+    "ownerId": 7,
+    "startDate": "2026-10-23",
+    "endDate": "2026-10-26",
+    "totalPrice": 885,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 11,
+    "UserId": 3,
+    "ownerId": 4,
+    "startDate": "2026-10-24",
+    "endDate": "2026-10-26",
+    "totalPrice": 470,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 8,
+    "UserId": 16,
+    "ownerId": 3,
+    "startDate": "2026-02-02",
+    "endDate": "2026-02-04",
+    "totalPrice": 190,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 16,
+    "UserId": 20,
+    "ownerId": 11,
+    "startDate": "2026-02-02",
+    "endDate": "2026-02-04",
+    "totalPrice": 680,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 24,
+    "UserId": 8,
+    "ownerId": 3,
+    "startDate": "2026-02-02",
+    "endDate": "2026-02-04",
+    "totalPrice": 440,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 32,
+    "UserId": 15,
+    "ownerId": 1,
+    "startDate": "2026-02-02",
+    "endDate": "2026-02-04",
+    "totalPrice": 156,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 40,
+    "UserId": 7,
+    "ownerId": 9,
+    "startDate": "2026-02-02",
+    "endDate": "2026-02-04",
+    "totalPrice": 1040,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 1,
+    "UserId": 13,
+    "ownerId": 1,
+    "startDate": "2026-02-07",
+    "endDate": "2026-02-10",
+    "totalPrice": 165,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 9,
+    "UserId": 11,
+    "ownerId": 1,
+    "startDate": "2026-02-07",
+    "endDate": "2026-02-10",
+    "totalPrice": 930,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 17,
+    "UserId": 3,
+    "ownerId": 14,
+    "startDate": "2026-02-07",
+    "endDate": "2026-02-10",
+    "totalPrice": 1440,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 25,
+    "UserId": 15,
+    "ownerId": 4,
+    "startDate": "2026-02-07",
+    "endDate": "2026-02-10",
+    "totalPrice": 690,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 33,
+    "UserId": 3,
+    "ownerId": 14,
+    "startDate": "2026-02-10",
+    "endDate": "2026-02-13",
+    "totalPrice": 990,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 10,
+    "UserId": 14,
+    "ownerId": 5,
+    "startDate": "2026-02-12",
+    "endDate": "2026-02-16",
+    "totalPrice": 300,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 18,
+    "UserId": 6,
+    "ownerId": 17,
+    "startDate": "2026-02-12",
+    "endDate": "2026-02-16",
+    "totalPrice": 960,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 34,
+    "UserId": 13,
+    "ownerId": 7,
+    "startDate": "2026-02-12",
+    "endDate": "2026-02-16",
+    "totalPrice": 460,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 26,
+    "UserId": 14,
+    "ownerId": 9,
+    "startDate": "2026-02-16",
+    "endDate": "2026-02-20",
+    "totalPrice": 420,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 3,
+    "UserId": 15,
+    "ownerId": 3,
+    "startDate": "2026-02-17",
+    "endDate": "2026-02-22",
+    "totalPrice": 1150,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 11,
+    "UserId": 16,
+    "ownerId": 4,
+    "startDate": "2026-02-17",
+    "endDate": "2026-02-22",
+    "totalPrice": 1175,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 27,
+    "UserId": 7,
+    "ownerId": 11,
+    "startDate": "2026-02-17",
+    "endDate": "2026-02-22",
+    "totalPrice": 2250,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 35,
+    "UserId": 11,
+    "ownerId": 12,
+    "startDate": "2026-02-17",
+    "endDate": "2026-02-22",
+    "totalPrice": 1500,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 4,
+    "UserId": 18,
+    "ownerId": 4,
+    "startDate": "2026-02-22",
+    "endDate": "2026-02-24",
+    "totalPrice": 780,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 12,
+    "UserId": 20,
+    "ownerId": 7,
+    "startDate": "2026-02-22",
+    "endDate": "2026-02-24",
+    "totalPrice": 550,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 25,
+    "UserId": 10,
+    "ownerId": 4,
+    "startDate": "2026-02-22",
+    "endDate": "2026-02-26",
+    "totalPrice": 920,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 28,
+    "UserId": 13,
+    "ownerId": 17,
+    "startDate": "2026-02-22",
+    "endDate": "2026-02-24",
+    "totalPrice": 120,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 17,
+    "UserId": 15,
+    "ownerId": 14,
+    "startDate": "2026-02-23",
+    "endDate": "2026-02-27",
+    "totalPrice": 1920,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 20,
+    "UserId": 18,
+    "ownerId": 7,
+    "startDate": "2026-02-24",
+    "endDate": "2026-02-26",
+    "totalPrice": 620,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 36,
+    "UserId": 20,
+    "ownerId": 19,
+    "startDate": "2026-02-24",
+    "endDate": "2026-02-26",
+    "totalPrice": 130,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 5,
+    "UserId": 20,
+    "ownerId": 1,
+    "startDate": "2026-02-27",
+    "endDate": "2026-03-02",
+    "totalPrice": 780,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 13,
+    "UserId": 18,
+    "ownerId": 3,
+    "startDate": "2026-02-27",
+    "endDate": "2026-03-02",
+    "totalPrice": 1020,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 19,
+    "UserId": 15,
+    "ownerId": 5,
+    "startDate": "2026-02-27",
+    "endDate": "2026-03-04",
+    "totalPrice": 340,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 21,
+    "UserId": 10,
+    "ownerId": 19,
+    "startDate": "2026-02-27",
+    "endDate": "2026-03-02",
+    "totalPrice": 360,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 29,
+    "UserId": 4,
+    "ownerId": 19,
+    "startDate": "2026-02-27",
+    "endDate": "2026-03-02",
+    "totalPrice": 630,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 37,
+    "UserId": 14,
+    "ownerId": 17,
+    "startDate": "2026-02-27",
+    "endDate": "2026-03-02",
+    "totalPrice": 510,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 34,
+    "UserId": 16,
+    "ownerId": 7,
+    "startDate": "2026-03-02",
+    "endDate": "2026-03-07",
+    "totalPrice": 575,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 6,
+    "UserId": 10,
+    "ownerId": 5,
+    "startDate": "2026-03-04",
+    "endDate": "2026-03-08",
+    "totalPrice": 260,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 14,
+    "UserId": 13,
+    "ownerId": 9,
+    "startDate": "2026-03-04",
+    "endDate": "2026-03-08",
+    "totalPrice": 280,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 22,
+    "UserId": 5,
+    "ownerId": 1,
+    "startDate": "2026-03-04",
+    "endDate": "2026-03-08",
+    "totalPrice": 1160,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 30,
+    "UserId": 12,
+    "ownerId": 4,
+    "startDate": "2026-03-04",
+    "endDate": "2026-03-08",
+    "totalPrice": 1120,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 10,
+    "UserId": 18,
+    "ownerId": 5,
+    "startDate": "2026-03-05",
+    "endDate": "2026-03-10",
+    "totalPrice": 375,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 38,
+    "UserId": 12,
+    "ownerId": 3,
+    "startDate": "2026-03-08",
+    "endDate": "2026-03-12",
+    "totalPrice": 880,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 7,
+    "UserId": 10,
+    "ownerId": 7,
+    "startDate": "2026-03-09",
+    "endDate": "2026-03-14",
+    "totalPrice": 1475,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 15,
+    "UserId": 2,
+    "ownerId": 12,
+    "startDate": "2026-03-09",
+    "endDate": "2026-03-14",
+    "totalPrice": 750,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 23,
+    "UserId": 6,
+    "ownerId": 12,
+    "startDate": "2026-03-09",
+    "endDate": "2026-03-14",
+    "totalPrice": 410,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 24,
+    "UserId": 20,
+    "ownerId": 3,
+    "startDate": "2026-03-10",
+    "endDate": "2026-03-13",
+    "totalPrice": 660,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 16,
+    "UserId": 8,
+    "ownerId": 11,
+    "startDate": "2026-03-11",
+    "endDate": "2026-03-14",
+    "totalPrice": 1020,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 8,
+    "UserId": 13,
+    "ownerId": 3,
+    "startDate": "2026-03-12",
+    "endDate": "2026-03-15",
+    "totalPrice": 285,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 27,
+    "UserId": 16,
+    "ownerId": 11,
+    "startDate": "2026-03-12",
+    "endDate": "2026-03-14",
+    "totalPrice": 900,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 40,
+    "UserId": 20,
+    "ownerId": 9,
+    "startDate": "2026-03-13",
+    "endDate": "2026-03-16",
+    "totalPrice": 1560,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 26,
+    "UserId": 2,
+    "ownerId": 9,
+    "startDate": "2026-03-14",
+    "endDate": "2026-03-19",
+    "totalPrice": 525,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 31,
+    "UserId": 8,
+    "ownerId": 5,
+    "startDate": "2026-03-14",
+    "endDate": "2026-03-19",
+    "totalPrice": 1050,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 32,
+    "UserId": 10,
+    "ownerId": 1,
+    "startDate": "2026-03-14",
+    "endDate": "2026-03-17",
+    "totalPrice": 234,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 35,
+    "UserId": 6,
+    "ownerId": 12,
+    "startDate": "2026-03-14",
+    "endDate": "2026-03-16",
+    "totalPrice": 600,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 3,
+    "UserId": 16,
+    "ownerId": 3,
+    "startDate": "2026-03-15",
+    "endDate": "2026-03-17",
+    "totalPrice": 460,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 18,
+    "UserId": 13,
+    "ownerId": 17,
+    "startDate": "2026-03-15",
+    "endDate": "2026-03-20",
+    "totalPrice": 1200,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 28,
+    "UserId": 6,
+    "ownerId": 17,
+    "startDate": "2026-03-17",
+    "endDate": "2026-03-20",
+    "totalPrice": 180,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 17,
+    "UserId": 8,
+    "ownerId": 14,
+    "startDate": "2026-03-19",
+    "endDate": "2026-03-24",
+    "totalPrice": 2400,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 20,
+    "UserId": 2,
+    "ownerId": 7,
+    "startDate": "2026-03-20",
+    "endDate": "2026-03-23",
+    "totalPrice": 930,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 33,
+    "UserId": 18,
+    "ownerId": 14,
+    "startDate": "2026-03-21",
+    "endDate": "2026-03-25",
+    "totalPrice": 1320,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 19,
+    "UserId": 16,
+    "ownerId": 5,
+    "startDate": "2026-03-23",
+    "endDate": "2026-03-25",
+    "totalPrice": 136,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 39,
+    "UserId": 2,
+    "ownerId": 11,
+    "startDate": "2026-03-23",
+    "endDate": "2026-03-28",
+    "totalPrice": 675,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 36,
+    "UserId": 8,
+    "ownerId": 19,
+    "startDate": "2026-03-24",
+    "endDate": "2026-03-27",
+    "totalPrice": 195,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 37,
+    "UserId": 3,
+    "ownerId": 17,
+    "startDate": "2026-03-25",
+    "endDate": "2026-03-29",
+    "totalPrice": 680,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 29,
+    "UserId": 15,
+    "ownerId": 19,
+    "startDate": "2026-03-26",
+    "endDate": "2026-03-30",
+    "totalPrice": 840,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 21,
+    "UserId": 20,
+    "ownerId": 19,
+    "startDate": "2026-03-27",
+    "endDate": "2026-03-31",
+    "totalPrice": 480,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 40,
+    "UserId": 15,
+    "ownerId": 9,
+    "startDate": "2026-03-30",
+    "endDate": "2026-04-03",
+    "totalPrice": 2080,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 16,
+    "UserId": 4,
+    "ownerId": 11,
+    "startDate": "2026-03-31",
+    "endDate": "2026-04-04",
+    "totalPrice": 1360,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 30,
+    "UserId": 20,
+    "ownerId": 4,
+    "startDate": "2026-04-04",
+    "endDate": "2026-04-09",
+    "totalPrice": 1400,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 22,
+    "UserId": 16,
+    "ownerId": 1,
+    "startDate": "2026-04-05",
+    "endDate": "2026-04-10",
+    "totalPrice": 1450,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 14,
+    "UserId": 18,
+    "ownerId": 9,
+    "startDate": "2026-04-06",
+    "endDate": "2026-04-11",
+    "totalPrice": 350,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 35,
+    "UserId": 15,
+    "ownerId": 12,
+    "startDate": "2026-04-09",
+    "endDate": "2026-04-12",
+    "totalPrice": 900,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 27,
+    "UserId": 18,
+    "ownerId": 11,
+    "startDate": "2026-04-11",
+    "endDate": "2026-04-14",
+    "totalPrice": 1350,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 33,
+    "UserId": 2,
+    "ownerId": 14,
+    "startDate": "2026-04-12",
+    "endDate": "2026-04-17",
+    "totalPrice": 1650,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 23,
+    "UserId": 18,
+    "ownerId": 12,
+    "startDate": "2026-04-14",
+    "endDate": "2026-04-16",
+    "totalPrice": 164,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 15,
+    "UserId": 16,
+    "ownerId": 12,
+    "startDate": "2026-04-15",
+    "endDate": "2026-04-17",
+    "totalPrice": 300,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 31,
+    "UserId": 2,
+    "ownerId": 5,
+    "startDate": "2026-04-18",
+    "endDate": "2026-04-20",
+    "totalPrice": 420,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 20,
+    "UserId": 14,
+    "ownerId": 7,
+    "startDate": "2026-04-21",
+    "endDate": "2026-04-25",
+    "totalPrice": 1240,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 40,
+    "UserId": 18,
+    "ownerId": 9,
+    "startDate": "2026-04-24",
+    "endDate": "2026-04-29",
+    "totalPrice": 2600,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 39,
+    "UserId": 4,
+    "ownerId": 11,
+    "startDate": "2026-04-26",
+    "endDate": "2026-04-28",
+    "totalPrice": 270,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 29,
+    "UserId": 13,
+    "ownerId": 19,
+    "startDate": "2026-04-30",
+    "endDate": "2026-05-05",
+    "totalPrice": 1050,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 22,
+    "UserId": 13,
+    "ownerId": 1,
+    "startDate": "2026-05-15",
+    "endDate": "2026-05-17",
+    "totalPrice": 580,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 14,
+    "UserId": 10,
+    "ownerId": 9,
+    "startDate": "2026-05-17",
+    "endDate": "2026-05-19",
+    "totalPrice": 140,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 27,
+    "UserId": 10,
+    "ownerId": 11,
+    "startDate": "2026-05-19",
+    "endDate": "2026-05-23",
+    "totalPrice": 1800,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 20,
+    "UserId": 16,
+    "ownerId": 7,
+    "startDate": "2026-05-31",
+    "endDate": "2026-06-05",
+    "totalPrice": 1550,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 22,
+    "UserId": 20,
+    "ownerId": 1,
+    "startDate": "2026-06-03",
+    "endDate": "2026-06-06",
+    "totalPrice": 870,
+    "status": "completed"
+  },
+  {
+    "PropertyId": 14,
+    "UserId": 6,
+    "ownerId": 9,
+    "startDate": "2026-06-06",
+    "endDate": "2026-06-09",
+    "totalPrice": 210,
+    "status": "completed"
+  }
 ]

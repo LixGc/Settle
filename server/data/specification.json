@@ -233,5 +233,490 @@
     "name": "parking",
     "value": "double garage",
     "PropertyId": 13
+  },
+  {
+    "name": "bathroom",
+    "value": "shared",
+    "PropertyId": 14
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 14
+  },
+  {
+    "name": "bills",
+    "value": "included",
+    "PropertyId": 14
+  },
+  {
+    "name": "bathroom",
+    "value": "private",
+    "PropertyId": 15
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 15
+  },
+  {
+    "name": "parking",
+    "value": "no",
+    "PropertyId": 15
+  },
+  {
+    "name": "bedrooms",
+    "value": "2",
+    "PropertyId": 16
+  },
+  {
+    "name": "bathrooms",
+    "value": "1",
+    "PropertyId": 16
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 16
+  },
+  {
+    "name": "parking",
+    "value": "1 car space",
+    "PropertyId": 16
+  },
+  {
+    "name": "bedrooms",
+    "value": "4",
+    "PropertyId": 17
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 17
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 17
+  },
+  {
+    "name": "parking",
+    "value": "single garage",
+    "PropertyId": 17
+  },
+  {
+    "name": "bedrooms",
+    "value": "3",
+    "PropertyId": 18
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 18
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 18
+  },
+  {
+    "name": "parking",
+    "value": "single garage",
+    "PropertyId": 18
+  },
+  {
+    "name": "bathroom",
+    "value": "shared",
+    "PropertyId": 19
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 19
+  },
+  {
+    "name": "bills",
+    "value": "included",
+    "PropertyId": 19
+  },
+  {
+    "name": "bedrooms",
+    "value": "2",
+    "PropertyId": 20
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 20
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 20
+  },
+  {
+    "name": "parking",
+    "value": "1 car space",
+    "PropertyId": 20
+  },
+  {
+    "name": "bathroom",
+    "value": "private",
+    "PropertyId": 21
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 21
+  },
+  {
+    "name": "parking",
+    "value": "street",
+    "PropertyId": 21
+  },
+  {
+    "name": "bedrooms",
+    "value": "2",
+    "PropertyId": 22
+  },
+  {
+    "name": "bathrooms",
+    "value": "1",
+    "PropertyId": 22
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 22
+  },
+  {
+    "name": "parking",
+    "value": "street",
+    "PropertyId": 22
+  },
+  {
+    "name": "bathroom",
+    "value": "ensuite",
+    "PropertyId": 23
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 23
+  },
+  {
+    "name": "bills",
+    "value": "included",
+    "PropertyId": 23
+  },
+  {
+    "name": "bedrooms",
+    "value": "2",
+    "PropertyId": 24
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 24
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 24
+  },
+  {
+    "name": "parking",
+    "value": "1 car space",
+    "PropertyId": 24
+  },
+  {
+    "name": "bedrooms",
+    "value": "3",
+    "PropertyId": 25
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 25
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 25
+  },
+  {
+    "name": "parking",
+    "value": "double garage",
+    "PropertyId": 25
+  },
+  {
+    "name": "bathroom",
+    "value": "private",
+    "PropertyId": 26
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 26
+  },
+  {
+    "name": "parking",
+    "value": "no",
+    "PropertyId": 26
+  },
+  {
+    "name": "bedrooms",
+    "value": "3",
+    "PropertyId": 27
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 27
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 27
+  },
+  {
+    "name": "parking",
+    "value": "single garage",
+    "PropertyId": 27
+  },
+  {
+    "name": "bathroom",
+    "value": "shared",
+    "PropertyId": 28
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 28
+  },
+  {
+    "name": "bills",
+    "value": "included",
+    "PropertyId": 28
+  },
+  {
+    "name": "bedrooms",
+    "value": "1",
+    "PropertyId": 29
+  },
+  {
+    "name": "bathrooms",
+    "value": "1",
+    "PropertyId": 29
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 29
+  },
+  {
+    "name": "parking",
+    "value": "1 car space",
+    "PropertyId": 29
+  },
+  {
+    "name": "bedrooms",
+    "value": "4",
+    "PropertyId": 30
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 30
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 30
+  },
+  {
+    "name": "parking",
+    "value": "double garage",
+    "PropertyId": 30
+  },
+  {
+    "name": "bedrooms",
+    "value": "3",
+    "PropertyId": 31
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 31
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 31
+  },
+  {
+    "name": "parking",
+    "value": "single garage",
+    "PropertyId": 31
+  },
+  {
+    "name": "bathroom",
+    "value": "shared",
+    "PropertyId": 32
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 32
+  },
+  {
+    "name": "bills",
+    "value": "not included",
+    "PropertyId": 32
+  },
+  {
+    "name": "bedrooms",
+    "value": "2",
+    "PropertyId": 33
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 33
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 33
+  },
+  {
+    "name": "parking",
+    "value": "1 car space",
+    "PropertyId": 33
+  },
+  {
+    "name": "bathroom",
+    "value": "private",
+    "PropertyId": 34
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 34
+  },
+  {
+    "name": "parking",
+    "value": "street",
+    "PropertyId": 34
+  },
+  {
+    "name": "bedrooms",
+    "value": "3",
+    "PropertyId": 35
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 35
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 35
+  },
+  {
+    "name": "parking",
+    "value": "single garage",
+    "PropertyId": 35
+  },
+  {
+    "name": "bathroom",
+    "value": "shared",
+    "PropertyId": 36
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 36
+  },
+  {
+    "name": "bills",
+    "value": "included",
+    "PropertyId": 36
+  },
+  {
+    "name": "bedrooms",
+    "value": "1",
+    "PropertyId": 37
+  },
+  {
+    "name": "bathrooms",
+    "value": "1",
+    "PropertyId": 37
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 37
+  },
+  {
+    "name": "parking",
+    "value": "1 car space",
+    "PropertyId": 37
+  },
+  {
+    "name": "bedrooms",
+    "value": "3",
+    "PropertyId": 38
+  },
+  {
+    "name": "bathrooms",
+    "value": "2",
+    "PropertyId": 38
+  },
+  {
+    "name": "furnished",
+    "value": "no",
+    "PropertyId": 38
+  },
+  {
+    "name": "parking",
+    "value": "single garage",
+    "PropertyId": 38
+  },
+  {
+    "name": "bathroom",
+    "value": "private",
+    "PropertyId": 39
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 39
+  },
+  {
+    "name": "parking",
+    "value": "street",
+    "PropertyId": 39
+  },
+  {
+    "name": "bedrooms",
+    "value": "4",
+    "PropertyId": 40
+  },
+  {
+    "name": "bathrooms",
+    "value": "3",
+    "PropertyId": 40
+  },
+  {
+    "name": "furnished",
+    "value": "yes",
+    "PropertyId": 40
+  },
+  {
+    "name": "parking",
+    "value": "double garage",
+    "PropertyId": 40
   }
 ]
