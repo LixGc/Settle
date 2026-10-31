@@ -55,6 +55,10 @@ module.exports = (sequelize, DataTypes) => {
             args: [8],
             msg: "Minimum password character is 8!",
           },
+          is: {
+            args: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/,
+            msg: "Password needs at least 1 capital letter, 1 number and 1 special character!",
+          },
         },
       },
       phone: {
