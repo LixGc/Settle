@@ -64,7 +64,11 @@ const errorHandler = (error, req, res, next) => {
     } else if (error.name == "invalid_suburb") {
         code = 400;
         message = "Please choose a suburb from the list";
+    } else if (error.name == "booking_expired") {
+        code = 400;
+        message = "This booking was cancelled because it wasn't paid within 30 minutes";
     }
+
 
     // Anything not listed above stays a 500
     res.status(code).json({ message });

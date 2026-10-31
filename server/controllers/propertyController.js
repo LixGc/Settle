@@ -71,7 +71,7 @@ class PropertyController {
                 filteredProperties = properties.filter((property) => {
                     let isNotBooked = true;
                     property.Bookings.forEach((el) => {
-                        if (startdate < el.endDate && enddate > el.startDate) {
+                        if (el.status !== "cancelled" && startdate < el.endDate && enddate > el.startDate) {
                             isNotBooked = false;
                         }
                     });
