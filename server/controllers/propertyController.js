@@ -2,6 +2,7 @@ const { Property, User, Category, Review, Booking, UserProfile, Specification, P
 const { sequelize } = require("../models/index");
 const { Op } = require("sequelize");
 const findAddress = require("../helpers/geocode");
+const kmToCity = require("../helpers/distance");
 
 class PropertyController {
     static async getCategories(req, res, next) {
@@ -101,10 +102,31 @@ class PropertyController {
         }
     }
 
+    // Every suburb that has places, with what Explore shows on its suburb card
     static async fetchLocation(req, res, next) {
         try {
-            const properties = await Property.findAll();
-            const locations = [...new Set(properties.map((property) => property.location))];
+            const properties = await Property.findAll({ include: [Booking, Review], order: [["id", "ASC"]] });
+            const names = [...new Set(properties.map((property) => property.location))];
+            const suburbs = await Suburb.findAll({ where: { name: names } });
+
+            const locations = suburbs.map((suburb) => {
+                const places = properties.filter((property) => property.location === suburb.name);
+                const reviews = places.flatMap((property) => property.Reviews);
+                // The place booked the most, shown as the guests' favourite
+                const favourite = places.reduce((best, property) => (property.Bookings.length > best.Bookings.length ? property : best));
+                return {
+                    name: suburb.name,
+                    image: favourite.image,
+                    totalPlaces: places.length,
+                    lowestPrice: Math.min(...places.map((property) => property.price)),
+                    totalReviews: reviews.length,
+                    averageRating: reviews.length ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1) : "0.0",
+                    favourite: favourite.Bookings.length ? favourite.name : null,
+                    kmToCity: kmToCity(suburb),
+                };
+            });
+            // Suburbs with the most places first
+            locations.sort((a, b) => b.totalPlaces - a.totalPlaces || a.name.localeCompare(b.name));
             res.status(200).json(locations);
         } catch (error) {
             next(error);
