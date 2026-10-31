@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Pressable, Image, ScrollView, TextInput, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories, addProperty, editProperty } from "../../store/actions";
-import { errorAlert, successAlert } from "../helpers/alert";
+import { fetchCategories, addProperty, editProperty, searchSuburbs } from "../../store/actions"; import { errorAlert, successAlert } from "../helpers/alert";
 import { pickImage, pickImages, toFile } from "../helpers/pickImage";
 import { colors } from "../theme";
 
@@ -36,10 +35,38 @@ function PropertyForm({ route, navigation }) {
     const [image, setImage] = useState(null);
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
+    // Suburbs matching what the host typed, and whether they picked one from that list
+    const [suburbs, setSuburbs] = useState([]);
+    const [suburbChosen, setSuburbChosen] = useState(Boolean(property));
 
     useEffect(() => {
         dispatch(fetchCategories());
     }, []);
+
+    useEffect(() => {
+        const search = input.location.trim();
+        if (suburbChosen || search.length < 2) {
+            setSuburbs([]);
+            return;
+        }
+        // Wait until the host stops typing for a moment, so it doesn't search on every letter
+        const timer = setTimeout(() => {
+            dispatch(searchSuburbs(search))
+                .then((data) => setSuburbs(data))
+                .catch(() => setSuburbs([]));
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [input.location, suburbChosen]);
+
+    const handleSuburbChange = (text) => {
+        handleChangeInput("location", text);
+        setSuburbChosen(false);
+    };
+
+    const chooseSuburb = (suburb) => {
+        handleChangeInput("location", suburb.name);
+        setSuburbChosen(true);
+    };
 
     // Each category has its own details, saved on the server as a JSON string like '["bedrooms","parking"]'
     const category = categories.find((item) => item.id === CategoryId);
@@ -79,6 +106,9 @@ function PropertyForm({ route, navigation }) {
         if (specNames.some((name) => !specifications[name])) {
             return errorAlert("Please fill in all the details");
         }
+        if (!suburbChosen) {
+            return errorAlert("Please choose a suburb from the list");
+        }
         if (!input.address) {
             return errorAlert("Please add the street address");
         }
@@ -87,6 +117,7 @@ function PropertyForm({ route, navigation }) {
         formData.append("name", input.name);
         formData.append("price", input.price);
         formData.append("location", input.location);
+        formData.append("address", input.address);
         formData.append("CategoryId", property ? property.CategoryId : CategoryId);
         if (image) {
             formData.append("image", toFile(image, "image"));
@@ -145,7 +176,18 @@ function PropertyForm({ route, navigation }) {
             </View>
             <View style={styles.field}>
                 <Text style={styles.label}>Suburb</Text>
-                <TextInput style={styles.textInput} placeholder="Parramatta" autoCapitalize="words" value={input.location} onChangeText={(text) => handleChangeInput("location", text)} />
+                <TextInput style={styles.textInput} placeholder="Start typing, like Bondi" autoCapitalize="words" value={input.location} onChangeText={handleSuburbChange} />
+                {/* the host has to pick from this list, they can't add their own suburb */}
+                {suburbs.length > 0 && (
+                    <View style={styles.dropdown}>
+                        {suburbs.map((suburb) => (
+                            <Pressable key={suburb.id} style={styles.dropdownItem} onPress={() => chooseSuburb(suburb)}>
+                                <Ionicons name="location-outline" size={16} color={colors.grey} />
+                                <Text style={styles.dropdownText}>{suburb.name}</Text>
+                            </Pressable>
+                        ))}
+                    </View>
+                )}
             </View>
             <View style={styles.field}>
                 <Text style={styles.label}>Street address</Text>
@@ -233,6 +275,23 @@ const styles = StyleSheet.create({
         padding: 14,
         borderWidth: 1,
         borderColor: "#DDE5E2",
+    },
+    dropdown: {
+        backgroundColor: colors.white,
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: "#DDE5E2",
+    },
+    dropdownItem: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 8,
+        padding: 12,
+        borderBottomWidth: 1,
+        borderBottomColor: "#F0F3F2",
+    },
+    dropdownText: {
+        color: colors.dark,
     },
     chips: {
         flexDirection: "row",

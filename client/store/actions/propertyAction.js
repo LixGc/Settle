@@ -126,6 +126,23 @@ export const searchProperties = (query) => {
         }
     };
 };
+
+// SUBURBS FOR THE LISTING FORM
+export const searchSuburbs = (search) => {
+    return async () => {
+        try {
+            const { data } = await axios({
+                url: baseUrl + "/suburbs",
+                method: "GET",
+                params: { search },
+            });
+            return data;
+        } catch (error) {
+            throw getErrorMessage(error);
+        }
+    };
+};
+
 // MY PROPERTIES
 export const myPropertiesFetchSuccess = (payload) => {
     return { type: MY_PROPERTIES_FETCH_SUCCESS, payload };
