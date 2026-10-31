@@ -6,6 +6,7 @@ import { fDate } from "../helpers/fDate";
 import { getStatusBackgroundColor } from "../helpers/getBg";
 import { colors } from "../theme";
 
+// A booking in a list. owner = true on Guest bookings, so it shows the guest instead of the suburb
 function BookingCard({ booking, navigation, owner }) {
     const property = booking.Property;
 
@@ -33,6 +34,7 @@ function BookingCard({ booking, navigation, owner }) {
                 </View>
                 <Text style={styles.price}>{fPrice(booking.totalPrice)}</Text>
             </View>
+            {/* Unpaid bookings say "Pay now" to the guest */}
             <Text style={[styles.status, { backgroundColor: getStatusBackgroundColor(booking.status) }]}>{booking.status === "pending" && !owner ? "Pay now" : booking.status}</Text>
         </Pressable>
     );

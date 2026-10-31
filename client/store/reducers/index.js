@@ -6,6 +6,7 @@ import categoryReducer from "./categoryReducer";
 import reviewReducer from "./reviewReducer";
 import bookingReducer from "./bookingReducer";
 
+// All the reducers together, each one looks after its own part of the state
 const rootReducer = combineReducers({
     userReducer,
     propertyReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     bookingReducer,
 });
 
+// thunk lets actions be async (call the API, then dispatch)
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;

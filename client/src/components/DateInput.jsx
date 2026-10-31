@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { fDate } from "../helpers/fDate";
 import { colors } from "../theme";
 
+// Date box for check-in and check-out. Android opens a calendar popup, iOS has its own date button
 function DateInput({ label, value, minimumDate, onChange }) {
     const openCalendar = () => {
         DateTimePickerAndroid.open({

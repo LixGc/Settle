@@ -10,6 +10,7 @@ import { generateStars } from "../helpers/fRating";
 import { fDate } from "../helpers/fDate";
 import { colors } from "../theme";
 
+// A photo box you tap to choose a photo, with a spinner while the gallery opens
 function PhotoBox({ label, uri, loading, onPress }) {
     return (
         <Pressable style={{ flex: 1, gap: 6 }} onPress={onPress}>
@@ -33,10 +34,12 @@ function PhotoBox({ label, uri, loading, onPress }) {
     );
 }
 
+// My profile: my details, profile photo + ID, and the reviews I've written
 function Profile() {
     const dispatch = useDispatch();
     const { profile } = useSelector((state) => state.userReducer);
     const { userReviews } = useSelector((state) => state.reviewReducer);
+    // New photos picked on this screen, not saved yet
     const [profilePicture, setProfilePicture] = useState(null);
     const [idCard, setIdCard] = useState(null);
     const [saving, setSaving] = useState(false);
@@ -64,6 +67,7 @@ function Profile() {
         }
     };
 
+    // Profile photos are square, ID cards are 4:3
     const chooseProfilePicture = () => choosePhoto("profilePicture", [1, 1], setProfilePicture);
     const chooseIdCard = () => choosePhoto("idCard", [4, 3], setIdCard);
     const submitProfile = () => {
@@ -76,6 +80,7 @@ function Profile() {
         formData.append("idCard", toFile(idCard, "idCard"));
 
         setSaving(true);
+        // The first time adds the photos, after that it replaces them
         const action = profile.UserProfile ? editProfile(formData) : addProfile(formData);
         dispatch(action)
             .then((data) => {
@@ -112,6 +117,7 @@ function Profile() {
                     <PhotoBox label="Profile photo" uri={profilePicture || profile.UserProfile?.profilePicture} loading={picking === "profilePicture"} onPress={chooseProfilePicture} />
                     <PhotoBox label="ID card" uri={idCard || profile.UserProfile?.idCard} loading={picking === "idCard"} onPress={chooseIdCard} />
                 </View>
+                {/* The save button only shows after picking a new photo */}
                 {(profilePicture || idCard) && (
                     <Pressable style={styles.button} onPress={submitProfile} disabled={saving}>
                         {saving ? <ActivityIndicator color={colors.white} /> : <Text style={styles.buttonText}>Save</Text>}

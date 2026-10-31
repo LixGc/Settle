@@ -8,6 +8,7 @@ import { generateStars } from "../helpers/fRating";
 import { fDate } from "../helpers/fDate";
 import { colors } from "../theme";
 
+// Account > Reviews: what guests said about my places. Tap one to open the place
 function PlaceReviews({ navigation }) {
     const dispatch = useDispatch();
     const { ownerReviews } = useSelector((state) => state.reviewReducer);

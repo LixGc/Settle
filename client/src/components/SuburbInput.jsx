@@ -26,6 +26,7 @@ function SuburbInput({ value, chosen, onChangeText, onChoose }) {
         return () => clearTimeout(timer);
     }, [value, chosen]);
 
+    // Picking one hides the keyboard and tells the form
     const choose = (name) => {
         Keyboard.dismiss();
         onChoose(name);

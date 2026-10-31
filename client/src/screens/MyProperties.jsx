@@ -7,6 +7,7 @@ import { fetchMyProperties, fetchOwnerBookings } from "../../store/actions";
 import MyPropertyCard from "../components/MyPropertyCard";
 import { colors } from "../theme";
 
+// My places: the places I host, with edit and remove
 function MyProperties({ navigation }) {
     const dispatch = useDispatch();
     const { myProperties } = useSelector((state) => state.propertyReducer);
@@ -15,6 +16,7 @@ function MyProperties({ navigation }) {
     useFocusEffect(
         useCallback(() => {
             dispatch(fetchMyProperties());
+            // Bookings get loaded too, to know which places can be removed
             dispatch(fetchOwnerBookings());
         }, [])
     );

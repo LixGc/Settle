@@ -5,12 +5,14 @@ import { connectChat } from "../services/streamChat";
 import { getErrorMessage } from "../helpers/alert";
 import { colors } from "../theme";
 
+// Chats screen: everyone I've messaged, newest first
 function ConversationList({ navigation }) {
     const [client, setClient] = useState(null);
     const [channels, setChannels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [errMsg, setErrMsg] = useState("");
 
+    // Connect to Stream, load my chats, and keep them updated while this screen is open
     useEffect(() => {
         let chatClient = null;
         let listener = null;
@@ -47,6 +49,7 @@ function ConversationList({ navigation }) {
         };
         start();
 
+        // Stop listening when leaving the screen
         return () => {
             cancelled = true;
             listener?.unsubscribe();

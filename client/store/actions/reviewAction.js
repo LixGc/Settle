@@ -8,6 +8,7 @@ export const reviewByPropertyFetchSuccess = (payload) => {
     return { type: FETCH_REVIEW_BY_PROPERTY_SUCCESS, payload };
 };
 
+// Reviews of one place, for its page
 export const fetchReviewByProperty = (id) => {
     return async (dispatch) => {
         try {
@@ -43,6 +44,7 @@ export const fetchReviewByUser = () => {
 };
 
 // POST REVIEW
+// value = { rating, message }, id = the place
 export const addReview = (value, id) => {
     return async (dispatch) => {
         try {
@@ -69,6 +71,7 @@ export const reviewByOwnerFetchSuccess = (payload) => {
     return { type: FETCH_REVIEW_BY_OWNER_SUCCESS, payload };
 };
 
+// Reviews of the places I host
 export const fetchReviewsOfMyProperties = () => {
     return async (dispatch) => {
         try {

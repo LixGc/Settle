@@ -8,8 +8,10 @@ import { getUser } from "../../store/actions";
 import BookingCard from "../components/BookingCard";
 import { colors } from "../theme";
 
+// The filter buttons at the top
 const statuses = ["all", "pending", "ongoing", "completed"];
 
+// Bookings tab: my bookings, filtered by status
 function Bookings({ navigation }) {
     const dispatch = useDispatch();
     const { profile } = useSelector((state) => state.userReducer);
@@ -21,6 +23,7 @@ function Bookings({ navigation }) {
         }, [])
     );
 
+    // Logged out, so there's nothing to show
     if (!profile) {
         return (
             <SafeAreaView style={[styles.container, styles.center]}>

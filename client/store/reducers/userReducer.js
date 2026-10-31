@@ -1,5 +1,6 @@
 import { PROFILES_FETCH_REQUEST, PROFILES_FETCH_SUCCESS, PROFILES_FETCH_FAIL, LOGOUT_SUCCESS } from "../actions/actionType";
 
+// profile = the logged in user, null when logged out
 const initialState = {
     loading: false,
     profile: null,
@@ -23,6 +24,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
             };
+        // Back to empty when logging out
         case LOGOUT_SUCCESS:
             return initialState;
         default:

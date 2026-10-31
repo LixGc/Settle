@@ -8,6 +8,7 @@ import { createOtp, handleLogin, registerHandler, getUser } from "../../store/ac
 import { errorAlert, successAlert, getErrorMessage } from "../helpers/alert";
 import { colors } from "../theme";
 
+// You tab when logged out: login and register on one screen, plus the code popup
 function LoginRegister({ navigation }) {
     const [inputRegister, setInputRegister] = useState({
         fullName: "",
@@ -16,7 +17,9 @@ function LoginRegister({ navigation }) {
         phone: "",
     });
     const [inputLogin, setInputLogin] = useState({ email: "", password: "" });
+    // false = login form, true = register form
     const [formRegister, setFormRegister] = useState(false);
+    // Shows the popup where you type the emailed code
     const [formOtp, setFormOtp] = useState(false);
     const [otp, setOtp] = useState(["", "", "", ""]);
     const [loading, setLoading] = useState(false);
@@ -36,6 +39,7 @@ function LoginRegister({ navigation }) {
         setInputRegister((input) => ({ ...input, [name]: text }));
     };
 
+    // One box per digit. Typing jumps to the next box, deleting goes back
     const handleOtpChange = (index, value) => {
         if (/^[0-9]$/.test(value) || value === "") {
             const updatedOtp = [...otp];
@@ -50,6 +54,7 @@ function LoginRegister({ navigation }) {
         }
     };
 
+    // Log In button: checks email + password and emails a code, then opens the code popup
     const getOtp = () => {
         setLoading(true);
         dispatch(createOtp(inputLogin))
@@ -62,6 +67,7 @@ function LoginRegister({ navigation }) {
             .finally(() => setLoading(false));
     };
 
+    // Register button: makes the account, then switches back to the login form
     const submitRegister = () => {
         setLoading(true);
         dispatch(registerHandler(inputRegister))
@@ -74,6 +80,7 @@ function LoginRegister({ navigation }) {
             .finally(() => setLoading(false));
     };
 
+    // Sends the code. If it's right, save the token on the phone and go to Home
     const submitOtp = () => {
         dispatch(handleLogin({ ...inputLogin, otp: otp.join("") }))
             .then(async (data) => {
@@ -153,6 +160,7 @@ function LoginRegister({ navigation }) {
                         <Text style={styles.otpText}>Enter the 4-digit code we emailed you</Text>
                         {errMsg ? <Text style={styles.errorText}>{errMsg}</Text> : null}
                         <View style={styles.otpView}>
+                            {/* 4 boxes, one digit each */}
                             {otp.map((digit, index) => (
                                 <TextInput
                                     key={index}

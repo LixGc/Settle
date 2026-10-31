@@ -1,3 +1,4 @@
+// The app's colours, use these instead of typing hex codes
 export const colors = {
     primary: "#1F6F5C",
     primaryLight: "#E3F1EC",

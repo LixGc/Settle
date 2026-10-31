@@ -7,6 +7,7 @@ import { errorAlert, successAlert } from "../helpers/alert";
 import { fPrice } from "../helpers/fPrice";
 import { colors } from "../theme";
 
+// One of my places on My places, with edit and remove buttons
 function MyPropertyCard({ property, bookings, navigation }) {
     const dispatch = useDispatch();
 
@@ -19,6 +20,7 @@ function MyPropertyCard({ property, bookings, navigation }) {
             .catch((error) => errorAlert(error));
     };
 
+    // Ask first, removing can't be undone
     const confirmDelete = () => {
         Alert.alert("Remove this place?", property.name, [
             { text: "Cancel", style: "cancel" },
@@ -52,6 +54,7 @@ function MyPropertyCard({ property, bookings, navigation }) {
                 <Pressable style={styles.editButton} onPress={() => navigation.navigate("propertyForm", { id: property.id })}>
                     <MaterialIcons name="edit" size={16} color={colors.white} />
                 </Pressable>
+                {/* The remove button only shows when it's allowed (see canDelete) */}
                 {canDelete && (
                     <Pressable style={styles.deleteButton} onPress={confirmDelete}>
                         <MaterialIcons name="delete-forever" size={16} color={colors.white} />

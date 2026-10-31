@@ -10,6 +10,8 @@ import {
     MY_PROPERTIES_FETCH_SUCCESS,
 } from "../actions/actionType";
 
+// properties = Home, trending = Trending row, detail = the place page,
+// locations = Explore's suburb cards, searchResults = Explore's search, myProperties = My places
 const initialState = {
     properties: [],
     trending: [],
@@ -44,6 +46,7 @@ const propertyReducer = (state = initialState, action) => {
                 ...state,
                 trending: action.payload,
             };
+        // Clear the old place so the page doesn't show the last one while loading
         case PROPERTY_DETAIL_FETCH_REQUEST:
             return {
                 ...state,

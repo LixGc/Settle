@@ -8,6 +8,7 @@ import { errorAlert, getErrorMessage } from "../helpers/alert";
 import { fPrice } from "../helpers/fPrice";
 import { colors } from "../theme";
 
+// One chat with one person. id = the other person's user id
 function Chatbox({ route }) {
     // property is only passed when a guest starts the chat from a place
     const { id, property } = route.params;
@@ -19,6 +20,7 @@ function Chatbox({ route }) {
     const [attachedProperty, setAttachedProperty] = useState(property);
     const [errMsg, setErrMsg] = useState("");
 
+    // Open the chat and listen for new messages
     useEffect(() => {
         let chatChannel = null;
         let cancelled = false;
@@ -41,12 +43,14 @@ function Chatbox({ route }) {
         };
         start();
 
+        // Stop listening when leaving the chat
         return () => {
             cancelled = true;
             chatChannel?.off("message.new", handleNewMessage);
         };
     }, [id]);
 
+    // Sends the text, plus a card of the place if the chat started from a place page
     const sendMessage = () => {
         const value = text.trim();
         if (!value) return;
@@ -96,6 +100,7 @@ function Chatbox({ route }) {
                                     </View>
                                 ))}
                             <View style={styles.messageContent}>
+                                {/* A place card sent with the first message */}
                                 {card && (
                                     <View style={styles.card}>
                                         <Image source={{ uri: card.image_url }} style={styles.cardImage} />

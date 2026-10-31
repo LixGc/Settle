@@ -12,6 +12,7 @@ import { getStatusBackgroundColor } from "../helpers/getBg";
 import { errorAlert } from "../helpers/alert";
 import { colors } from "../theme";
 
+// Icon for each category, by its name
 const categoryIcons = {
     room: "bed-outline",
     studio: "cube-outline",
@@ -20,6 +21,7 @@ const categoryIcons = {
     townhouse: "albums-outline",
 };
 
+// Home tab: search, categories, trending, all places and my stays
 function Home({ navigation }) {
     const dispatch = useDispatch();
     const { properties, trending, loading } = useSelector((state) => state.propertyReducer);
@@ -30,6 +32,7 @@ function Home({ navigation }) {
     const [resultTitle, setResultTitle] = useState("");
     const [showResults, setShowResults] = useState(false);
 
+    // Reload everything each time Home comes back into view
     useFocusEffect(
         useCallback(() => {
             dispatch(fetchProperties());
@@ -38,6 +41,7 @@ function Home({ navigation }) {
         }, [])
     );
 
+    // Searches the places already loaded, by name or suburb. Results open in a sheet
     const handleSearch = () => {
         const text = searchValue.trim().toLowerCase();
         if (!text) return;
@@ -47,6 +51,7 @@ function Home({ navigation }) {
         setShowResults(true);
     };
 
+    // Tap a category to see only those places
     const filterByCategory = (name) => {
         setResults(properties.filter((item) => item.Category?.name === name));
         setResultTitle(name.charAt(0).toUpperCase() + name.slice(1));
@@ -58,6 +63,7 @@ function Home({ navigation }) {
         navigation.navigate("detail", { id: item.id, name: item.name });
     };
 
+    // Chat needs a login, so send logged out people to the login tab
     const goChats = () => {
         if (!profile) {
             errorAlert("Please log in first");
@@ -66,6 +72,7 @@ function Home({ navigation }) {
         navigation.navigate("conversationList");
     };
 
+    // Spinner only the first time, when there's nothing to show yet
     if (loading && properties.length === 0) {
         return (
             <View style={styles.center}>
@@ -141,6 +148,7 @@ function Home({ navigation }) {
                 {/* history */}
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Your stays</Text>
+                    {/* Logged out: ask to log in. Logged in: my bookings, or a message if there aren't any */}
                     {!profile ? (
                         <View style={styles.emptyCard}>
                             <Ionicons name="time-outline" size={26} color={colors.grey} />
