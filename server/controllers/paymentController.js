@@ -1,6 +1,7 @@
 const { Booking, Property, User } = require("../models");
 const getStripe = require("../helpers/stripe");
 const { sendInvoiceEmail } = require("../helpers/nodemailer");
+const { HOLD_MINUTES, minutesFromNow } = require("../helpers/bookingHold");
 
 class PaymentController {
     // POST /payments/:bookingId: makes a Stripe payment page for a booking and sends back its link
@@ -13,9 +14,16 @@ class PaymentController {
             if (findBooking.UserId !== req.user.id) {
                 throw { name: "forbidden", message: "You can only pay for your own booking" };
             }
+            if (findBooking.status === "cancelled") {
+                throw { name: "booking_expired" };
+            }
             if (findBooking.status !== "pending") {
                 throw { name: "already_paid" };
             }
+
+            // Stripe's page can close 30 minutes from now at the earliest, so it gets 31 in case the clocks differ.
+            // The booking holds the dates a minute longer than that, so nobody can pay for a cancelled booking
+            const closesAt = minutesFromNow(HOLD_MINUTES + 1);
 
             // After paying, Stripe sends the tenant back to this server
             const serverUrl = `${req.protocol}://${req.get("host")}`;
@@ -38,7 +46,9 @@ class PaymentController {
                 metadata: { bookingId: String(findBooking.id) },
                 success_url: `${serverUrl}/payments/success?session_id={CHECKOUT_SESSION_ID}`,
                 cancel_url: `${serverUrl}/payments/cancel`,
+                expires_at: Math.floor(closesAt.getTime() / 1000),
             });
+            await findBooking.update({ expiresAt: minutesFromNow(HOLD_MINUTES + 2), paymentSessionId: session.id });
             res.status(201).json({ id: session.id, url: session.url });
         } catch (error) {
             next(error);

@@ -1,6 +1,7 @@
 const { Booking, Property, User, UserProfile, Review, Balance } = require("../models/index");
 const { Sequelize, Op } = require("sequelize");
 const totalNightConverter = require("../helpers/totalNightConverter");
+const { HOLD_MINUTES, minutesFromNow } = require("../helpers/bookingHold");
 
 // Every booking comes with its place (and the host) and the guest, without passwords
 const bookingInclude = [
@@ -49,6 +50,8 @@ class BookingController {
             const overlapping = await Booking.findOne({
                 where: {
                     PropertyId,
+                    // Cancelled bookings don't hold their dates any more
+                    status: { [Op.ne]: "cancelled" },
                     startDate: { [Op.lt]: endDate },
                     endDate: { [Op.gt]: startDate },
                 },
@@ -65,6 +68,8 @@ class BookingController {
                 UserId: req.user.id,
                 ownerId: property.UserId,
                 totalPrice,
+                // Until it's paid, it holds the dates for 30 minutes
+                expiresAt: minutesFromNow(HOLD_MINUTES),
             });
             res.status(201).json({ message: "Success create new booking", id: booking.id });
         } catch (error) {
@@ -137,6 +142,9 @@ class BookingController {
             if (!findBooking) {
                 throw { name: "not_found" };
             }
+            if (findBooking.status === "cancelled") {
+                throw { name: "booking_expired" };
+            }
             // Payment sets "ongoing" by itself, so only the owner changes the status here
             if (findBooking.ownerId !== req.user.id) {
                 throw { name: "forbidden", message: "Only the owner can update this booking" };
@@ -164,7 +172,7 @@ class BookingController {
             }
             // Public route, so only return the booked dates, not who booked
             const bookings = await Booking.findAll({
-                where: { PropertyId: propertyId },
+                where: { PropertyId: propertyId, status: { [Op.ne]: "cancelled" } },
                 attributes: ["id", "startDate", "endDate", "status"],
             });
             res.json(bookings);

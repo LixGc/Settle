@@ -10,10 +10,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Booking.init(
     {
-      // pending = not paid yet, ongoing = paid, completed = the stay is over
+      // pending = not paid yet, ongoing = paid, completed = the stay is over,
+      // cancelled = it wasn't paid in time (see helpers/bookingHold.js)
       status: {
         type: DataTypes.ENUM,
-        values: ["pending", "ongoing", "payment", "completed"],
+        values: ["pending", "ongoing", "payment", "completed", "cancelled"],
         defaultValue: "pending",
       },
       PropertyId: DataTypes.INTEGER,
@@ -47,6 +48,10 @@ module.exports = (sequelize, DataTypes) => {
       totalPrice: {
         type: DataTypes.INTEGER,
       },
+      // An unpaid booking holds the dates until this time
+      expiresAt: DataTypes.DATE,
+      // The last Stripe payment page opened for it, so the server can ask Stripe if it was paid
+      paymentSessionId: DataTypes.STRING,
     },
     {
       sequelize,
