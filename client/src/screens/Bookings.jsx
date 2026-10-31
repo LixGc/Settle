@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
+import { View, Text, StyleSheet, Pressable, FlatList, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
@@ -9,7 +9,7 @@ import BookingCard from "../components/BookingCard";
 import { colors } from "../theme";
 
 // The filter buttons at the top
-const statuses = ["all", "pending", "ongoing", "completed"];
+const statuses = ["all", "pending", "ongoing", "completed", "cancelled"];
 
 // Bookings tab: my bookings, filtered by status
 function Bookings({ navigation }) {
@@ -44,14 +44,14 @@ function Bookings({ navigation }) {
         <SafeAreaView style={styles.container} edges={["top"]}>
             <Text style={styles.title}>My bookings</Text>
 
-            {/* status filter */}
-            <View style={styles.tabs}>
+            {/* status filter, scrolls sideways on narrow phones */}
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flexGrow: 0, flexShrink: 0 }} contentContainerStyle={styles.tabs}>
                 {statuses.map((status) => (
                     <Pressable key={status} style={[styles.tab, selectedStatus === status && styles.tabActive]} onPress={() => setSelectedStatus(status)}>
                         <Text style={[styles.tabText, selectedStatus === status && styles.tabTextActive]}>{status}</Text>
                     </Pressable>
                 ))}
-            </View>
+            </ScrollView>
 
             <FlatList
                 data={filteredBookings}

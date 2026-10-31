@@ -14,7 +14,10 @@ export const toDateString = (date) => {
     const day = String(date.getDate()).padStart(2, "0");
     return `${date.getFullYear()}-${month}-${day}`;
 };
-
+// Shows a time like 3:45 pm
+export const fTime = (dateString) => {
+    return new Date(dateString).toLocaleTimeString("en-AU", { hour: "numeric", minute: "2-digit" });
+};
 // The day after, so check-out is always at least 1 night later
 export const nextDay = (date) => {
     return new Date(date.getTime() + 24 * 60 * 60 * 1000);
