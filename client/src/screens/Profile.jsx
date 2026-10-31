@@ -10,18 +10,25 @@ import { generateStars } from "../helpers/fRating";
 import { fDate } from "../helpers/fDate";
 import { colors } from "../theme";
 
-function PhotoBox({ label, uri, onPress }) {
+function PhotoBox({ label, uri, loading, onPress }) {
     return (
         <Pressable style={{ flex: 1, gap: 6 }} onPress={onPress}>
             <Text style={styles.label}>{label}</Text>
-            {uri ? (
-                <Image source={{ uri }} style={styles.photo} />
-            ) : (
-                <View style={[styles.photo, styles.photoEmpty]}>
-                    <Ionicons name="camera-outline" size={26} color={colors.primary} />
-                    <Text style={styles.grey}>Choose</Text>
-                </View>
-            )}
+            <View>
+                {uri ? (
+                    <Image source={{ uri }} style={styles.photo} />
+                ) : (
+                    <View style={[styles.photo, styles.photoEmpty]}>
+                        <Ionicons name="camera-outline" size={26} color={colors.primary} />
+                        <Text style={styles.grey}>Choose</Text>
+                    </View>
+                )}
+                {loading && (
+                    <View style={styles.photoLoading}>
+                        <ActivityIndicator color={colors.primary} />
+                    </View>
+                )}
+            </View>
         </Pressable>
     );
 }
@@ -33,6 +40,8 @@ function Profile() {
     const [profilePicture, setProfilePicture] = useState(null);
     const [idCard, setIdCard] = useState(null);
     const [saving, setSaving] = useState(false);
+    // Which photo is opening the gallery ("profilePicture" or "idCard"), to show a spinner on it
+    const [picking, setPicking] = useState(null);
 
     useFocusEffect(
         useCallback(() => {
@@ -41,16 +50,22 @@ function Profile() {
         }, [])
     );
 
-    const chooseProfilePicture = async () => {
-        const uri = await pickImage([1, 1]);
-        if (uri) setProfilePicture(uri);
+    // The gallery can take a moment to open, so show a spinner until it does and ignore extra taps
+    const choosePhoto = async (name, aspect, setPhoto) => {
+        if (picking) return;
+        setPicking(name);
+        try {
+            const uri = await pickImage(aspect);
+            if (uri) setPhoto(uri);
+        } catch (error) {
+            errorAlert("Could not open your photos");
+        } finally {
+            setPicking(null);
+        }
     };
 
-    const chooseIdCard = async () => {
-        const uri = await pickImage();
-        if (uri) setIdCard(uri);
-    };
-
+    const chooseProfilePicture = () => choosePhoto("profilePicture", [1, 1], setProfilePicture);
+    const chooseIdCard = () => choosePhoto("idCard", [4, 3], setIdCard);
     const submitProfile = () => {
         // The server needs both photos every time
         if (!profilePicture || !idCard) {
@@ -94,8 +109,8 @@ function Profile() {
                 <Text style={styles.sectionTitle}>Photo and ID</Text>
                 <Text style={styles.grey}>{profile.UserProfile ? "Choose both photos again to update them" : "Add a photo and your ID so hosts know who is staying"}</Text>
                 <View style={styles.photoRow}>
-                    <PhotoBox label="Profile photo" uri={profilePicture || profile.UserProfile?.profilePicture} onPress={chooseProfilePicture} />
-                    <PhotoBox label="ID card" uri={idCard || profile.UserProfile?.idCard} onPress={chooseIdCard} />
+                    <PhotoBox label="Profile photo" uri={profilePicture || profile.UserProfile?.profilePicture} loading={picking === "profilePicture"} onPress={chooseProfilePicture} />
+                    <PhotoBox label="ID card" uri={idCard || profile.UserProfile?.idCard} loading={picking === "idCard"} onPress={chooseIdCard} />
                 </View>
                 {(profilePicture || idCard) && (
                     <Pressable style={styles.button} onPress={submitProfile} disabled={saving}>
@@ -178,6 +193,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: "dashed",
         borderColor: colors.primary,
+    },
+    photoLoading: {
+        ...StyleSheet.absoluteFillObject,
+        borderRadius: 12,
+        backgroundColor: "rgba(227,241,236,0.95)",
+        alignItems: "center",
+        justifyContent: "center",
     },
     button: {
         backgroundColor: colors.primary,

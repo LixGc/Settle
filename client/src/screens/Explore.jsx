@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { View, Text, StyleSheet, Pressable, ScrollView, ActivityIndicator } from "react-native";
+import React, { useCallback, useRef, useState } from "react";
+import { View, Text, StyleSheet, Pressable, ScrollView, FlatList, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
@@ -7,17 +7,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLocations, searchProperties } from "../../store/actions";
 import DateInput from "../components/DateInput";
 import PropertyListItem from "../components/PropertyListItem";
+import SuburbCard from "../components/SuburbCard";
+import SuburbInput from "../components/SuburbInput";
 import { errorAlert } from "../helpers/alert";
-import { toDateString, nextDay, countNights } from "../helpers/fDate";
+import { fDate, toDateString, nextDay, countNights } from "../helpers/fDate";
 import { colors } from "../theme";
 
 function Explore({ navigation }) {
     const dispatch = useDispatch();
     const { locations, searchResults } = useSelector((state) => state.propertyReducer);
+    const scrollRef = useRef(null);
     const [location, setLocation] = useState("");
+    const [suburbChosen, setSuburbChosen] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(nextDay(new Date()));
-    const [searched, setSearched] = useState(false);
+    // The suburb and dates of the last search, so the results title stays right while the search box is changed
+    const [searched, setSearched] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useFocusEffect(
@@ -33,63 +38,117 @@ function Explore({ navigation }) {
         }
     };
 
-    const search = () => {
-        if (!location) {
-            return errorAlert("Please choose a suburb");
-        }
+    const handleSuburbChange = (text) => {
+        setLocation(text);
+        setSuburbChosen(false);
+    };
+
+    const chooseSuburb = (name) => {
+        setLocation(name);
+        setSuburbChosen(true);
+    };
+
+    const search = (suburb) => {
+        setSearched({ location: suburb, startDate, endDate });
         setLoading(true);
-        dispatch(searchProperties({ location, startdate: toDateString(startDate), enddate: toDateString(endDate) })).finally(() => {
-            setLoading(false);
-            setSearched(true);
-        });
+        // The results show under the search box, so scroll back up to them
+        scrollRef.current?.scrollTo({ y: 0, animated: true });
+        dispatch(searchProperties({ location: suburb, startdate: toDateString(startDate), enddate: toDateString(endDate) })).finally(() => setLoading(false));
+    };
+
+    const handleSearch = () => {
+        if (!suburbChosen) {
+            return errorAlert("Please choose a suburb from the list");
+        }
+        search(location);
+    };
+
+    // Tapping a suburb card fills in the search box and shows that suburb's places
+    const seeSuburb = (name) => {
+        chooseSuburb(name);
+        search(name);
+    };
+
+    const clearSearch = () => {
+        setSearched(null);
+        setLocation("");
+        setSuburbChosen(false);
     };
 
     const goDetail = (item) => {
         // Pass the dates on so the detail screen is ready to book them
-        navigation.navigate("detail", { id: item.id, name: item.name, startDate: startDate.getTime(), endDate: endDate.getTime() });
+        navigation.navigate("detail", { id: item.id, name: item.name, startDate: searched.startDate.getTime(), endDate: searched.endDate.getTime() });
     };
+
+    // A suburb with no places at all gets a different message from one that is booked out
+    const hasPlaces = searched && locations.some((item) => item.name === searched.location);
 
     return (
         <SafeAreaView style={styles.container} edges={["top"]}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
                 <View style={styles.header}>
-                    <Text style={styles.title}>Explore</Text>
-                    <Text style={styles.subtitle}>Find a place that's free on your dates</Text>
+                    <Text style={styles.title}>Find the right suburb</Text>
+                    <Text style={styles.subtitle}>Search any suburb in Sydney, or start with a popular one below</Text>
                 </View>
 
-                {/* search form */}
+                {/* search box */}
                 <View style={styles.card}>
-                    <Text style={styles.label}>Suburb</Text>
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
-                        {locations.map((item) => (
-                            <Pressable key={item} style={[styles.chip, location === item && styles.chipActive]} onPress={() => setLocation(item)}>
-                                <Text style={[styles.chipText, location === item && styles.chipTextActive]}>{item}</Text>
-                            </Pressable>
-                        ))}
-                    </ScrollView>
+                    <Text style={styles.label}>Where are you looking?</Text>
+                    <SuburbInput value={location} chosen={suburbChosen} onChangeText={handleSuburbChange} onChoose={chooseSuburb} />
                     <View style={styles.dateRow}>
                         <DateInput label="Check-in" value={startDate} minimumDate={new Date()} onChange={handleStartChange} />
                         <DateInput label="Check-out" value={endDate} minimumDate={nextDay(startDate)} onChange={setEndDate} />
                     </View>
-                    <Pressable style={styles.searchButton} onPress={search}>
+                    <Pressable style={styles.searchButton} onPress={handleSearch}>
                         <Ionicons name="search" size={18} color={colors.white} />
                         <Text style={styles.searchText}>Search</Text>
                     </Pressable>
                 </View>
 
                 {/* results */}
-                <View style={styles.results}>
-                    {loading ? (
-                        <ActivityIndicator size="large" color={colors.primary} style={{ marginTop: 20 }} />
-                    ) : searched && searchResults.length === 0 ? (
-                        <View style={styles.emptyCard}>
-                            <Ionicons name="search-outline" size={26} color={colors.grey} />
-                            <Text style={styles.emptyText}>No places free in {location} on those dates</Text>
+                {searched && (
+                    <View style={styles.section}>
+                        <View style={styles.resultsHeader}>
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.sectionTitle}>Places in {searched.location}</Text>
+                                <Text style={styles.sectionSubtitle}>
+                                    {fDate(searched.startDate)} - {fDate(searched.endDate)}
+                                </Text>
+                            </View>
+                            <Pressable onPress={clearSearch}>
+                                <Text style={styles.clear}>Clear</Text>
+                            </Pressable>
                         </View>
-                    ) : (
-                        searched && searchResults.map((item) => <PropertyListItem key={item.id} property={item} onPress={() => goDetail(item)} />)
-                    )}
-                </View>
+                        {loading ? (
+                            <ActivityIndicator size="large" color={colors.primary} style={{ marginTop: 20 }} />
+                        ) : searchResults.length ? (
+                            searchResults.map((item) => <PropertyListItem key={item.id} property={item} onPress={() => goDetail(item)} />)
+                        ) : (
+                            <View style={styles.emptyCard}>
+                                <Ionicons name="search-outline" size={26} color={colors.grey} />
+                                <Text style={styles.emptyText}>{hasPlaces ? `No places free in ${searched.location} on those dates` : `No places in ${searched.location} yet. Try one of the suburbs below.`}</Text>
+                            </View>
+                        )}
+                    </View>
+                )}
+
+                {/* popular suburbs */}
+                {locations.length > 0 && (
+                    <View style={styles.popular}>
+                        <Text style={[styles.sectionTitle, styles.popularText]}>Popular suburbs</Text>
+                        <Text style={[styles.sectionSubtitle, styles.popularText]}>Not sure where to look? Start with a suburb that already has places.</Text>
+                        <FlatList
+                            data={locations}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            keyExtractor={(item) => item.name}
+                            contentContainerStyle={styles.popularList}
+                            snapToInterval={274}
+                            decelerationRate="fast"
+                            renderItem={({ item }) => <SuburbCard suburb={item} onPress={() => seeSuburb(item.name)} />}
+                        />
+                    </View>
+                )}
             </ScrollView>
         </SafeAreaView>
     );
@@ -108,7 +167,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 24,
     },
     title: {
-        fontSize: 24,
+        fontSize: 26,
         fontWeight: "800",
         color: colors.white,
     },
@@ -131,24 +190,9 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
     },
     label: {
-        fontSize: 12,
-        color: colors.grey,
-    },
-    chip: {
-        paddingVertical: 8,
-        paddingHorizontal: 14,
-        borderRadius: 20,
-        backgroundColor: colors.primaryLight,
-    },
-    chipActive: {
-        backgroundColor: colors.primary,
-    },
-    chipText: {
-        color: colors.primary,
+        fontSize: 15,
         fontWeight: "600",
-    },
-    chipTextActive: {
-        color: colors.white,
+        color: colors.dark,
     },
     dateRow: {
         flexDirection: "row",
@@ -168,9 +212,28 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         fontSize: 16,
     },
-    results: {
+    section: {
         paddingHorizontal: 20,
-        paddingVertical: 10,
+        paddingTop: 22,
+    },
+    resultsHeader: {
+        flexDirection: "row",
+        alignItems: "flex-start",
+        gap: 12,
+    },
+    sectionTitle: {
+        fontSize: 18,
+        fontWeight: "800",
+        color: colors.dark,
+    },
+    sectionSubtitle: {
+        marginTop: 2,
+        fontSize: 13,
+        color: colors.grey,
+    },
+    clear: {
+        color: colors.primary,
+        fontWeight: "700",
     },
     emptyCard: {
         backgroundColor: colors.white,
@@ -178,11 +241,25 @@ const styles = StyleSheet.create({
         padding: 24,
         alignItems: "center",
         gap: 8,
-        marginTop: 10,
+        marginTop: 12,
     },
     emptyText: {
         color: colors.grey,
         textAlign: "center",
+    },
+    popular: {
+        marginTop: 24,
+        marginBottom: 24,
+        paddingVertical: 20,
+        backgroundColor: "#FDF0E1",
+    },
+    popularText: {
+        paddingHorizontal: 20,
+    },
+    popularList: {
+        paddingHorizontal: 20,
+        paddingTop: 14,
+        paddingBottom: 6,
     },
 });
 
