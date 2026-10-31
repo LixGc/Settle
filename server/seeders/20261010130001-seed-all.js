@@ -5,6 +5,14 @@ const { hashPassword } = require("../helpers/bcrypt");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // Every suburb in Greater Sydney, with coordinates from Wikipedia and OpenStreetMap
+    const suburbs = require("../data/suburb.json");
+    const dataSuburbs = suburbs.map((el) => {
+      el.createdAt = el.updatedAt = new Date();
+      return el;
+    });
+    await queryInterface.bulkInsert("Suburbs", dataSuburbs, {});
+
     const users = require("../data/users.json");
     const dataUsers = users.map((el) => {
       el.password = hashPassword(el.password);
@@ -75,5 +83,6 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true });
     await queryInterface.bulkDelete("Categories", null, { truncate: true, cascade: true, restartIdentity: true });
+    await queryInterface.bulkDelete("Suburbs", null, { truncate: true, restartIdentity: true });
   },
 };

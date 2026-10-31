@@ -1,15 +1,33 @@
-const { Property, User, Category, Review, Booking, UserProfile, Specification, PropertyImage } = require("../models/index");
+const { Property, User, Category, Review, Booking, UserProfile, Specification, PropertyImage, Suburb } = require("../models/index");
 const { sequelize } = require("../models/index");
-const getCoordinates = require("../helpers/geocode");
-// "parramatta " and "Parramatta" are the same suburb, so save them the same way.
-// Otherwise Explore would show the suburb twice
-const tidySuburb = (location) => location?.trim().toLowerCase().replace(/\b\w/g, (letter) => letter.toUpperCase());
+const { Op } = require("sequelize");
+const findAddress = require("../helpers/geocode");
 
 class PropertyController {
     static async getCategories(req, res, next) {
         try {
             const categories = await Category.findAll();
             res.json(categories);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // Suburbs starting with what the host typed, for the suburb list on the listing form
+    static async searchSuburbs(req, res, next) {
+        try {
+            // % and _ are wildcards in a search, so take them out of what was typed
+            const search = (req.query.search || "").replace(/[%_\\]/g, "").trim();
+            if (search.length < 2) {
+                return res.json([]);
+            }
+            const suburbs = await Suburb.findAll({
+                where: { name: { [Op.iLike]: search + "%" } },
+                attributes: ["id", "name"],
+                order: [["name", "ASC"]],
+                limit: 8,
+            });
+            res.json(suburbs);
         } catch (error) {
             next(error);
         }
@@ -161,10 +179,16 @@ class PropertyController {
     static async addProperty(req, res, next) {
         try {
             const { name, CategoryId, price, address } = req.body;
-            const location = tidySuburb(req.body.location);
             const specifications = req.body.specifications ? JSON.parse(req.body.specifications) : [];
             const images = req.images || [];
-            const { latitude, longitude } = await getCoordinates(address, location);
+
+            // The suburb has to be one from the list, so every place uses the same spelling
+            const suburb = await Suburb.findOne({ where: { name: req.body.location || "" } });
+            if (!suburb) {
+                throw { name: "invalid_suburb" };
+            }
+            // The exact spot for paid guests, or the suburb's spot if the address can't be found
+            const { latitude, longitude } = (await findAddress(address, suburb.name)) || suburb;
 
             await sequelize.transaction(async (t) => {
                 const property = await Property.create(
@@ -173,7 +197,8 @@ class PropertyController {
                         CategoryId,
                         price,
                         image: req.image,
-                        location,
+                        location: suburb.name,
+                        address,
                         latitude,
                         longitude,
                         UserId: req.user.id,
@@ -198,7 +223,7 @@ class PropertyController {
         try {
             const { id } = req.params;
             const { name, CategoryId, price, address } = req.body;
-            const location = tidySuburb(req.body.location);
+
             const findProperty = await Property.scope("withAddress").findByPk(id);
             if (!findProperty) {
                 throw { name: "not_found" };
@@ -206,19 +231,27 @@ class PropertyController {
             if (findProperty.UserId !== req.user.id) {
                 throw { name: "forbidden" };
             }
+            const suburb = await Suburb.findOne({ where: { name: req.body.location || "" } });
+            if (!suburb) {
+                throw { name: "invalid_suburb" };
+            }
 
             // Only look the place up again when the address or suburb changed, or it has no map yet
-            const moved = address !== findProperty.address || location !== findProperty.location;
-            const coordinates = moved || findProperty.latitude === null ? await getCoordinates(address, location) : {};
+            const moved = address !== findProperty.address || suburb.name !== findProperty.location;
+            let spot = {};
+            if (moved || findProperty.latitude === null) {
+                const { latitude, longitude } = (await findAddress(address, suburb.name)) || suburb;
+                spot = { latitude, longitude };
+            }
 
             await findProperty.update({
                 name,
                 CategoryId,
                 price,
-                location,
+                location: suburb.name,
                 address,
                 image: req.image || findProperty.image,
-                ...coordinates,
+                ...spot,
             });
             if (req.images) {
                 await PropertyImage.bulkCreate(req.images.map((imageUrl) => ({ imageUrl, PropertyId: findProperty.id })));
