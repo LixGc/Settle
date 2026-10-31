@@ -108,6 +108,7 @@ function LoginRegister({ navigation }) {
                             <View style={styles.field}>
                                 <Text style={styles.label}>Password</Text>
                                 <TextInput placeholder="At least 8 characters" secureTextEntry={true} style={styles.textInput} value={inputRegister.password} onChangeText={(text) => handleChangeRegister("password", text)} />
+                                <Text style={styles.hint}>Must include 1 capital letter, 1 number and 1 special character</Text>
                             </View>
                             <View style={styles.field}>
                                 <Text style={styles.label}>Phone Number</Text>
@@ -122,8 +123,7 @@ function LoginRegister({ navigation }) {
                             </View>
                             <View style={styles.field}>
                                 <Text style={styles.label}>Password</Text>
-                                <TextInput placeholder="At least 8 characters" secureTextEntry={true} style={styles.textInput} value={inputRegister.password} onChangeText={(text) => handleChangeRegister("password", text)} />
-                                <Text style={styles.hint}>Must include 1 capital letter, 1 number and 1 special character</Text>
+                                <TextInput placeholder="Your password" secureTextEntry={true} style={styles.textInput} value={inputLogin.password} onChangeText={(text) => handleChangeLogin("password", text)} />
                             </View>
                         </>
                     )}
