@@ -77,6 +77,10 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      amenities: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        defaultValue: [],
+      },
       UserId: DataTypes.INTEGER,
       status: {
         type: DataTypes.ENUM,
