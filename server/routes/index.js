@@ -14,6 +14,7 @@ router.post("/login", UserController.login);
 router.use("/profiles", user);
 router.use("/properties", property);
 router.get("/categories", PropertyController.getCategories);
+router.get("/suburbs", PropertyController.searchSuburbs);
 router.use("/bookings", booking);
 router.get("/trending", BookingController.fetchTrending);
 router.use("/reviews", review);

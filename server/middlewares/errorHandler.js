@@ -54,9 +54,13 @@ const errorHandler = (error, req, res, next) => {
     } else if (error.name == "payment_not_completed") {
         code = 400;
         message = "Payment has not been completed";
-    } else if (error.type && error.type.startsWith("Stripe")) {
+    }
+    else if (error.type && error.type.startsWith("Stripe")) {
         code = 400;
         message = "Payment gateway error";
+    } else if (error.name == "invalid_suburb") {
+        code = 400;
+        message = "Please choose a suburb from the list";
     }
 
     res.status(code).json({ message });
