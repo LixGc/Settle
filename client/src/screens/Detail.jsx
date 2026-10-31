@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, FlatList, ScrollView, Pressable, ActivityIndicator, useWindowDimensions, Linking } from "react-native"; import { AntDesign, Ionicons } from "@expo/vector-icons";
-import MapView, { Circle, Marker } from "react-native-maps";
+import { View, Text, StyleSheet, Image, FlatList, ScrollView, Pressable, ActivityIndicator, useWindowDimensions, Linking, Modal } from "react-native";
+import { AntDesign, Ionicons } from "@expo/vector-icons"; import MapView, { Circle, Marker } from "react-native-maps";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetail, fetchReviewByProperty, fetchPropertyBookings, createBooking } from "../../store/actions";
 import { errorAlert, successAlert } from "../helpers/alert";
@@ -23,6 +23,8 @@ function Detail({ route, navigation }) {
     const [startDate, setStartDate] = useState(searchStart ? new Date(searchStart) : new Date());
     const [endDate, setEndDate] = useState(searchEnd ? new Date(searchEnd) : nextDay(new Date()));
     const [submitting, setSubmitting] = useState(false);
+    // The bottom sheet that's open: "description", "amenities" or null for none
+    const [sheet, setSheet] = useState(null);
     const { width } = useWindowDimensions();
 
     useEffect(() => {
@@ -138,7 +140,6 @@ function Detail({ route, navigation }) {
             {/* specifications */}
             {property.Specifications.length > 0 && (
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>About this place</Text>
                     <View style={styles.specContainer}>
                         {property.Specifications.map((spec) => (
                             <View style={styles.spec} key={spec.id}>
@@ -149,6 +150,21 @@ function Detail({ route, navigation }) {
                     </View>
                 </View>
             )}
+
+            {/* description, cut to 4 lines with a button for the rest */}
+            {property.description ? (
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>About this space</Text>
+                    <Text style={styles.description} numberOfLines={4}>
+                        {property.description}
+                    </Text>
+                    {property.description.length > 180 && (
+                        <Pressable style={styles.moreButton} onPress={() => setSheet("description")}>
+                            <Text style={styles.moreText}>Show more</Text>
+                        </Pressable>
+                    )}
+                </View>
+            ) : null}
 
             {/* map, only the suburb is shown, not the exact address */}
             {property.latitude ? (
@@ -253,6 +269,25 @@ function Detail({ route, navigation }) {
                     <Text style={styles.grey}>No reviews yet</Text>
                 )}
             </View>
+
+            {/* the full description */}
+            <Modal visible={sheet !== null} transparent animationType="slide" onRequestClose={() => setSheet(null)}>
+                <View style={styles.sheetBackdrop}>
+                    {/* tapping above the sheet closes it */}
+                    <Pressable style={{ flex: 1 }} onPress={() => setSheet(null)} />
+                    <View style={styles.sheet}>
+                        <View style={styles.sheetHeader}>
+                            <Text style={styles.sectionTitle}>About this space</Text>
+                            <Pressable onPress={() => setSheet(null)}>
+                                <Ionicons name="close" size={26} color={colors.grey} />
+                            </Pressable>
+                        </View>
+                        <ScrollView showsVerticalScrollIndicator={false}>
+                            <Text style={styles.description}>{property.description}</Text>
+                        </ScrollView>
+                    </View>
+                </View>
+            </Modal>
         </ScrollView>
     );
 }
@@ -345,6 +380,43 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         color: colors.dark,
         textTransform: "capitalize",
+    },
+    description: {
+        fontSize: 15,
+        lineHeight: 22,
+        color: colors.dark,
+    },
+    moreButton: {
+        alignSelf: "flex-start",
+        backgroundColor: colors.white,
+        borderWidth: 1,
+        borderColor: colors.dark,
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 16,
+        marginTop: 8,
+    },
+    moreText: {
+        fontWeight: "700",
+        color: colors.dark,
+    },
+    sheetBackdrop: {
+        flex: 1,
+        backgroundColor: "rgba(0,0,0,0.4)",
+    },
+    sheet: {
+        maxHeight: "80%",
+        backgroundColor: colors.white,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        padding: 20,
+        paddingBottom: 34,
+    },
+    sheetHeader: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        marginBottom: 8,
     },
     ownerCard: {
         flexDirection: "row",

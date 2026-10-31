@@ -31,6 +31,7 @@ function PropertyForm({ route, navigation }) {
         price: property ? String(property.price) : "",
         location: property ? property.location : "",
         address: property?.address || "",
+        description: property?.description || "",
     });
     const [CategoryId, setCategoryId] = useState(null);
     const [specifications, setSpecifications] = useState({});
@@ -123,6 +124,7 @@ function PropertyForm({ route, navigation }) {
         formData.append("price", input.price);
         formData.append("location", input.location);
         formData.append("address", input.address);
+        formData.append("description", input.description);
         formData.append("CategoryId", property ? property.CategoryId : CategoryId);
         if (image) {
             formData.append("image", toFile(image, "image"));
@@ -194,6 +196,12 @@ function PropertyForm({ route, navigation }) {
                 <Text style={styles.label}>Street address</Text>
                 <TextInput style={styles.textInput} placeholder="12 Church Street" value={input.address} onChangeText={(text) => handleChangeInput("address", text)} />
                 <Text style={styles.grey}>Only guests who have booked and paid can see this. Everyone else sees the suburb.</Text>
+            </View>
+
+            <View style={styles.field}>
+                <Text style={styles.label}>Description</Text>
+                <TextInput style={[styles.textInput, styles.textArea]} placeholder="What's the place like, and what's nearby?" multiline maxLength={1000} value={input.description} onChangeText={(text) => handleChangeInput("description", text)} />
+                <Text style={styles.grey}>{input.description.length}/1000</Text>
             </View>
 
             {/* type and details, only when listing a new place */}
@@ -284,6 +292,10 @@ const styles = StyleSheet.create({
         padding: 14,
         borderWidth: 1,
         borderColor: "#DDE5E2",
+    },
+    textArea: {
+        minHeight: 120,
+        textAlignVertical: "top",
     },
     chips: {
         flexDirection: "row",
