@@ -200,8 +200,10 @@ class PropertyController {
     }
     static async addProperty(req, res, next) {
         try {
-            const { name, CategoryId, price, address } = req.body;
+            const { name, CategoryId, price, address, description } = req.body;
             const specifications = req.body.specifications ? JSON.parse(req.body.specifications) : [];
+            // Sent as a JSON string like '["wifi","kitchen"]', the same way as specifications
+            const amenities = req.body.amenities ? JSON.parse(req.body.amenities) : [];
             const images = req.images || [];
 
             // The suburb has to be one from the list, so every place uses the same spelling
@@ -218,6 +220,8 @@ class PropertyController {
                         name,
                         CategoryId,
                         price,
+                        description,
+                        amenities,
                         image: req.image,
                         location: suburb.name,
                         address,
@@ -244,8 +248,7 @@ class PropertyController {
     static async editProperty(req, res, next) {
         try {
             const { id } = req.params;
-            const { name, CategoryId, price, address } = req.body;
-
+            const { name, CategoryId, price, address, description } = req.body;
             const findProperty = await Property.scope("withAddress").findByPk(id);
             if (!findProperty) {
                 throw { name: "not_found" };
@@ -270,6 +273,9 @@ class PropertyController {
                 name,
                 CategoryId,
                 price,
+                description,
+                // Keep the old list if the app didn't send one
+                amenities: req.body.amenities ? JSON.parse(req.body.amenities) : findProperty.amenities,
                 location: suburb.name,
                 address,
                 image: req.image || findProperty.image,

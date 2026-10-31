@@ -68,6 +68,19 @@ module.exports = (sequelize, DataTypes) => {
       address: DataTypes.STRING,
       latitude: DataTypes.FLOAT,
       longitude: DataTypes.FLOAT,
+      description: {
+        type: DataTypes.TEXT,
+        validate: {
+          len: {
+            args: [0, 1000],
+            msg: "Description can't be longer than 1000 characters",
+          },
+        },
+      },
+      amenities: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        defaultValue: [],
+      },
       UserId: DataTypes.INTEGER,
       status: {
         type: DataTypes.ENUM,
