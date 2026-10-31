@@ -200,7 +200,7 @@ class PropertyController {
     }
     static async addProperty(req, res, next) {
         try {
-            const { name, CategoryId, price, address } = req.body;
+            const { name, CategoryId, price, address, description } = req.body;
             const specifications = req.body.specifications ? JSON.parse(req.body.specifications) : [];
             const images = req.images || [];
 
@@ -244,8 +244,7 @@ class PropertyController {
     static async editProperty(req, res, next) {
         try {
             const { id } = req.params;
-            const { name, CategoryId, price, address } = req.body;
-
+            const { name, CategoryId, price, address, description } = req.body;
             const findProperty = await Property.scope("withAddress").findByPk(id);
             if (!findProperty) {
                 throw { name: "not_found" };
