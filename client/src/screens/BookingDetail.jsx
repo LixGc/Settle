@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchBookingById, createPayment, confirmPayment, getUser, updateBookingStatus } from "../../store/actions";
 import { errorAlert, successAlert } from "../helpers/alert";
 import { fPrice } from "../helpers/fPrice";
-import { fDate } from "../helpers/fDate";
+import { fDate, fTime } from "../helpers/fDate";
 import { getStatusBackgroundColor } from "../helpers/getBg";
 import ReviewModal from "../components/ReviewModal";
 import { colors } from "../theme";
@@ -70,6 +70,8 @@ function BookingDetail({ route, navigation }) {
             paymentHandled.current = true;
             setPaymentUrl("");
             errorAlert("Payment cancelled");
+            // Opening the payment page gave the booking more time, so show the new pay-by time
+            dispatch(fetchBookingById(id)).catch((error) => errorAlert(error));
         }
     };
 
@@ -216,7 +218,21 @@ function BookingDetail({ route, navigation }) {
                     <Pressable style={styles.payButton} onPress={handlePayment} disabled={paying}>
                         {paying ? <ActivityIndicator color={colors.white} /> : <Text style={styles.payText}>Pay with Stripe</Text>}
                     </Pressable>
-                    <Text style={[styles.grey, { textAlign: "center" }]}>Your stay is confirmed once it's paid</Text>
+                    <Text style={[styles.grey, { textAlign: "center" }]}>
+                        {booking.expiresAt ? `Pay by ${fTime(booking.expiresAt)} or this booking is cancelled` : "Your stay is confirmed once it's paid"}
+                    </Text>
+                </View>
+            )}
+
+            {/* not paid in time */}
+            {booking.status === "cancelled" && (
+                <View style={styles.section}>
+                    <Text style={[styles.grey, { textAlign: "center" }]}>This booking was cancelled because it wasn't paid within 30 minutes</Text>
+                    {isTenant && property && (
+                        <Pressable style={styles.payButton} onPress={() => navigation.navigate("detail", { id: property.id, name: property.name })}>
+                            <Text style={styles.payText}>Book again</Text>
+                        </Pressable>
+                    )}
                 </View>
             )}
 
