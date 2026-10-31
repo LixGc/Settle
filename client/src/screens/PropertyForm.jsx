@@ -35,6 +35,8 @@ function PropertyForm({ route, navigation }) {
     const [image, setImage] = useState(null);
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
+    // Which photo button is opening the gallery ("main" or "more"), to show a spinner on it
+    const [picking, setPicking] = useState(null);
     // Suburbs matching what the host typed, and whether they picked one from that list
     const [suburbs, setSuburbs] = useState([]);
     const [suburbChosen, setSuburbChosen] = useState(Boolean(property));
@@ -86,14 +88,31 @@ function PropertyForm({ route, navigation }) {
         }));
     };
 
+    // The gallery can take a moment to open, so show a spinner until it does and ignore extra taps
     const chooseImage = async () => {
-        const uri = await pickImage();
-        if (uri) setImage(uri);
+        if (picking) return;
+        setPicking("main");
+        try {
+            const uri = await pickImage();
+            if (uri) setImage(uri);
+        } catch (error) {
+            errorAlert("Could not open your photos");
+        } finally {
+            setPicking(null);
+        }
     };
 
     const chooseImages = async () => {
-        const uris = await pickImages();
-        if (uris.length) setImages(uris);
+        if (picking) return;
+        setPicking("more");
+        try {
+            const uris = await pickImages();
+            if (uris.length) setImages(uris);
+        } catch (error) {
+            errorAlert("Could not open your photos");
+        } finally {
+            setPicking(null);
+        }
     };
 
     const handleSubmit = () => {
@@ -150,6 +169,12 @@ function PropertyForm({ route, navigation }) {
                         <Text style={styles.grey}>Choose a main photo</Text>
                     </View>
                 )}
+                {picking === "main" && (
+                    <View style={styles.photoLoading}>
+                        <ActivityIndicator size="large" color={colors.primary} />
+                        <Text style={styles.grey}>Opening your photos...</Text>
+                    </View>
+                )}
             </Pressable>
 
             {/* more photos */}
@@ -182,7 +207,7 @@ function PropertyForm({ route, navigation }) {
                     <View style={styles.dropdown}>
                         {suburbs.map((suburb) => (
                             <Pressable key={suburb.id} style={styles.dropdownItem} onPress={() => chooseSuburb(suburb)}>
-                                <Ionicons name="location-outline" size={16} color={colors.grey} />
+                                {picking === "more" ? <ActivityIndicator color={colors.primary} /> : <Ionicons name="images-outline" size={22} color={colors.primary} />}
                                 <Text style={styles.dropdownText}>{suburb.name}</Text>
                             </Pressable>
                         ))}
@@ -250,6 +275,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: "dashed",
         borderColor: colors.primary,
+    },
+    photoLoading: {
+        ...StyleSheet.absoluteFillObject,
+        borderRadius: 16,
+        backgroundColor: "rgba(227,241,236,0.95)",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 6,
     },
     smallPhoto: {
         width: 70,
