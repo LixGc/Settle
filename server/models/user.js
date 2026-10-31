@@ -3,6 +3,7 @@ const { Model } = require("sequelize");
 const { hashPassword } = require("../helpers/bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+    // A user can host places, book places and write reviews, and has one profile
     static associate(models) {
       User.hasMany(models.Property);
       User.hasOne(models.UserProfile);
@@ -55,6 +56,7 @@ module.exports = (sequelize, DataTypes) => {
             args: [8],
             msg: "Minimum password character is 8!",
           },
+          // At least 1 capital, 1 number and 1 thing that isn't a letter or number
           is: {
             args: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/,
             msg: "Password needs at least 1 capital letter, 1 number and 1 special character!",
@@ -73,6 +75,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      // otp = the login code while it's waiting to be used
       otp: DataTypes.STRING,
       expoToken: DataTypes.STRING,
     },
@@ -81,6 +84,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+  // Hash the password before it's saved
   User.beforeCreate((el) => {
     el.password = hashPassword(el.password);
   });

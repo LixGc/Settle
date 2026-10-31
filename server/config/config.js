@@ -1,6 +1,7 @@
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
+// Database settings. npm run dev uses development, Jest uses test
 module.exports = {
     development: {
         username: process.env.DB_USERNAME,
@@ -21,6 +22,7 @@ module.exports = {
         logging: false,
     },
     production: {
+        // When it's hosted online, the whole database address comes in DATABASE_URL
         use_env_variable: "DATABASE_URL",
         dialect: "postgres",
         logging: false,

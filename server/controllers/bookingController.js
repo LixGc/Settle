@@ -2,6 +2,7 @@ const { Booking, Property, User, UserProfile, Review, Balance } = require("../mo
 const { Sequelize, Op } = require("sequelize");
 const totalNightConverter = require("../helpers/totalNightConverter");
 
+// Every booking comes with its place (and the host) and the guest, without passwords
 const bookingInclude = [
     {
         model: Property,
@@ -21,6 +22,7 @@ const bookingInclude = [
 ];
 
 class BookingController {
+    // POST /bookings/:PropertyId: book a place. Price = nights x price per night
     static async createBooking(req, res, next) {
         try {
             const { PropertyId } = req.params;
@@ -28,6 +30,7 @@ class BookingController {
             if (!property) {
                 throw { name: "not_found" };
             }
+            // Hosts can't book their own place
             if (property.UserId == req.user.id) {
                 throw { name: "same-user" };
             }
@@ -68,6 +71,7 @@ class BookingController {
             next(error);
         }
     }
+    // GET /bookings: my trips, newest first
     static async findAllBooking(req, res, next) {
         try {
             const bookings = await Booking.findAll({
@@ -81,6 +85,7 @@ class BookingController {
         }
     }
 
+    // GET /bookings/owner: bookings at the places I host
     static async findBookingsByOwner(req, res, next) {
         try {
             const bookings = await Booking.findAll({
@@ -94,6 +99,7 @@ class BookingController {
         }
     }
 
+    // GET /bookings/:id: one booking, only for its guest or host
     static async findBookingById(req, res, next) {
         try {
             const { id } = req.params;
@@ -119,6 +125,7 @@ class BookingController {
             next(error);
         }
     }
+    // PATCH /bookings/:id: the host changes the status, like completed after the stay
     static async updateBookingStatus(req, res, next) {
         try {
             const { id } = req.params;
@@ -135,6 +142,7 @@ class BookingController {
                 throw { name: "forbidden", message: "Only the owner can update this booking" };
             }
 
+            // The host gets paid (a Balance row) once, the first time it's marked completed
             const wasCompleted = findBooking.status === "completed";
             await findBooking.update({ status });
 
@@ -146,6 +154,7 @@ class BookingController {
             next(error);
         }
     }
+    // GET /bookings/property/:propertyId: booked dates so the app can grey them out
     static async findAllBookingByProperty(req, res, next) {
         try {
             const { propertyId } = req.params;
@@ -164,6 +173,7 @@ class BookingController {
         }
     }
 
+    // GET /trending: the 7 places with the most completed stays
     static async fetchTrending(req, res, next) {
         try {
             const results = await Booking.findAll({
@@ -174,6 +184,7 @@ class BookingController {
                 limit: 7,
             });
 
+            // Then load those places with their reviews to work out the ratings
             const mostBookedIds = results.map((result) => result.getDataValue("PropertyId"));
             const mostBookedProperties = await Property.findAll({
                 where: { id: mostBookedIds },

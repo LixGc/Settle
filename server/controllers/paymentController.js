@@ -3,6 +3,7 @@ const getStripe = require("../helpers/stripe");
 const { sendInvoiceEmail } = require("../helpers/nodemailer");
 
 class PaymentController {
+    // POST /payments/:bookingId: makes a Stripe payment page for a booking and sends back its link
     static async createPayment(req, res, next) {
         try {
             const findBooking = await Booking.findByPk(req.params.bookingId, { include: [Property, User] });
@@ -33,6 +34,7 @@ class PaymentController {
                         quantity: 1,
                     },
                 ],
+                // So /success knows which booking was paid
                 metadata: { bookingId: String(findBooking.id) },
                 success_url: `${serverUrl}/payments/success?session_id={CHECKOUT_SESSION_ID}`,
                 cancel_url: `${serverUrl}/payments/cancel`,
@@ -43,6 +45,7 @@ class PaymentController {
         }
     }
 
+    // GET /payments/success: where Stripe sends the guest after paying
     static async paymentSuccess(req, res, next) {
         try {
             const { session_id } = req.query;
@@ -71,6 +74,7 @@ class PaymentController {
         }
     }
 
+    // GET /payments/cancel: the guest cancelled on the payment page
     static paymentCancel(req, res) {
         res.send("<h2>Payment cancelled</h2><p>You can go back to the Settle app and try again.</p>");
     }

@@ -1,6 +1,7 @@
 const { Review, Property, User, Booking, UserProfile } = require("../models");
 
 class ReviewController {
+    // GET /reviews: reviews I've written
     static async getReviewUser(req, res, next) {
         try {
             const reviews = await Review.findAll({
@@ -13,12 +14,14 @@ class ReviewController {
         }
     }
 
+    // GET /reviews/my-properties: reviews of the places I host, newest first
     static async getReviewMyProperties(req, res, next) {
         try {
             const reviews = await Review.findAll({
                 include: [
                     {
                         model: Property,
+                        // Only reviews of places I own
                         where: { UserId: req.user.id },
                     },
                     {
@@ -35,6 +38,7 @@ class ReviewController {
         }
     }
 
+    // GET /reviews/:PropertyId: all reviews of one place
     static async getReviewProperty(req, res, next) {
         try {
             const { PropertyId } = req.params;
@@ -57,6 +61,7 @@ class ReviewController {
             next(error);
         }
     }
+    // POST /reviews/:PropertyId: leave a review
     static async postReview(req, res, next) {
         try {
             const { PropertyId } = req.params;

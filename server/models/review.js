@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Review.init(
     {
+      // 1 to 5 stars
       rating: {
         type: DataTypes.FLOAT,
         allowNull: false,

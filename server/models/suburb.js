@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     class Suburb extends Model {
         static associate(models) { }
     }
+    // The Sydney suburbs hosts pick from, with where each one is on the map
     Suburb.init(
         {
             name: DataTypes.STRING,

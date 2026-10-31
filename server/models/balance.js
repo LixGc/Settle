@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       Balance.belongsTo(models.Booking);
     }
   }
+  // Money a host earned from one completed booking. Earnings = all their balances added up
   Balance.init(
     {
       amount: DataTypes.INTEGER,

@@ -4,6 +4,7 @@ const { generateOTP, sendOTPByEmail } = require("../helpers/nodemailer");
 const { User, UserProfile, Booking, Property, Balance } = require("../models");
 
 class UserController {
+    // POST /register: makes an account. The User model checks the rules and hashes the password
     static async register(req, res, next) {
         try {
             const { fullName, email, password, phone } = req.body;
@@ -13,6 +14,7 @@ class UserController {
             next(error);
         }
     }
+    // POST /otp: step 1 of logging in. Checks email + password, then emails a 4-digit code
     static async getOTP(req, res, next) {
         try {
             const { email, password } = req.body;
@@ -23,6 +25,7 @@ class UserController {
             if (!passValid) throw { name: "invalid_password" };
             const otp = generateOTP();
 
+            // Save the code so /login can check it
             await user.update({ otp });
 
             await sendOTPByEmail(user.email, otp);
@@ -32,6 +35,7 @@ class UserController {
         }
     }
 
+    // POST /login: step 2. Same checks plus the code, then sends back a login token
     static async login(req, res, next) {
         try {
             const { email, password, otp } = req.body;
@@ -42,6 +46,7 @@ class UserController {
             if (!passValid) throw { name: "invalid_password" };
             if (!user.otp || user.otp !== otp) throw { name: "invalid_otp" };
 
+            // A code only works once
             await user.update({ otp: null });
 
             const access_token = signToken({ id: user.id });
@@ -50,6 +55,7 @@ class UserController {
             next(error);
         }
     }
+    // GET /profiles: my account with profile photos, bookings and earnings
     static async getProfile(req, res, next) {
         try {
             const data = await User.findOne({
@@ -69,6 +75,7 @@ class UserController {
                 ],
             });
 
+            // Add totals for the Account screen, and don't send the whole list of balances
             data.dataValues.totalBookings = data.Bookings.length;
             data.dataValues.totalAmount = data.Balances.reduce((sum, balance) => sum + balance.amount, 0);
             data.dataValues.Balances = undefined;
@@ -78,6 +85,7 @@ class UserController {
             next(error);
         }
     }
+    // POST /profiles: saves the photo links that uploadMulti put on req
     static async createProfile(req, res, next) {
         try {
             if (!req.profilePicture) throw { name: "Profile Picture is required!" };
@@ -93,6 +101,7 @@ class UserController {
         }
     }
 
+    // PUT /profiles: both photos have to be sent again
     static async editProfile(req, res, next) {
         try {
             const { idCard, profilePicture } = req;
@@ -105,6 +114,7 @@ class UserController {
         }
     }
 
+    // DELETE /profiles: deletes my account
     static async deleteUser(req, res, next) {
         try {
             await User.destroy({ where: { id: req.user.id } });

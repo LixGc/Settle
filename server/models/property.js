@@ -2,6 +2,7 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Property extends Model {
+    // A place belongs to a host (User) and a category, and has bookings, reviews, specs and extra photos
     static associate(models) {
       Property.belongsTo(models.Category);
       Property.hasMany(models.Booking);
@@ -53,6 +54,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      // The suburb name, always one from the Suburbs table
       location: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -65,6 +67,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      // Street address and exact map spot, kept private until the guest pays (see defaultScope below)
       address: DataTypes.STRING,
       latitude: DataTypes.FLOAT,
       longitude: DataTypes.FLOAT,
@@ -77,6 +80,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      // Keys like ["wifi", "kitchen"], the app turns them into icons
       amenities: {
         type: DataTypes.ARRAY(DataTypes.STRING),
         defaultValue: [],

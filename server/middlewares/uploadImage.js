@@ -1,14 +1,17 @@
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 
+// Photos are stored on Cloudinary, not on this server
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// Middleware for routes with photos. fields = which form fields to upload, like ["image", "images"]
 const uploadMulti = (fields) => {
     const upload = multer({
+        // Keep the files in memory just long enough to send them on. Images only, max 10MB each
         storage: multer.memoryStorage(),
         limits: {
             fileSize: 1024 * 1024 * 10,
@@ -39,6 +42,7 @@ const uploadMulti = (fields) => {
                     const files = req.files && req.files[field];
                     if (!files) continue;
 
+                    // Upload all the files at once and wait for every link
                     const results = await Promise.all(files.map((file) => uploadToCloudinary(file.buffer)));
 
                     // "images" can have many files, every other field has one
@@ -53,6 +57,7 @@ const uploadMulti = (fields) => {
     };
 };
 
+// Sends one file to Cloudinary and gives back its details (we use secure_url)
 const uploadToCloudinary = (buffer) => {
     return new Promise((resolve, reject) => {
         cloudinary.uploader

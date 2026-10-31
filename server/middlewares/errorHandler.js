@@ -1,7 +1,10 @@
+// Every error ends up here and gets turned into a status code and a message.
+// Controllers throw { name: "..." } and this picks the right response
 const errorHandler = (error, req, res, next) => {
     let code = 500;
     let message = "Internal server error";
     console.log(error);
+    // A model rule failed (like an empty name), send back the first message
     if (error.name == "SequelizeValidationError" || error.name == "SequelizeUniqueConstraintError") {
         code = 400;
         message = error.errors[0].message;
@@ -63,6 +66,7 @@ const errorHandler = (error, req, res, next) => {
         message = "Please choose a suburb from the list";
     }
 
+    // Anything not listed above stays a 500
     res.status(code).json({ message });
 };
 

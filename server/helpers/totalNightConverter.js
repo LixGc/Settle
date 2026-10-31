@@ -1,3 +1,4 @@
+// How many nights between check-in and check-out
 const totalNightConverter = (sDate, eDate) => {
     const startDate = new Date(sDate);
     const endDate = new Date(eDate);
