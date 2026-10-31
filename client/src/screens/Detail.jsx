@@ -7,6 +7,7 @@ import { errorAlert, successAlert } from "../helpers/alert";
 import { fPrice } from "../helpers/fPrice";
 import { fDate, toDateString, nextDay, countNights } from "../helpers/fDate";
 import { generateStars } from "../helpers/fRating";
+import { amenityList } from "../helpers/amenities";
 import DateInput from "../components/DateInput";
 import { colors } from "../theme";
 
@@ -79,6 +80,8 @@ function Detail({ route, navigation }) {
     const images = [property.image, ...property.PropertyImages.map((el) => el.imageUrl)];
     const owner = property.User;
     const nights = countNights(startDate, endDate);
+    // What the place offers, in the same order as on the listing form
+    const offered = amenityList.filter((item) => property.amenities?.includes(item.key));
 
     const goChat = () => {
         if (!profile) {
@@ -165,6 +168,26 @@ function Detail({ route, navigation }) {
                     )}
                 </View>
             ) : null}
+
+            {/* amenities, the first 6 with a button for the rest */}
+            {offered.length > 0 && (
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>What this place offers</Text>
+                    <View style={styles.amenityGrid}>
+                        {offered.slice(0, 6).map((item) => (
+                            <View style={styles.amenity} key={item.key}>
+                                <Ionicons name={item.icon} size={20} color={colors.dark} />
+                                <Text style={styles.amenityText}>{item.label}</Text>
+                            </View>
+                        ))}
+                    </View>
+                    {offered.length > 6 && (
+                        <Pressable style={styles.moreButton} onPress={() => setSheet("amenities")}>
+                            <Text style={styles.moreText}>Show all {offered.length} amenities</Text>
+                        </Pressable>
+                    )}
+                </View>
+            )}
 
             {/* map, only the suburb is shown, not the exact address */}
             {property.latitude ? (
@@ -270,20 +293,29 @@ function Detail({ route, navigation }) {
                 )}
             </View>
 
-            {/* the full description */}
+            {/* the full description or the full amenity list */}
             <Modal visible={sheet !== null} transparent animationType="slide" onRequestClose={() => setSheet(null)}>
                 <View style={styles.sheetBackdrop}>
                     {/* tapping above the sheet closes it */}
                     <Pressable style={{ flex: 1 }} onPress={() => setSheet(null)} />
                     <View style={styles.sheet}>
                         <View style={styles.sheetHeader}>
-                            <Text style={styles.sectionTitle}>About this space</Text>
+                            <Text style={styles.sectionTitle}>{sheet === "amenities" ? "What this place offers" : "About this space"}</Text>
                             <Pressable onPress={() => setSheet(null)}>
                                 <Ionicons name="close" size={26} color={colors.grey} />
                             </Pressable>
                         </View>
                         <ScrollView showsVerticalScrollIndicator={false}>
-                            <Text style={styles.description}>{property.description}</Text>
+                            {sheet === "amenities" ? (
+                                offered.map((item) => (
+                                    <View style={styles.sheetAmenity} key={item.key}>
+                                        <Ionicons name={item.icon} size={22} color={colors.dark} />
+                                        <Text style={styles.amenityText}>{item.label}</Text>
+                                    </View>
+                                ))
+                            ) : (
+                                <Text style={styles.description}>{property.description}</Text>
+                            )}
                         </ScrollView>
                     </View>
                 </View>
@@ -400,6 +432,24 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         color: colors.dark,
     },
+    amenityGrid: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        rowGap: 16,
+        marginTop: 4,
+    },
+    amenity: {
+        width: "50%",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+        paddingRight: 8,
+    },
+    amenityText: {
+        flexShrink: 1,
+        fontSize: 15,
+        color: colors.dark,
+    },
     sheetBackdrop: {
         flex: 1,
         backgroundColor: "rgba(0,0,0,0.4)",
@@ -417,6 +467,14 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "flex-start",
         marginBottom: 8,
+    },
+    sheetAmenity: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 14,
+        paddingVertical: 14,
+        borderBottomWidth: 1,
+        borderBottomColor: "#EEF2F0",
     },
     ownerCard: {
         flexDirection: "row",

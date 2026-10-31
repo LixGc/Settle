@@ -6,6 +6,7 @@ import { fetchCategories, addProperty, editProperty } from "../../store/actions"
 import { errorAlert, successAlert } from "../helpers/alert";
 import { pickImage, pickImages, toFile } from "../helpers/pickImage";
 import SuburbInput from "../components/SuburbInput";
+import { amenityList } from "../helpers/amenities";
 import { colors } from "../theme";
 
 // The choices for each detail, so every listing uses the same words.
@@ -35,6 +36,7 @@ function PropertyForm({ route, navigation }) {
     });
     const [CategoryId, setCategoryId] = useState(null);
     const [specifications, setSpecifications] = useState({});
+    const [amenities, setAmenities] = useState(property?.amenities || []);
     const [image, setImage] = useState(null);
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -73,6 +75,11 @@ function PropertyForm({ route, navigation }) {
             ...specifications,
             [name]: value,
         }));
+    };
+
+    // Tap an amenity to tick it, and tap it again to untick it
+    const toggleAmenity = (key) => {
+        setAmenities((amenities) => (amenities.includes(key) ? amenities.filter((item) => item !== key) : [...amenities, key]));
     };
 
     // The gallery can take a moment to open, so show a spinner until it does and ignore extra taps
@@ -125,6 +132,7 @@ function PropertyForm({ route, navigation }) {
         formData.append("location", input.location);
         formData.append("address", input.address);
         formData.append("description", input.description);
+        formData.append("amenities", JSON.stringify(amenities));
         formData.append("CategoryId", property ? property.CategoryId : CategoryId);
         if (image) {
             formData.append("image", toFile(image, "image"));
@@ -234,6 +242,21 @@ function PropertyForm({ route, navigation }) {
                 </View>
             ))}
 
+            <View style={styles.field}>
+                <Text style={styles.label}>What this place offers</Text>
+                <View style={styles.chips}>
+                    {amenityList.map((item) => {
+                        const ticked = amenities.includes(item.key);
+                        return (
+                            <Pressable key={item.key} style={[styles.chip, styles.amenityChip, ticked && styles.chipActive]} onPress={() => toggleAmenity(item.key)}>
+                                <Ionicons name={item.icon} size={16} color={ticked ? colors.white : colors.primary} />
+                                <Text style={[styles.chipText, styles.amenityText, ticked && styles.chipTextActive]}>{item.label}</Text>
+                            </Pressable>
+                        );
+                    })}
+                </View>
+            </View>
+
             <Pressable style={styles.button} onPress={handleSubmit} disabled={loading}>
                 {loading ? <ActivityIndicator color={colors.white} /> : <Text style={styles.buttonText}>{property ? "Save changes" : "List my place"}</Text>}
             </Pressable>
@@ -318,6 +341,14 @@ const styles = StyleSheet.create({
     },
     chipTextActive: {
         color: colors.white,
+    },
+    amenityChip: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 6,
+    },
+    amenityText: {
+        textTransform: "none",
     },
     button: {
         marginTop: 6,
