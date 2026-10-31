@@ -6,8 +6,10 @@ import { addReview } from "../../store/actions";
 import { successAlert } from "../helpers/alert";
 import { colors } from "../theme";
 
+// Text under the stars for each rating, 0 = nothing picked yet
 const ratingText = ["How was your stay?", "Very bad", "Bad", "Average", "Good", "Very good"];
 
+// Popup to rate a place after a stay. onSuccess lets the screen move on once it's posted
 function ReviewModal({ visible, property, onClose, onSuccess }) {
     const dispatch = useDispatch();
     const [rating, setRating] = useState(0);
@@ -53,6 +55,7 @@ function ReviewModal({ visible, property, onClose, onSuccess }) {
                             </Text>
                             <Text style={styles.grey}>{ratingText[rating]}</Text>
                             <View style={styles.stars}>
+                                {/* Tap a star to pick the rating, every star up to it lights up */}
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <Pressable key={star} onPress={() => setRating(star)}>
                                         <AntDesign name="star" size={26} color={star <= rating ? colors.accent : "#DDE5E2"} />

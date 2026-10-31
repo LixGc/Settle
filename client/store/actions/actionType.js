@@ -1,3 +1,4 @@
+// Names of every Redux action, so actions and reducers use the same spelling
 export const PROFILES_FETCH_REQUEST = "profiles/fetchRequest";
 export const PROFILES_FETCH_SUCCESS = "profiles/fetchSuccess";
 export const PROFILES_FETCH_FAIL = "profiles/fetchFail";

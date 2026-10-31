@@ -8,6 +8,7 @@ import { getUser, handleLogout } from "../../store/actions";
 import { fPrice } from "../helpers/fPrice";
 import { colors } from "../theme";
 
+// One row in the menu: icon, title, small text and an arrow
 function MenuItem({ icon, title, info, onPress }) {
     return (
         <Pressable style={styles.menuItem} onPress={onPress}>
@@ -21,10 +22,12 @@ function MenuItem({ icon, title, info, onPress }) {
     );
 }
 
+// You tab when logged in: my details, earnings, and links for staying and hosting
 function Account({ navigation }) {
     const dispatch = useDispatch();
     const { profile } = useSelector((state) => state.userReducer);
 
+    // Reload my account every time this tab opens, so the earnings stay up to date
     useFocusEffect(
         useCallback(() => {
             dispatch(getUser());

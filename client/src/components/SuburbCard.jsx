@@ -4,6 +4,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { fPrice } from "../helpers/fPrice";
 import { colors } from "../theme";
 
+// Suburb card on Explore: number of places, cheapest price, distance to the city, rating and the guests' favourite
 function SuburbCard({ suburb, onPress }) {
     const { name, image, totalPlaces, lowestPrice, averageRating, totalReviews, favourite, kmToCity } = suburb;
 
@@ -33,6 +34,7 @@ function SuburbCard({ suburb, onPress }) {
                     </View>
                 </View>
 
+                {/* Only when a place there has been booked */}
                 {favourite && (
                     <View style={styles.highlight}>
                         <Text style={styles.highlightText} numberOfLines={2}>

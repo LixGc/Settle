@@ -11,6 +11,7 @@ import { colors } from "../theme";
 
 // The choices for each detail, so every listing uses the same words.
 // A detail that isn't listed here (from a new category) is typed in instead
+// Tap options for these details. Any other detail gets a text box
 const specOptions = {
     bedrooms: ["1", "2", "3", "4", "5+"],
     bathrooms: ["1", "2", "3", "4+"],
@@ -20,12 +21,14 @@ const specOptions = {
     parking: ["no", "street", "1 car space", "single garage", "double garage"],
 };
 
+// List a place, or edit one when an id is passed
 function PropertyForm({ route, navigation }) {
     // id is only passed when editing a place
     const id = route.params?.id;
     const dispatch = useDispatch();
     const { categories } = useSelector((state) => state.categoryReducer);
     const { myProperties } = useSelector((state) => state.propertyReducer);
+    // When editing, start with the place's current details
     const property = myProperties.find((item) => item.id === id);
     const [input, setInput] = useState({
         name: property ? property.name : "",
@@ -49,6 +52,7 @@ function PropertyForm({ route, navigation }) {
         dispatch(fetchCategories());
     }, []);
 
+    // Typing again means the suburb has to be picked again
     const handleSuburbChange = (text) => {
         handleChangeInput("location", text);
         setSuburbChosen(false);
@@ -109,6 +113,7 @@ function PropertyForm({ route, navigation }) {
         }
     };
 
+    // Check everything is filled in, then send it all as FormData (photos can't go in plain JSON)
     const handleSubmit = () => {
         if (!property && !image) {
             return errorAlert("Please choose a main photo");
@@ -138,11 +143,13 @@ function PropertyForm({ route, navigation }) {
             formData.append("image", toFile(image, "image"));
         }
         images.forEach((uri, index) => formData.append("images", toFile(uri, "image" + index)));
+        // Details can only be set when listing, they aren't edited later
         if (!property) {
             formData.append("specifications", JSON.stringify(specNames.map((name) => ({ name, value: specifications[name] }))));
         }
 
         setLoading(true);
+        // Edit if the place already exists, otherwise add it
         const action = property ? editProperty(formData, id) : addProperty(formData);
         dispatch(action)
             .then((data) => {
@@ -225,6 +232,7 @@ function PropertyForm({ route, navigation }) {
                     </View>
                 </View>
             )}
+            {/* One question per detail of the chosen type (bedrooms, parking...) */}
             {specNames.map((name) => (
                 <View style={styles.field} key={name}>
                     <Text style={[styles.label, { textTransform: "capitalize" }]}>{name}</Text>
@@ -242,6 +250,7 @@ function PropertyForm({ route, navigation }) {
                 </View>
             ))}
 
+            {/* Amenities: tap to tick or untick */}
             <View style={styles.field}>
                 <Text style={styles.label}>What this place offers</Text>
                 <View style={styles.chips}>

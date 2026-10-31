@@ -13,11 +13,13 @@ import { errorAlert } from "../helpers/alert";
 import { fDate, toDateString, nextDay, countNights } from "../helpers/fDate";
 import { colors } from "../theme";
 
+// Explore tab: search a suburb with dates, or tap one of the popular suburbs
 function Explore({ navigation }) {
     const dispatch = useDispatch();
     const { locations, searchResults } = useSelector((state) => state.propertyReducer);
     const scrollRef = useRef(null);
     const [location, setLocation] = useState("");
+    // true once a suburb is picked from the dropdown, typing it isn't enough
     const [suburbChosen, setSuburbChosen] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(nextDay(new Date()));
@@ -31,6 +33,7 @@ function Explore({ navigation }) {
         }, [])
     );
 
+    // If check-in moves past check-out, push check-out to the next day
     const handleStartChange = (date) => {
         setStartDate(date);
         if (countNights(date, endDate) < 1) {
@@ -38,6 +41,7 @@ function Explore({ navigation }) {
         }
     };
 
+    // Typing again means the suburb has to be picked again
     const handleSuburbChange = (text) => {
         setLocation(text);
         setSuburbChosen(false);
@@ -56,6 +60,7 @@ function Explore({ navigation }) {
         dispatch(searchProperties({ location: suburb, startdate: toDateString(startDate), enddate: toDateString(endDate) })).finally(() => setLoading(false));
     };
 
+    // Only search suburbs picked from the list, so the spelling matches the server
     const handleSearch = () => {
         if (!suburbChosen) {
             return errorAlert("Please choose a suburb from the list");

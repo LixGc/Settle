@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { successAlert, getErrorMessage } from "../../src/helpers/alert";
 import { baseUrl } from "./baseUrl";
 
+// Sign up. Errors get thrown as a readable message so the screen can show it
 export const registerHandler = (value) => {
     return async () => {
         try {
@@ -19,6 +20,7 @@ export const registerHandler = (value) => {
     };
 };
 
+// Login step 1: checks email + password and emails the code
 export const createOtp = (value) => {
     return async () => {
         try {
@@ -34,6 +36,7 @@ export const createOtp = (value) => {
     };
 };
 
+// Login step 2: sends the code and gets back the access_token
 export const handleLogin = (value) => {
     return async () => {
         try {
@@ -50,6 +53,7 @@ export const handleLogin = (value) => {
 };
 
 // FETCH PROFILE
+// Loads my account, but only if a token is saved on the phone (I'm logged in)
 export const getUser = () => {
     return async (dispatch) => {
         const access_token = await AsyncStorage.getItem("access_token");
@@ -71,6 +75,7 @@ export const profilesFetchFail = () => {
     return { type: PROFILES_FETCH_FAIL };
 };
 
+// GET /profiles with the token, then puts my account in the store
 export const fetchProfile = (access_token) => {
     return async (dispatch) => {
         dispatch(profilesFetchRequest());
@@ -90,6 +95,7 @@ export const fetchProfile = (access_token) => {
     };
 };
 
+// Forget the token and clear my account from the store
 export const handleLogout = () => {
     return async (dispatch) => {
         await AsyncStorage.removeItem("access_token");
@@ -99,6 +105,7 @@ export const handleLogout = () => {
 };
 
 // PROFILE PHOTO AND ID CARD
+// Uploads the profile photo + ID (FormData), then reloads my account
 export const addProfile = (value) => {
     return async (dispatch) => {
         try {
@@ -119,6 +126,7 @@ export const addProfile = (value) => {
     };
 };
 
+// Same, but replaces the old photos
 export const editProfile = (value) => {
     return async (dispatch) => {
         try {

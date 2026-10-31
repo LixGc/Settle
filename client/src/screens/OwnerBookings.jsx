@@ -7,6 +7,7 @@ import { fetchOwnerBookings } from "../../store/actions";
 import BookingCard from "../components/BookingCard";
 import { colors } from "../theme";
 
+// Guest bookings: everyone who booked my places. Tap one to mark it completed
 function OwnerBookings({ navigation }) {
     const dispatch = useDispatch();
     const { ownerBookings } = useSelector((state) => state.bookingReducer);

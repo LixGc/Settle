@@ -26,13 +26,16 @@ import Chatbox from "./src/screens/Chatbox";
 import PlaceReviews from "./src/screens/PlaceReviews";
 
 
+// Stack = full screens that open on top, Tab = the 4 tabs at the bottom
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+// The bottom tabs: Home, Explore, Bookings and You
 const HomeTab = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.userReducer);
 
+  // Load the logged in user whenever the tabs show, so You knows which screen to show
   useFocusEffect(
     useCallback(() => {
       dispatch(getUser());
@@ -45,6 +48,7 @@ const HomeTab = () => {
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.grey,
+        // Filled icon for the tab you're on, outline for the rest
         tabBarIcon: ({ focused, color }) => {
           let iconName;
           if (route.name === "Home") {
@@ -63,11 +67,13 @@ const HomeTab = () => {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Bookings" component={Bookings} />
+      {/* Logged in = account menu, logged out = the login form */}
       {profile ? <Tab.Screen name="You" component={Account} /> : <Tab.Screen name="You" component={LoginRegister} />}
     </Tab.Navigator>
   );
 };
 
+// The app: Redux store, popups and navigation wrapped around every screen
 export default function App() {
   return (
     <Provider store={store}>
@@ -75,6 +81,7 @@ export default function App() {
         <NavigationContainer>
           <StatusBar style="dark" />
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+            {/* Starts on the splash, which then goes to the tabs. Everything else opens on top */}
             <Stack.Screen name="splash" component={Splash} />
             <Stack.Screen name="home" component={HomeTab} />
             <Stack.Screen name="loginRegister" component={LoginRegister} />

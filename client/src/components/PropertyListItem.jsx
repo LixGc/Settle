@@ -4,6 +4,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { fPrice } from "../helpers/fPrice";
 import { colors } from "../theme";
 
+// A place as a row, used in the search results
 function PropertyListItem({ property, onPress }) {
     const { name, image, price, location, averageRating, totalReviews } = property;
 

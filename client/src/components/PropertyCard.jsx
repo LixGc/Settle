@@ -4,6 +4,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { fPrice } from "../helpers/fPrice";
 import { colors } from "../theme";
 
+// Place card on Home (photo, name, suburb, price, rating), tap it to open the place
 function PropertyCard({ property, navigation }) {
     const { id, name, image, price, location, averageRating, totalReviews } = property;
 

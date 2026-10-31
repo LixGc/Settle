@@ -14,6 +14,7 @@ export const bookingDetailFetchSuccess = (payload) => {
     return { type: BOOKING_DETAIL_FETCH_SUCCESS, payload };
 };
 
+// One booking, for the booking screen
 export const fetchBookingById = (id) => {
     return async (dispatch) => {
         dispatch(bookingDetailFetchRequest());
@@ -34,6 +35,7 @@ export const fetchBookingById = (id) => {
 };
 
 // STRIPE PAYMENT
+// Asks the server for a Stripe payment page and gives back its link
 export const createPayment = (id) => {
     return async () => {
         try {
@@ -77,6 +79,7 @@ export const propertyBookingsFetchSuccess = (payload) => {
     return { type: PROPERTY_BOOKINGS_FETCH_SUCCESS, payload };
 };
 
+// Booked dates of a place, so the app knows which dates are taken
 export const fetchPropertyBookings = (id) => {
     return async (dispatch) => {
         try {
@@ -89,6 +92,7 @@ export const fetchPropertyBookings = (id) => {
 };
 
 // CREATE BOOKING
+// Books a place. value = { startDate, endDate }, id = the place
 export const createBooking = (value, id) => {
     return async (dispatch) => {
         try {
@@ -114,6 +118,7 @@ export const ownerBookingsFetchSuccess = (payload) => {
     return { type: OWNER_BOOKINGS_FETCH_SUCCESS, payload };
 };
 
+// Bookings at my places, for Guest bookings
 export const fetchOwnerBookings = () => {
     return async (dispatch) => {
         try {
@@ -133,6 +138,7 @@ export const fetchOwnerBookings = () => {
 };
 
 // UPDATE BOOKING STATUS (owner only)
+// Host changes the status, then everything that shows it gets reloaded
 export const updateBookingStatus = (status, id) => {
     return async (dispatch) => {
         try {

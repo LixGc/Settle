@@ -12,6 +12,7 @@ import { getStatusBackgroundColor } from "../helpers/getBg";
 import ReviewModal from "../components/ReviewModal";
 import { colors } from "../theme";
 
+// One booking. The guest can pay, chat and review here, the host can chat and mark the stay completed
 function BookingDetail({ route, navigation }) {
     const { id } = route.params;
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function BookingDetail({ route, navigation }) {
     const [paymentUrl, setPaymentUrl] = useState("");
     const [updating, setUpdating] = useState(false);
     const [reviewVisible, setReviewVisible] = useState(false);
+    // So the success page only gets handled once, even if it loads twice
     const paymentHandled = useRef(false);
 
     useEffect(() => {
@@ -31,6 +33,7 @@ function BookingDetail({ route, navigation }) {
             .finally(() => setLoading(false));
     }, [id]);
 
+    // Pay button: gets a Stripe payment page from the server and opens it in the WebView below
     const handlePayment = () => {
         setPaying(true);
         paymentHandled.current = false;
@@ -40,6 +43,7 @@ function BookingDetail({ route, navigation }) {
             .finally(() => setPaying(false));
     };
 
+    // Host's button after the stay, this also adds the money to their earnings
     const handleComplete = () => {
         setUpdating(true);
         dispatch(updateBookingStatus("completed", id))
@@ -69,6 +73,7 @@ function BookingDetail({ route, navigation }) {
         }
     };
 
+    // While paying, the whole screen is the Stripe page
     if (paymentUrl) {
         return <WebView source={{ uri: paymentUrl }} onLoad={handlePaymentLoad} startInLoadingState style={{ flex: 1 }} />;
     }
@@ -90,6 +95,7 @@ function BookingDetail({ route, navigation }) {
     }
 
     const property = booking.Property;
+    // Am I the guest or the host of this booking?
     const isTenant = booking.UserId === profile?.id;
     const isOwner = booking.ownerId === profile?.id;
 

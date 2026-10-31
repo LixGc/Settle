@@ -1,5 +1,6 @@
 import { FETCH_REVIEW_BY_PROPERTY_SUCCESS, FETCH_REVIEW_BY_USER_SUCCESS, FETCH_REVIEW_BY_OWNER_SUCCESS } from "../actions/actionType";
 
+// Reviews of a place, reviews I wrote, and reviews of my places
 const initialState = {
     propertyReviews: [],
     userReviews: [],

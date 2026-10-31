@@ -28,6 +28,7 @@ export const propertyFetchFail = () => {
     return { type: PROPERTY_FETCH_FAIL };
 };
 
+// All places, for Home
 export const fetchProperties = () => {
     return async (dispatch) => {
         dispatch(propertyFetchRequest());
@@ -46,6 +47,7 @@ export const trendingFetchSuccess = (payload) => {
     return { type: TRENDING_FETCH_SUCCESS, payload };
 };
 
+// Most booked places, for the Trending row
 export const fetchTrending = () => {
     return async (dispatch) => {
         try {
@@ -66,6 +68,7 @@ export const detailFetchSuccess = (payload) => {
     return { type: PROPERTY_DETAIL_FETCH_SUCCESS, payload };
 };
 
+// Everything for one place's page
 export const fetchDetail = (id) => {
     return async (dispatch) => {
         dispatch(detailFetchRequest());
@@ -99,6 +102,7 @@ export const locationsFetchSuccess = (payload) => {
     return { type: LOCATIONS_FETCH_SUCCESS, payload };
 };
 
+// Suburb cards for Explore
 export const fetchLocations = () => {
     return async (dispatch) => {
         try {
@@ -115,6 +119,7 @@ export const searchFetchSuccess = (payload) => {
     return { type: SEARCH_FETCH_SUCCESS, payload };
 };
 
+// query = { location, startdate, enddate }
 export const searchProperties = (query) => {
     return async (dispatch) => {
         try {
@@ -128,6 +133,7 @@ export const searchProperties = (query) => {
 };
 
 // SUBURBS FOR THE LISTING FORM
+// Suburbs that match what the host typed, for the dropdown
 export const searchSuburbs = (search) => {
     return async () => {
         try {
@@ -166,6 +172,7 @@ export const fetchMyProperties = () => {
     };
 };
 
+// Removes one of my places
 export const deleteProperty = (id) => {
     return async (dispatch) => {
         try {
@@ -208,6 +215,7 @@ export const addProperty = (value) => {
     };
 };
 
+// Same as adding, plus the id of the place to change
 export const editProperty = (value, id) => {
     return async (dispatch) => {
         try {

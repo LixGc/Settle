@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import { ALERT_TYPE, Toast } from "react-native-alert-notification";
 import { colors } from "../theme";
 
+// Gets a readable message out of any error, the server's message first
 export const getErrorMessage = (error) => {
     if (typeof error === "string") return error;
     if (error?.response?.data?.message) return error.response.data.message;
@@ -10,6 +11,7 @@ export const getErrorMessage = (error) => {
     return "Something went wrong. Please try again.";
 };
 
+// Small popup at the top for errors
 export const errorAlert = (msg) => {
     Toast.show({
         type: ALERT_TYPE.WARNING,
@@ -21,6 +23,7 @@ export const errorAlert = (msg) => {
     });
 };
 
+// Same, for things that worked
 export const successAlert = (msg) => {
     Toast.show({
         type: ALERT_TYPE.SUCCESS,

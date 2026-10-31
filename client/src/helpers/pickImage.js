@@ -1,5 +1,6 @@
 import * as ImagePicker from "expo-image-picker";
 
+// Opens the gallery for one photo, cropped to the shape given (4:3 unless told otherwise)
 export const pickImage = async (aspect = [4, 3]) => {
     const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ["images"],
@@ -13,6 +14,7 @@ export const pickImage = async (aspect = [4, 3]) => {
     }
 };
 
+// Opens the gallery to choose up to 10 photos at once
 export const pickImages = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ["images"],

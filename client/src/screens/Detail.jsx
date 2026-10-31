@@ -11,6 +11,7 @@ import { amenityList } from "../helpers/amenities";
 import DateInput from "../components/DateInput";
 import { colors } from "../theme";
 
+// A place's page: photos, info, map, host, booking and reviews
 function Detail({ route, navigation }) {
     // startDate and endDate come from Explore, when the guest searched by dates
     const { id, startDate: searchStart, endDate: searchEnd } = route.params;
@@ -21,6 +22,7 @@ function Detail({ route, navigation }) {
     const { profile } = useSelector((state) => state.userReducer);
     const [loading, setLoading] = useState(true);
     const [imageIndex, setImageIndex] = useState(0);
+    // Dates come from Explore if the guest searched with dates, otherwise today and tomorrow
     const [startDate, setStartDate] = useState(searchStart ? new Date(searchStart) : new Date());
     const [endDate, setEndDate] = useState(searchEnd ? new Date(searchEnd) : nextDay(new Date()));
     const [submitting, setSubmitting] = useState(false);
@@ -28,6 +30,7 @@ function Detail({ route, navigation }) {
     const [sheet, setSheet] = useState(null);
     const { width } = useWindowDimensions();
 
+    // Load the place, its reviews and its booked dates whenever a different place opens
     useEffect(() => {
         setLoading(true);
         dispatch(fetchReviewByProperty(id));
@@ -44,6 +47,7 @@ function Detail({ route, navigation }) {
         }
     };
 
+    // Book button: needs a login, then opens the new booking so the guest can pay
     const handleBooking = () => {
         if (!profile) {
             errorAlert("Please log in first");
@@ -77,12 +81,14 @@ function Detail({ route, navigation }) {
     }
 
     const { property, rating } = detail;
+    // The main photo first, then the extra ones
     const images = [property.image, ...property.PropertyImages.map((el) => el.imageUrl)];
     const owner = property.User;
     const nights = countNights(startDate, endDate);
     // What the place offers, in the same order as on the listing form
     const offered = amenityList.filter((item) => property.amenities?.includes(item.key));
 
+    // Message the host. The place gets attached to the first message
     const goChat = () => {
         if (!profile) {
             errorAlert("Please log in first");
@@ -260,6 +266,7 @@ function Detail({ route, navigation }) {
                     </Text>
                     <Text style={styles.total}>{fPrice(property.price * nights)}</Text>
                 </View>
+                {/* Dates already taken show a red box instead of the Book button */}
                 {isBooked ? (
                     <View style={[styles.bookButton, { backgroundColor: colors.danger }]}>
                         <Text style={styles.bookText}>Not available on these dates</Text>
