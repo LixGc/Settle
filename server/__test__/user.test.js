@@ -333,6 +333,7 @@ describe("PUT user photo and ID /profiles", () => {
         expect(response.body).toHaveProperty("message", "Successfully updated!");
     });
 
+
     it("should respond with 400 without ID card", async function () {
         const response = await request(app)
             .put("/profiles")

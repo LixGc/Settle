@@ -16,11 +16,13 @@ const uploadMulti = (fields) => {
         limits: {
             fileSize: 1024 * 1024 * 10,
         },
+        // An iPhone labels each photo with the type iOS works out from the file, and when it can't tell
+        // it says "application/octet-stream". Let those through too, Cloudinary checks it's really a photo
         fileFilter: (req, file, cb) => {
-            if (file.mimetype.startsWith("image/")) {
+            if (file.mimetype.startsWith("image/") || file.mimetype === "application/octet-stream") {
                 cb(null, true);
             } else {
-                cb(new Error("Invalid file type. Only images are allowed."));
+                cb(new Error(`Invalid file type (${file.mimetype}). Only images are allowed.`));
             }
         },
     }).fields([
@@ -51,6 +53,10 @@ const uploadMulti = (fields) => {
                 next();
             } catch (error) {
                 console.error("Error uploading to Cloudinary:", error);
+                // Cloudinary answers 400 when the file isn't a photo after all
+                if (error.http_code === 400) {
+                    return res.status(400).json({ message: "Failed to upload images" });
+                }
                 return res.status(500).json({ message: "Failed to upload images to Cloudinary" });
             }
         });
@@ -61,7 +67,8 @@ const uploadMulti = (fields) => {
 const uploadToCloudinary = (buffer) => {
     return new Promise((resolve, reject) => {
         cloudinary.uploader
-            .upload_stream({ resource_type: "auto" }, (error, result) => {
+            // Only real photos, and every photo is saved as a JPG, so an iPhone's HEIC photos show on Android too
+            .upload_stream({ resource_type: "image", format: "jpg" }, (error, result) => {
                 if (error) {
                     reject(error);
                 } else {

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node bin/www",
     "dev": "nodemon bin/www",
-    "test": "jest --runInBand --detectOpenHandles --verbose --coverage",
+    "test": "jest --runInBand --detectOpenHandles --verbose --coverage --silent",
     "db:create": "sequelize-cli db:create && sequelize-cli db:create --env test",
     "db:migrate": "sequelize-cli db:migrate && sequelize-cli db:migrate --env test",
     "db:seed": "sequelize-cli db:seed:all"
