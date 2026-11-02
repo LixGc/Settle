@@ -1,5 +1,6 @@
 // Jenkins pipeline for the Settle backend (the server folder).
 // It installs the packages, sets up a test database and runs the Jest tests on every new commit.
+// When every test passes, it deploys the new server: it goes live on this PC, kept running by pm2.
 // The mobile app (the client folder) isn't built here.
 pipeline {
     agent any
@@ -23,6 +24,8 @@ pipeline {
         DB_PASSWORD = credentials('settle-db-password')
         // Only used to sign tokens inside the tests, so it isn't a real secret
         JWT_SECRET = 'jenkins-test-secret'
+        // The live copy of the server. It has its own .env, copied there by hand once
+        DEPLOY_DIR = 'C:\\Settle-live\\server'
     }
 
     stages {
@@ -48,6 +51,37 @@ pipeline {
             steps {
                 dir('server') {
                     runCommand('npm test -- --ci --reporters=default --reporters=jest-junit')
+                }
+            }
+        }
+
+        // Continuous deployment. Jenkins only gets here when every test has passed.
+        // The tested server is copied into its own live folder and restarted with pm2,
+        // so the code I'm still changing in C:\Settle never affects the running app.
+        // This stage is written for my Windows PC
+        stage('Deploy') {
+            steps {
+                dir('server') {
+                    // Copy the code across, leaving node_modules, the tests and the live .env alone.
+                    // robocopy uses exit codes below 8 for success
+                    bat 'robocopy . "%DEPLOY_DIR%" /E /XD node_modules coverage __test__ /XF .env junit.xml /NFL /NDL /NJH /NJS /NP & if errorlevel 8 (exit /b 1) else (exit /b 0)'
+                }
+                dir(env.DEPLOY_DIR) {
+                    // The live server uses its own .env, so the test settings above are cleared first.
+                    // npm, npx and pm2 are .cmd files, so they need call. The cookie stops Jenkins
+                    // from closing pm2 when the build finishes
+                    bat '''
+                        if not exist .env (echo Copy server\\.env into %DEPLOY_DIR% first & exit /b 1)
+                        set "NODE_ENV=development"
+                        set "JWT_SECRET="
+                        set "DB_PASSWORD="
+                        set "PORT=3001"
+                        set "JENKINS_NODE_COOKIE=dontKillMe"
+                        set "BUILD_ID=dontKillMe"
+                        call npm ci || exit /b 1
+                        call npx sequelize-cli db:migrate || exit /b 1
+                        call pm2 restart settle-api --update-env || call pm2 start bin\\www --name settle-api --interpreter node || exit /b 1
+                    '''
                 }
             }
         }
